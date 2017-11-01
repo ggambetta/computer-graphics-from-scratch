@@ -1,0 +1,100 @@
+<!--
+!!html_title Lines demo 2 - Computer Graphics from scratch
+-->
+<canvas id="canvas" width=600 height=600 style="border: 1px grey solid">
+
+<script>
+
+// ======================================================================
+//  Low-level canvas access. 
+// ======================================================================
+
+var canvas = document.getElementById("canvas");
+var canvas_context = canvas.getContext("2d");
+var canvas_buffer = canvas_context.getImageData(0, 0, canvas.width, canvas.height);
+var canvas_pitch = canvas_buffer.width * 4;
+
+
+// The PutPixel() function.
+var PutPixel = function(x, y, color) {
+  x = canvas.width/2 + Math.floor(x);
+  y = canvas.height/2 - Math.floor(y) - 1;
+
+  if (x < 0 || x >= canvas.width || y < 0 || y >= canvas.height) {
+    return;
+  }
+
+  var offset = 4*x + canvas_pitch*y;
+  canvas_buffer.data[offset++] = color[0];
+  canvas_buffer.data[offset++] = color[1];
+  canvas_buffer.data[offset++] = color[2];
+  canvas_buffer.data[offset++] = 255; // Alpha = 255 (full opacity)
+}
+
+
+// Displays the contents of the offscreen buffer into the canvas.
+var UpdateCanvas = function() {
+  canvas_context.putImageData(canvas_buffer, 0, 0);
+}
+
+
+// ======================================================================
+//  Rasterization code.
+// ======================================================================
+
+// A Point.
+var Pt = function(x, y) {
+  if (!(this instanceof Pt)) { return new Pt(x, y); } 
+
+  this.x = x;
+  this.y = y;
+}
+
+
+var Interpolate = function(i0, d0, i1, d1) {
+  if (i0 == i1) {
+    return [d0];
+  }
+
+  var values = [];
+  var a = (d1 - d0) / (i1 - i0);
+  var d = d0;
+  for (var i = i0; i <= i1; i++) {
+    values.push(d);
+    d += a;
+  }
+
+  return values;
+}
+
+
+var DrawLine = function(p0, p1, color) {
+  var dx = p1.x - p0.x, dy = p1.y - p0.y;
+
+  if (Math.abs(dx) > Math.abs(dy)) {
+    // The line is horizontal-ish. Make sure it's left to right.
+    if (dx < 0) { var swap = p0; p0 = p1; p1 = swap; }
+  
+    // Compute the Y values and draw.
+    var ys = Interpolate(p0.x, p0.y, p1.x, p1.y);
+    for (var x = p0.x; x <= p1.x; x++) {
+      PutPixel(x, ys[(x - p0.x) | 0], color);
+    }
+  } else {
+    // The line is verical-ish. Make sure it's bottom to top.
+    if (dy < 0) { var swap = p0; p0 = p1; p1 = swap; }
+
+    // Compute the X values and draw.
+    var xs = Interpolate(p0.y, p0.x, p1.y, p1.x);
+    for (var y = p0.y; y <= p1.y; y++) {
+      PutPixel(xs[(y - p0.y) | 0], y, color);
+    }
+  }
+}
+
+DrawLine(Pt(-200, -100), Pt(240, 120), [0, 0, 0]);
+DrawLine(Pt(-50, -200), Pt(60, 240), [0, 0, 0]);
+
+UpdateCanvas();
+
+</script>
