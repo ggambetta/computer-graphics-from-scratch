@@ -4186,7 +4186,7 @@ what happens:
 These doesn't quite look like cubes, do they?
 
 The problem here is that some triangles that should be behind others are instead
-drawn in front of them. Why? Because we're blindingly drawing 2D triangles on
+drawn in front of them. Why? Because we're blindly drawing 2D triangles on
 the canvas in an essentially random order - in the order they happen to be
 defined in the model.
 
