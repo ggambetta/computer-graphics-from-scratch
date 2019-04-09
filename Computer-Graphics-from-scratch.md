@@ -43,7 +43,7 @@ produce similar results when used to render a simple scene:
 ![](<images/comparison-1.png>)
 
 While their sets of features have considerable overlap, they aren’t identical,
-so this book covers their specific strenghts:
+so this book covers their specific strengths:
 
 ![](<images/comparison-2.png>)
 
@@ -170,20 +170,25 @@ the scope of this text. The following is a simplified version of the aspects
 that will be relevant to us.
 
 A *color* is what we call the way our brain interprets photons hitting the eyes.
-These photons carry energy in different frequencies; our eyes maps these
-frequencies to colors. The lowest energy we can perceive is around 450 THz; we
-see this as "red". On the other end of the scale is 750 THz, which we see as
-"purple". Between these two frequencies we see the continuous spectrum of colors
-(for example, green is around 575 THz).
+You can famously think of photons as particles or as waves; our eyes map the
+different the wavelengths of these waves to colors.
 
-We can't normally see frequencies outside of these ranges. Higher frequencies
-carry more energy; this is why infrared (frequencies lower than 450 THz) is
-harmless, but ultraviolet (frequencies higher than 750 THz) can burn your skin.
+The longest wavelength we can perceive is around 740 nm; we see this as "red".
+On the other end of the scale is 380 nm, which we see as "purple". Between these
+two wavelength we perceive the continuous spectrum of colors (for example, green
+is around 530 nm).
+
+We can't normally see wavelengths outside of that "visible range". Wavelength
+and frequency are inversely related (the more frequently the wave "hits", the
+smaller the distance between peaks of that wave). This is why infrared
+(wavelengths bigger than 740 nm, corresponding to frequencies lower than 405 THz)
+is harmless, but ultraviolet (wavelengths smaller than 380 nm,
+corresponding to frequencies higher than 790 THz) can burn your skin.
 
 Every color imaginable can be described as different combinations of these
 colors (in particular, "white" is the sum of all colors, and "black" is the
 absence of all colors). It would be impractical to describe colors by describing
-the exact frequencies they're made of. Fortunately, it's possible to create
+the exact wavelengths they're made of. Fortunately, it's possible to create
 almost all colors as a linear combination of just three colors which we call
 "primary colors".
 
@@ -199,34 +204,34 @@ together - something darkish! Wasn't childhood amazing?
 
 Things are of different colors because they absorb and reflect light in
 different ways. Let's start with white light, like sunlight[^2]. White light
-contains every light frequency. When light hits some object, depending on what
-the object is made of, its surface absorbs some of the frequencies and reflects
+contains every light wavelength. When light hits some object, depending on what
+the object is made of, its surface absorbs some of the wavelengths and reflects
 others. Some of the reflected light hits our eyes, and our brains convert that
-to color. What color? The sum of the frequencies that were reflected[^3].
+to color. What color? The sum of the wavelengths that were reflected[^3].
 
 [^2]: Sunlight isn't quite white, but it's close enough for our purposes.
 
 [^3]: Because of thermodynamics, the rest of the energy isn't lost; it's mostly
 turned to heat. That's why black things get hotter than white ones - they absorb
-most of the frequencies!
+most of the wavelengths!
 
 So what happens with the crayons? You start with white light reflecting off the
 paper. Since it's white paper, it means it reflects most of the light it gets.
 When you draw with a "yellow" crayon, you're adding a layer of a material that
-absorbs some frequencies but lets others pass through it. They're reflected by
+absorbs some wavelengths but lets others pass through it. They're reflected by
 the paper, pass through the yellow layer again, hit your eyes, and your brain
-interprets that particular combination of frequencies as "yellow". So what the
-yellow layer does is *subtract* a bunch of frequencies from the original white
+interprets that particular combination of wavelengths as "yellow". So what the
+yellow layer does is *subtract* a bunch of wavelengths from the original white
 light.
 
 When you then draw a blue circle over the yellow one, you're subtracting even
-more frequencies to what was left after the yellow circle subtracted its own, so
-what hits your eyes is whatever frequencies weren't filtered by either the blue
+more wavelengths to what was left after the yellow circle subtracted its own, so
+what hits your eyes is whatever wavelengths weren't filtered by either the blue
 or yellow circles - which your brain sees as "green".
 
-In summary, we start with all frequencies, and subtract some amount of the
+In summary, we start with all wavelengths, and subtract some amount of the
 primary colors, to create any other color. Because we're subtracting
-frequencies, this is called the *Subtractive Color Model*.
+wavelengths, this is called the *Subtractive Color Model*.
 
 This model is not quite right, though. The actual primary colors in the
 subtractive model aren't Blue, Red and Yellow as taught to toddlers and art
@@ -247,8 +252,8 @@ each pixel.
 Monitor screens are the opposite of paper. Paper doesn't emit light; it merely
 reflects part of the light that hits it. Screens, on the other hand, are black,
 but they do emit light on their own. With paper we start with white light and
-*subtract* the frequencies we don't want; with a screen we start with no light,
-and *add* the frequencies we want.
+*subtract* the wavelengths we don't want; with a screen we start with no light,
+and *add* the wavelengths we want.
 
 It turns out different primary colors are necessary for this. Most colors can be
 created by adding different amounts of red, green and blue to a black surface;
@@ -267,9 +272,9 @@ another. Since we'll be focusing on rendering things to a screen, the rest of
 this work will use the RGB color model.
 
 As described above, objects absorb part of the light reaching them, and reflect
-the rest. Which frequencies are absorbed and which are reflected is what we
+the rest. Which wavelengths are absorbed and which are reflected is what we
 perceive as the "color" of the surface. From now on, we'll simply treat the
-color as a property of a surface, and forget about absorbed light frequencies.
+color as a property of a surface, and forget about absorbed light wavelengths.
 
 ## Color depth and representation
 
@@ -518,7 +523,7 @@ $(V_x, V_y, V_z)$ as seen from the camera's point of view $(O_x, O_y, O_z)$.
 So what color *is* the light reaching $(O_x, O_y, O_z)$ after passing through
 $(V_x, V_y, V_z)$?
 
-In the real world, light comes from a light source (the sun, a lightbulb, etc),
+In the real world, light comes from a light source (the sun, a light bulb, etc),
 bounces off several objects, and it finally reaches our eyes. We could try
 simulating the path of every photon leaving our simulated light sources, but it
 would be *extremely* time consuming[^7]. Not only we'd have to simulate millions
@@ -633,7 +638,7 @@ $$
 
 What values of $t$ satisfy this equation?
 
-In its current form, the equation is somewhat unwieldily. Let's do some
+In its current form, the equation is somewhat unwieldy. Let's do some
 algebraic manipulation to see what can we get out of it.
 
 First of all, let $\vec{OC} = O - C$. Then the equation can be written as
@@ -666,7 +671,7 @@ $$
 t^2 \langle \vec{D}, \vec{D} \rangle + t(2\langle \vec{OC}, \vec{D} \rangle) + \langle \vec{OC}, \vec{OC} \rangle - r^2 = 0
 $$
 
-Doesn't it look less unwieldily now? Note that the dot product of two vectors is
+Doesn't it look less unwieldy now? Note that the dot product of two vectors is
 a real number, so every parenthesized term is a real number. If we give them
 names, we'll get something much more familiar:
 
@@ -905,8 +910,8 @@ Light is emitted equally in every direction; this why they're also called
 *omnidirectional lights*. A point light is therefore fully characterized by its position
 and its intensity.
 
-A good real-life example of what a point light approximates is a lightbulb.
-While a lightbulb doesn't emit light from a single point, and it isn't perfectly
+A good real-life example of what a point light approximates is a light bulb.
+While a light bulb doesn't emit light from a single point, and it isn't perfectly
 omnidirectional, the approximation is good enough.
 
 Let's define the vector $\vec{L}$ as the direction from a point in the scene,
@@ -918,7 +923,7 @@ $\vec{L}$ is different for every point in the scene.
 
 ### Directional lights
 
-If a point light is a good approximation of a lightbulb, does it also work as an
+If a point light is a good approximation of a light bulb, does it also work as an
 approximation of the Sun?
 
 It's a tricky question, and the answer depends on what are you trying to render.
@@ -935,7 +940,7 @@ distance between the objects in your scene are so different in magnitude you'd
 start running into numerical accuracy errors.
 
 [^4]: This is an approximation that holds at city-scale level, but it doesn't
-hold over much longer distances - indeed, the ancient greeks were able to
+hold over much longer distances - indeed, the ancient Greeks were able to
 compute the radius of the Earth with surprising accuracy based on the different
 directions of sunlight at the same time but in distant places.
 
@@ -1288,7 +1293,7 @@ situation:
 Depending on the degree of "polish" of the surface, it behaves more or less like
 a mirror; hence "specular" reflection[^11].
 
-[^11]: From "speculum", latin for "mirror".
+[^11]: From "speculum", Latin for "mirror".
 
 For a perfectly polished mirror, the incident ray of light $\vec{L}$ is
 reflected in a single direction, $\vec{R}$. This is what lets you see perfectly
