@@ -2445,7 +2445,7 @@ This shouldn't be so surprising; after all, the slope $a$ is the measure of how
 much $y$ changes for each unit increment in $x$, which is exactly what we're
 doing here.
 
-The interest thing is that we can trivially get this
+The interesting thing is that we can trivially get this
 
 $$
 y(x+1) = y(x) + a
