@@ -1424,13 +1424,13 @@ sphere {
     specular = 500  # Shiny
 }
 sphere {
-    center = (-2, 1, 3)
+    center = (2, 0, 4)
     radius = 1
     color = (0, 0, 255)  # Blue
     specular = 500  # Shiny
 }
 sphere {
-    center = (2, 1, 3)
+    center = (-2, 0, 4)
     radius = 1
     color = (0, 255, 0)  # Green
     specular = 10  # Somewhat shiny
