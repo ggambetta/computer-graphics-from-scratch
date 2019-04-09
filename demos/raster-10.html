@@ -1,7 +1,28 @@
 <!--
 !!html_title Hidden surface removal demo - Computer Graphics from scratch
 -->
-<canvas id="canvas" width=600 height=600 style="border: 1px grey solid">
+<center>
+<canvas id="canvas" width=600 height=600 style="border: 1px grey solid"></canvas><br>
+<table>
+<tr bgcolor="#e0e0e0">
+<td><b>Depth buffering &<br>Backface culling</b></td>
+<td>
+<input type="radio" name="depth-enabled" onClick="SetDepthEnabled(false);">Disabled</input><br>
+<input type="radio" name="depth-enabled" onClick="SetDepthEnabled(true);" checked>Enabled</input>
+</td>
+</tr>
+<tr>
+<td colspan=2 align="center"><button onClick="ShuffleCubeTriangles();">Shuffle triangles</button>
+</tr>
+<tr bgcolor="#e0e0e0">
+<td><b>Triangle outlines</b></td>
+<td>
+<input type="radio" name="outlines-enabled" onClick="SetOutlinesEnabled(false);" checked>Disabled</input><br>
+<input type="radio" name="outlines-enabled" onClick="SetOutlinesEnabled(true);">Enabled</input>
+</td>
+</tr>
+</table>
+</center>
 
 <script>
 
@@ -59,6 +80,12 @@ var UpdateDepthBufferIfCloser = function(x, y, inv_z) {
     return true;
   }
   return false;
+}
+
+var ClearAll = function() {
+  canvas.width = canvas.width;
+  depth_buffer = Array();
+  depth_buffer.length = canvas.width * canvas.height;
 }
 
 
@@ -179,6 +206,11 @@ var Plane = function(normal, distance) {
 // Computes k * vec.
 var Multiply = function(k, vec) {
   return Vertex(k*vec.x, k*vec.y, k*vec.z);
+}
+
+
+var MultiplyColor = function(k, color) {
+  return [k*color[0], k*color[1], k*color[2]];
 }
 
 
@@ -387,6 +419,10 @@ var EdgeInterpolate = function(y0, v0, y1, v1, y2, v2) {
   return [v02, v012];
 }
 
+// Controls depth buffering and backface culling.
+var depthChecksEnabled = true;
+
+var drawOutlines = false;
 
 var RenderTriangle = function(triangle, vertexes, projected) {
   // Sort by projected point Y.
@@ -401,9 +437,11 @@ var RenderTriangle = function(triangle, vertexes, projected) {
   var normal = ComputeTriangleNormal(vertexes[triangle.indexes[0]], vertexes[triangle.indexes[1]], vertexes[triangle.indexes[2]]);
 
   // Backface culling.
-  var centre = Multiply(-1.0/3.0, Add(Add(vertexes[triangle.indexes[0]], vertexes[triangle.indexes[1]]), vertexes[triangle.indexes[2]]));
-  if (Dot(centre, normal) < 0) {
-    return;
+  if (depthChecksEnabled) {
+    var centre = Multiply(-1.0/3.0, Add(Add(vertexes[triangle.indexes[0]], vertexes[triangle.indexes[1]]), vertexes[triangle.indexes[2]]));
+    if (Dot(centre, normal) < 0) {
+      return;
+    }
   }
 
   // Get attribute values (X, 1/Z) at the vertexes.
@@ -435,10 +473,18 @@ var RenderTriangle = function(triangle, vertexes, projected) {
     var zscan = Interpolate(xl, zl, xr, zr);
 
     for (var x = xl; x <= xr; x++) {
-      if (UpdateDepthBufferIfCloser(x, y, zscan[x - xl])) {
+      if (!depthChecksEnabled ||
+          UpdateDepthBufferIfCloser(x, y, zscan[x - xl])) {
         PutPixel(x, y, triangle.color);
       }
     }
+  }
+
+  if (drawOutlines) {
+    var outline_color = MultiplyColor(0.75, triangle.color);
+    DrawLine(p0, p1, outline_color);
+    DrawLine(p0, p2, outline_color);
+    DrawLine(p2, p1, outline_color);
   }
 }
 
@@ -559,7 +605,6 @@ var triangles = [
 Shuffle(triangles);
 
 var cube = Model(vertexes, triangles, Vertex(0, 0, 0), Math.sqrt(3));
-
 var instances = [Instance(cube, Vertex(-1.5, 0, 7), Identity4x4, 0.75),
       	         Instance(cube, Vertex(1.25, 2.5, 7.5), MakeOYRotationMatrix(195)),
 ];
@@ -575,8 +620,31 @@ camera.clipping_planes = [
   Plane(Vertex(0, s2, s2), 0), // Bottom
 ];
 
-RenderScene(camera, instances);
 
-UpdateCanvas();
+var ShuffleCubeTriangles = function() {
+  Shuffle(cube.triangles);
+  Render();
+}
+
+var SetDepthEnabled = function(enabled) {
+  depthChecksEnabled = enabled;
+  Render();
+}
+
+var SetOutlinesEnabled = function(enabled) {
+  drawOutlines = enabled;
+  Render();
+}
+
+var Render = function() {
+  ClearAll(); 
+  // This lets the browser clear the canvas before blocking to render the scene.
+  setTimeout(function(){
+    RenderScene(camera, instances);
+    UpdateCanvas();
+  }, 0);
+}
+
+Render();
 
 </script>

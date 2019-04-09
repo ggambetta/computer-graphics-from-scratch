@@ -1,7 +1,36 @@
 <!--
 !!html_title Shading demo - Computer Graphics from scratch
 -->
-<canvas id="canvas" width=600 height=600 style="border: 1px grey solid">
+<center>
+<canvas id="canvas" width=600 height=600 style="border: 1px grey solid"></canvas><br>
+<table>
+<tr bgcolor="#e0e0e0">
+<td><b>Lighting model</b></td>
+<td>
+<input type="radio" name="lighting-model" onClick="SetLightingModel(LM_DIFFUSE);">Diffuse only</input><br>
+<input type="radio" name="lighting-model" onClick="SetLightingModel(LM_SPECULAR);">Specular only</input><br>
+<input type="radio" name="lighting-model" onClick="SetLightingModel(LM_DIFFUSE | LM_SPECULAR);" checked>Diffuse + Specular</input>
+</td>
+</tr>
+
+<tr>
+<td><b>Shading model</b></td>
+<td>
+<input type="radio" name="shading-model" onClick="SetShadingModel(SM_FLAT);">Flat</input><br>
+<input type="radio" name="shading-model" onClick="SetShadingModel(SM_GOURAUD);">Gouraud</input><br>
+<input type="radio" name="shading-model" onClick="SetShadingModel(SM_PHONG);" checked>Phong</input>
+</td>
+</tr>
+
+<tr bgcolor="#e0e0e0">
+<td><b>Normals</b></td>
+<td>
+<input type="radio" name="vertex-normals" onClick="SetUseVertexNormals(false)">Computed triangle normals</input><br>
+<input type="radio" name="vertex-normals" onClick="SetUseVertexNormals(true)" checked>Vertex normals from model</input>
+</td>
+</tr>
+</table>
+</center>
 
 <script>
 
@@ -58,6 +87,12 @@ var UpdateDepthBufferIfCloser = function(x, y, inv_z) {
     return true;
   }
   return false;
+}
+
+var ClearAll = function() {
+  canvas.width = canvas.width;
+  depth_buffer = Array();
+  depth_buffer.length = canvas.width * canvas.height;
 }
 
 
@@ -448,32 +483,39 @@ var ComputeIllumination = function(vertex, normal, camera, lights) {
     }
  
     // Diffuse component.
-    var cos_alpha = Dot(vl, normal) / (Magnitude(vl) * Magnitude(normal));
-    if (cos_alpha > 0) {
-      illumination += cos_alpha * light.intensity;
+    if (LightingModel & LM_DIFFUSE) {
+      var cos_alpha = Dot(vl, normal) / (Magnitude(vl) * Magnitude(normal));
+      if (cos_alpha > 0) {
+        illumination += cos_alpha * light.intensity;
+      }
     }
 
     // Specular component.
-    var reflected = Add(Multiply(2*Dot(normal, vl), normal), Multiply(-1, vl));
-    var view = Add(camera.position, Multiply(-1, vertex));
+    if (LightingModel & LM_SPECULAR) {
+      var reflected = Add(Multiply(2*Dot(normal, vl), normal), Multiply(-1, vl));
+      var view = Add(camera.position, Multiply(-1, vertex));
 
-    var cos_beta = Dot(reflected, view) / (Magnitude(reflected) * Magnitude(view));
-    if (cos_beta > 0) {
-      var specular = 50;
-      illumination += Math.pow(cos_beta, specular) * light.intensity;
+      var cos_beta = Dot(reflected, view) / (Magnitude(reflected) * Magnitude(view));
+      if (cos_beta > 0) {
+        var specular = 50;
+        illumination += Math.pow(cos_beta, specular) * light.intensity;
+      }
     }
   }
   return illumination;
 }
 
 
+var LM_DIFFUSE = 1;
+var LM_SPECULAR = 2;
+
 var SM_FLAT = 0;
 var SM_GOURAUD = 1;
 var SM_PHONG = 2;
 
+var LightingModel = LM_DIFFUSE | LM_SPECULAR;
 var ShadingModel = SM_PHONG;
 var UseVertexNormals = true;
-
 
 var EdgeInterpolate = function(y0, v0, y1, v1, y2, v2) {
   var v01 = Interpolate(y0, v0, y1, v1);
@@ -805,8 +847,30 @@ var instances = [
 */
 // -----------------------------------------------------
 
-RenderScene(camera, instances, lights);
+var SetLightingModel = function(model) {
+  LightingModel = model;
+  Render();
+}
 
-UpdateCanvas();
+var SetShadingModel = function(model) {
+  ShadingModel = model;
+  Render();
+}
+
+var SetUseVertexNormals = function(use_vertex_normals) {
+  UseVertexNormals = use_vertex_normals;
+  Render();
+}
+
+var Render = function() {
+  ClearAll(); 
+  // This lets the browser clear the canvas before blocking to render the scene.
+  setTimeout(function(){
+    RenderScene(camera, instances, lights);
+    UpdateCanvas();
+  }, 0);
+}
+
+Render();
 
 </script>

@@ -1,7 +1,18 @@
 <!--
 !!html_title Shadows demo - Computer Graphics from scratch
 -->
-<canvas id="canvas" width=600 height=600 style="border: 1px grey solid">
+<center>
+<canvas id="canvas" width=600 height=600 style="border: 1px grey solid"></canvas><br>
+<table>
+<tr bgcolor="#e0e0e0">
+<td><b>Shadow ray start</b></td>
+<td>
+<input type="radio" name="shadow-ray-start" onClick="SetShadowEpsilon(0);">Zero</input><br>
+<input type="radio" name="shadow-ray-start" onClick="SetShadowEpsilon(0.001);" checked>Epsilon</input>
+</td>
+</tr>
+</table>
+</center>
 
 <script>
 
@@ -37,6 +48,10 @@ var UpdateCanvas = function() {
   canvas_context.putImageData(canvas_buffer, 0, 0);
 }
 
+
+var ClearAll = function() {
+  canvas.width = canvas.width;
+}
 
 // ======================================================================
 //  Linear algebra and helpers.
@@ -243,18 +258,31 @@ var TraceRay = function(origin, direction, min_t, max_t) {
 }
 
 
-//
-// Main loop.
-//
-for (var x = -canvas.width/2; x < canvas.width/2; x++) {
-  for (var y = -canvas.height/2; y < canvas.height/2; y++) {
-    var direction = CanvasToViewport([x, y])
-    var color = TraceRay(camera_position, direction, 1, Infinity);
-    PutPixel(x, y, Clamp(color));
-  }
+var SetShadowEpsilon = function(epsilon) {
+  EPSILON = epsilon;
+  Render();
 }
 
-UpdateCanvas();
+
+var Render = function() {
+  ClearAll(); 
+
+  // This lets the browser clear the canvas before blocking to render the scene.
+  setTimeout(function(){
+    // Main loop.
+    for (var x = -canvas.width/2; x < canvas.width/2; x++) {
+      for (var y = -canvas.height/2; y < canvas.height/2; y++) {
+        var direction = CanvasToViewport([x, y])
+        var color = TraceRay(camera_position, direction, 1, Infinity);
+        PutPixel(x, y, Clamp(color));
+      }
+    }
+
+    UpdateCanvas();
+  }, 0);
+}
+
+Render();
 
 
 </script>

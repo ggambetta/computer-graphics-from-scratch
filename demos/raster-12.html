@@ -1,7 +1,19 @@
 <!--
 !!html_title Textures demo - Computer Graphics from scratch
 -->
-<canvas id="canvas" width=600 height=600 style="border: 1px grey solid">
+
+<center>
+<canvas id="canvas" width=600 height=600 style="border: 1px grey solid"></canvas><br>
+<table>
+<tr bgcolor="#e0e0e0">
+<td><b>Depth buffer values</b></td>
+<td>
+<input type="radio" name="perspective-correct-depth" onClick="SetUsePerspectiveCorrectDepth(false)">Linear (Z)</input><br>
+<input type="radio" name="perspective-correct-depth" onClick="SetUsePerspectiveCorrectDepth(true)" checked>Inverse (1/Z)</input>
+</td>
+</tr>
+</table>
+</center>
 
 <script>
 
@@ -60,6 +72,11 @@ var UpdateDepthBufferIfCloser = function(x, y, inv_z) {
   return false;
 }
 
+var ClearAll = function() {
+  canvas.width = canvas.width;
+  depth_buffer = Array();
+  depth_buffer.length = canvas.width * canvas.height;
+}
 
 // ======================================================================
 //  Data model.
@@ -512,7 +529,7 @@ var SM_PHONG = 2;
 
 var ShadingModel = SM_PHONG;
 var UseVertexNormals = true;
-var PerspectiveCorrectTextures = true;
+var UsePerspectiveCorrectDepth = true;
 
 
 var EdgeInterpolate = function(y0, v0, y1, v1, y2, v2) {
@@ -547,7 +564,7 @@ var RenderTriangle = function(triangle, vertexes, projected, camera, lights, ori
   var [x02, x012] = EdgeInterpolate(p0.y, p0.x, p1.y, p1.x, p2.y, p2.x);
   var [iz02, iz012] = EdgeInterpolate(p0.y, 1.0/v0.z, p1.y, 1.0/v1.z, p2.y, 1.0/v2.z);
   if (triangle.texture) {
-    if (PerspectiveCorrectTextures) {
+    if (UsePerspectiveCorrectDepth) {
       var [uz02, uz012] = EdgeInterpolate(p0.y, triangle.uvs[i0].x / v0.z,
                                           p1.y, triangle.uvs[i1].x / v1.z,
                                           p2.y, triangle.uvs[i2].x / v2.z);
@@ -661,7 +678,7 @@ var RenderTriangle = function(triangle, vertexes, projected, camera, lights, ori
         }
 
         if (triangle.texture) {
-          if (PerspectiveCorrectTextures) {
+          if (UsePerspectiveCorrectDepth) {
             var u = uzscan[x - xl] / zscan[x - xl];
             var v = vzscan[x - xl] / zscan[x - xl];
           } else {
@@ -829,11 +846,11 @@ var triangles = [
 var cube = Model(vertexes, triangles, Vertex(0, 0, 0), Math.sqrt(3));
 // ----------
 
-var sphere = GenerateSphere(15, GREEN);
+//var sphere = GenerateSphere(15, GREEN);
 
 var instances = [Instance(cube, Vertex(-1.5, 0, 7), Identity4x4, 0.75),
       	         Instance(cube, Vertex(1.25, 2.5, 7.5), MakeOYRotationMatrix(195)),
-      	         Instance(sphere, Vertex(1.75, -0.5, 7), Identity4x4, 1.5),
+      	         Instance(cube, Vertex(1.75, 0, 5), MakeOYRotationMatrix(-30)),
 ];
 
 var camera = Camera(Vertex(-3, 1, 2), MakeOYRotationMatrix(-30));
@@ -858,12 +875,21 @@ lights = [
   Light(LT_POINT, 0.6, Vertex(-3, 2, -10))
 ];
 
-
-function Render() {
-  RenderScene(camera, instances, lights);
-  UpdateCanvas();
+var SetUsePerspectiveCorrectDepth = function(use_perspective_correct_depth) {
+  UsePerspectiveCorrectDepth = use_perspective_correct_depth;
+  Render();
 }
 
+function Render() {
+  ClearAll(); 
+  // This lets the browser clear the canvas before blocking to render the scene.
+  setTimeout(function(){
+    RenderScene(camera, instances, lights);
+    UpdateCanvas();
+  }, 0);
+}
+
+// Ugly hack - wait for texture to load.
 setTimeout(function() { Render() }, 50 );
 
 </script>
