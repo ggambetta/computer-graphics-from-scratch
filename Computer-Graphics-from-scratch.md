@@ -467,9 +467,9 @@ This rectangle that will act as our window to the world is called the
 viewport. Note that the size of the viewport and the distance to the camera
 determine the angle visible from the camera, called the *field of view* or FOV
 for short. Humans have an almost $180^\circ$ horizontal FOV, although much of it
-is blurry peripheral vision with no sense of depth. In general, using a
-$60^\circ$ FOV in the horizontal and vertical directions produces reasonable
-images; this is achieved with $V_w = V_h = d = 1$.
+is blurry peripheral vision with no sense of depth. For simplicity, we'll set 
+$V_w = V_h = d = 1$; this results in a FOV of approximately $53^\circ$, which
+produces reasonable-looking images (i.e. not overly distorted).
 
 Let's go back to the "algorithm" presented in the previous section, and number
 the steps:
