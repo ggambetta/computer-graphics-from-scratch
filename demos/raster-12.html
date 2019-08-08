@@ -724,10 +724,9 @@ var ClipTriangle = function(triangle, plane, triangles, vertexes) {
 var TransformAndClip = function(clipping_planes, model, transform) {
   // Transform the bounding sphere, and attempt early discard.
   center = MultiplyMV(transform, Vertex4(model.bounds_center)); 
-  var radius2 = model.bounds_radius*model.bounds_radius;
   for (var p = 0; p < clipping_planes.length; p++) {
-    var distance2 = Dot(clipping_planes[p].normal, center) + clipping_planes[p].distance;
-    if (distance2 < -radius2) { 
+    var distance = Dot(clipping_planes[p].normal, center) + clipping_planes[p].distance;
+    if (distance < -model.bounds_radius) { 
       return null;
     }
   }
@@ -860,7 +859,7 @@ var camera = Camera(Vertex(-3, 1, 2), MakeOYRotationMatrix(-30));
 
 var camera = Camera(Vertex(0, 0, 0), Identity4x4);*/
 
-var s2 = Math.sqrt(2);
+var s2 = Math.sqrt(2) / 2.0;  // Used in the side planes, to make sure the length of their normals are 1.
 camera.clipping_planes = [
   Plane(Vertex(  0,   0,  1), -1), // Near
   Plane(Vertex( s2,   0, s2),  0), // Left
