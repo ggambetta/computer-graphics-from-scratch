@@ -4740,7 +4740,7 @@ out where the inputs to the illumination equation come from.
 
 **We need **$\vec{L}$**.** For directional lights, $\vec{L}$ is given. For point
 lights, $\vec{L}$ is defined as the vector from the point in the scene, $P$, to
-the position of the light, $Q$. However, we don’t have $Q$ for every pixel of
+the position of the light, $Q$. However, we don’t have $P$ for every pixel of
 the triangle, but only for the vertexes.
 
 We do have the projection of $P$ - that is, the $x'$ and $y'$ we’re about to
