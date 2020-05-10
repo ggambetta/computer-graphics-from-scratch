@@ -3178,16 +3178,16 @@ So we can go ahead and draw our first 3D object: a cube. We define the coordinat
       return ViewportToCanvas(v.x * d / v.z, v.y * d / v.z)
   
   # The four "front" vertexes.
-  vAf = [-1, 1, 1]
-  vBf = [1, 1, 1]
-  vCf = [1, -1, 1]
-  vDf = [-1, -1, 1]
+  vAf = [-2, -0.5, 5]
+  vBf = [-2, 0.5, 5]
+  vCf = [-1, 0.5, 5]
+  vDf = [-1, -0.5, 5]
   
   # The four "back" vertexes.
-  vAb = [-1, 1, 2]
-  vBb = [1, 1, 2]
-  vCb = [1, -1, 2]
-  vDb = [-1, -1, 2]
+  vAb = [-2, -0.5, 6]
+  vBb = [-2, 0.5, 6]
+  vCb = [-1, 0.5, 6]
+  vDb = [-1, -0.5, 6]
   
   # The front face.
   DrawLine(ProjectVertex(vAf), ProjectVertex(vBf), BLUE);
