@@ -1954,7 +1954,7 @@ check whether the last object that caused a shadow on this object for that light
 also causes a shadow for this point. If it does, you're done; if it doesn't,
 just check the rest of the objects normally.
 
-On the same vein, when computing the intersection between the light ray and the
+In the same vein, when computing the intersection between the light ray and the
 objects in the scene, you don't really need the closest intersection; it's
 enough to know that there's at least one intersection. You can use a special
 version of `ClosestIntersection` that returns as soon as it finds the first
