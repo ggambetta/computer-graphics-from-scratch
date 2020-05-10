@@ -702,7 +702,7 @@ $$
 Fortunately, this makes geometrical sense. As you may recall, a quadratic equation can
 have no solutions, one double solution, or two different solutions, depending on
 the value of the discriminant ${k_2}^2 -4k_1k_3$.  This corresponds exactly to
-with the cases where the ray doesn't intersect the sphere, the ray is tangent to
+the cases where the ray doesn't intersect the sphere, the ray is tangent to
 the sphere, and the ray enters and exits the sphere, respectively:
 
 ![](<images/04-sphere-solutions.png>) 
@@ -968,7 +968,7 @@ but this is cumbersome, computationally more expensive, and the results aren't
 perfect.
 
 Consider what happens to the Moon. The only significant light source nearby is
-the Sun. So the "front half" of the Moon respect to the sun gets all its light,
+the Sun. So the "front half" of the Moon with respect to the sun gets all its light,
 and the "back half" is in complete darkness. We see this from different angles
 from Earth, creating what we call the "phases" of the Moon.
 
