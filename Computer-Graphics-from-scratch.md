@@ -1684,7 +1684,7 @@ can, and in fact doing this in a ray tracer is remarkably simple, but it can
 also be mind-twisting the first time you see how it's done.
 
 Let's see how mirrors work. When you look at a mirror, you're seeing the rays of
-light that bounce off the mirror. Rays of light are reflected symmetrically
+light that bounce off the mirror. Rays of light are reflected symmetrically with
 respect to the surface normal:
 
 ![](<images/08-mirror.png>) 
