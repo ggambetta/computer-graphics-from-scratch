@@ -1448,7 +1448,7 @@ sphere {
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-On the code, we need to change `ComputeLighting` to compute the specular term
+In the code, we need to change `ComputeLighting` to compute the specular term
 when necessary and add it to the overall light. Note that it now needs $\vec{V}$
 and $s$:
 
