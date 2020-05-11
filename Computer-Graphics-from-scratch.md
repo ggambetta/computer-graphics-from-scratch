@@ -702,7 +702,7 @@ $$
 Fortunately, this makes geometrical sense. As you may recall, a quadratic equation can
 have no solutions, one double solution, or two different solutions, depending on
 the value of the discriminant ${k_2}^2 -4k_1k_3$.  This corresponds exactly to
-with the cases where the ray doesn't intersect the sphere, the ray is tangent to
+the cases where the ray doesn't intersect the sphere, the ray is tangent to
 the sphere, and the ray enters and exits the sphere, respectively:
 
 ![](<images/04-sphere-solutions.png>) 
@@ -968,7 +968,7 @@ but this is cumbersome, computationally more expensive, and the results aren't
 perfect.
 
 Consider what happens to the Moon. The only significant light source nearby is
-the Sun. So the "front half" of the Moon respect to the sun gets all its light,
+the Sun. So the "front half" of the Moon with respect to the sun gets all its light,
 and the "back half" is in complete darkness. We see this from different angles
 from Earth, creating what we call the "phases" of the Moon.
 
@@ -1448,7 +1448,7 @@ sphere {
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-On the code, we need to change `ComputeLighting` to compute the specular term
+In the code, we need to change `ComputeLighting` to compute the specular term
 when necessary and add it to the overall light. Note that it now needs $\vec{V}$
 and $s$:
 
@@ -1684,7 +1684,7 @@ can, and in fact doing this in a ray tracer is remarkably simple, but it can
 also be mind-twisting the first time you see how it's done.
 
 Let's see how mirrors work. When you look at a mirror, you're seeing the rays of
-light that bounce off the mirror. Rays of light are reflected symmetrically
+light that bounce off the mirror. Rays of light are reflected symmetrically with
 respect to the surface normal:
 
 ![](<images/08-mirror.png>) 
@@ -1954,7 +1954,7 @@ check whether the last object that caused a shadow on this object for that light
 also causes a shadow for this point. If it does, you're done; if it doesn't,
 just check the rest of the objects normally.
 
-On the same vein, when computing the intersection between the light ray and the
+In the same vein, when computing the intersection between the light ray and the
 objects in the scene, you don't really need the closest intersection; it's
 enough to know that there's at least one intersection. You can use a special
 version of `ClosestIntersection` that returns as soon as it finds the first
