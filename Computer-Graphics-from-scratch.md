@@ -91,7 +91,7 @@ This is a work in progress. Here's a non-exhaustive to do list:
  * Clean up demo code
 
 Feel free to contribute or to correct mistakes - all the text, diagrams and demos
-are in [Github](https://github.com/ggambetta/computer-graphics-from-scratch). PRs welcome!
+are in [GitHub](https://github.com/ggambetta/computer-graphics-from-scratch). PRs welcome!
 
 
 ## About the author
