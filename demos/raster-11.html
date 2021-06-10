@@ -743,10 +743,14 @@ var GenerateSphere = function(divs, color) {
 
   // Generate triangles.
   for (var d = 0; d < divs; d++) {
-    for (var i = 0; i < divs - 1; i++) {
+    for (var i = 0; i < divs; i++) {
       var i0 = d*divs + i;
-      triangles.push(Triangle([i0, i0+divs+1, i0+1], color, [vertexes[i0], vertexes[i0+divs+1], vertexes[i0+1]]));
-      triangles.push(Triangle([i0, i0+divs, i0+divs+1], color, [vertexes[i0], vertexes[i0+divs], vertexes[i0+divs+1]]));
+      var i1 = (d+1)*divs + (i+1)%divs;
+      var i2 = divs*d + (i+1)%divs;
+      var tri0 = [i0, i1, i2];
+      var tri1 = [i0, i0+divs, i1];
+      triangles.push(Triangle(tri0, color, [vertexes[tri0[0]], vertexes[tri0[1]], vertexes[tri0[2]]]));
+      triangles.push(Triangle(tri1, color, [vertexes[tri1[0]], vertexes[tri1[1]], vertexes[tri1[2]]]));
     }
   }
 
