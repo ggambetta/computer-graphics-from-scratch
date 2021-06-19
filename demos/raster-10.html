@@ -589,16 +589,16 @@ var CYAN = [0, 255, 255];
 var triangles = [
   Triangle([0, 1, 2], RED),
   Triangle([0, 2, 3], RED),
-  Triangle([1, 5, 6], YELLOW),
-  Triangle([1, 6, 2], YELLOW),
-  Triangle([2, 6, 7], CYAN),
-  Triangle([2, 7, 3], CYAN),
   Triangle([4, 0, 3], GREEN),
-  Triangle([4, 1, 0], PURPLE),
   Triangle([4, 3, 7], GREEN),
-  Triangle([4, 5, 1], PURPLE),
   Triangle([5, 4, 7], BLUE),
   Triangle([5, 7, 6], BLUE),
+  Triangle([1, 5, 6], YELLOW),
+  Triangle([1, 6, 2], YELLOW),
+  Triangle([5, 1, 0], PURPLE),
+  Triangle([5, 0, 4], PURPLE),
+  Triangle([2, 6, 7], CYAN),
+  Triangle([2, 7, 3], CYAN),
 ];
 
 Shuffle(triangles);
