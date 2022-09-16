@@ -1,24 +1,31 @@
 <!--
-!!html_title Textures demo - Computer Graphics from scratch
+!!html_title Texture mapping demo - Computer Graphics from scratch
 -->
 
-<center>
-<canvas id="canvas" width=600 height=600 style="border: 1px grey solid"></canvas><br>
-<table>
-<tr bgcolor="#e0e0e0">
+# Texture mapping demo
+
+This demo implements [texture mapping](../14-textures.html). You can choose whether to use
+perspective-correct interpolated depth values (1/z) or not, to see the difference it has on the output.
+
+<div class="centered">
+<canvas id="canvas" width=600 height=600 style="border: 1px grey solid"></canvas>
+<table class="cgfs-demo-controls">
+
+<tr>
 <td><b>Depth buffer values</b></td>
-<td>
-<input type="radio" name="perspective-correct-depth" onClick="SetUsePerspectiveCorrectDepth(false)">Linear (Z)</input><br>
-<input type="radio" name="perspective-correct-depth" onClick="SetUsePerspectiveCorrectDepth(true)" checked>Inverse (1/Z)</input>
+<td class="text-left">
+<input type="radio" name="perspective-correct-depth" onClick="SetUsePerspectiveCorrectDepth(false)"><label for="pcd-off">Linear (z)</label><br>
+<input type="radio" name="perspective-correct-depth" onClick="SetUsePerspectiveCorrectDepth(true)" checked><label for="pcd-on">Perspective-correct (1/z)</label>
 </td>
 </tr>
+
 </table>
-</center>
+</div>
 
 <script>
 
 // ======================================================================
-//  Low-level canvas access. 
+//  Low-level canvas access.
 // ======================================================================
 
 var canvas = document.getElementById("canvas");
@@ -78,13 +85,14 @@ var ClearAll = function() {
   depth_buffer.length = canvas.width * canvas.height;
 }
 
+
 // ======================================================================
 //  Data model.
 // ======================================================================
 
 // A Point.
 var Pt = function(x, y, h) {
-  if (!(this instanceof Pt)) { return new Pt(x, y, h); } 
+  if (!(this instanceof Pt)) { return new Pt(x, y, h); }
 
   this.x = x;
   this.y = y;
@@ -94,7 +102,7 @@ var Pt = function(x, y, h) {
 
 // A 3D vertex.
 var Vertex = function(x, y, z) {
-  if (!(this instanceof Vertex)) { return new Vertex(x, y, z); } 
+  if (!(this instanceof Vertex)) { return new Vertex(x, y, z); }
 
   this.x = x;
   this.y = y;
@@ -104,8 +112,8 @@ var Vertex = function(x, y, z) {
 
 // A 4D vertex (a 3D vertex in homogeneous coordinates).
 var Vertex4 = function(arg1, y, z, w) {
-  if (!(this instanceof Vertex4)) { return new Vertex4(arg1, y, z, w); } 
-  
+  if (!(this instanceof Vertex4)) { return new Vertex4(arg1, y, z, w); }
+
   if (arg1 instanceof Vertex) {
     this.x = arg1.x;
     this.y = arg1.y;
@@ -130,7 +138,7 @@ var Mat4x4 = function(data) {
   if (!(this instanceof Mat4x4)) { return new Mat4x4(data); }
 
   this.data = data;
-} 
+}
 
 
 var Identity4x4 = Mat4x4([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]);
@@ -149,10 +157,10 @@ var Triangle = function(indexes, color, normals, texture, uvs) {
 
 
 // A Model.
-var Model = function(vertexes, triangles, bounds_center, bounds_radius) {
-  if (!(this instanceof Model)) { return new Model(vertexes, triangles, bounds_center, bounds_radius); }
+var Model = function(vertices, triangles, bounds_center, bounds_radius) {
+  if (!(this instanceof Model)) { return new Model(vertices, triangles, bounds_center, bounds_radius); }
 
-  this.vertexes = vertexes;
+  this.vertices = vertices;
   this.triangles = triangles;
   this.bounds_center = bounds_center;
   this.bounds_radius = bounds_radius;
@@ -179,7 +187,7 @@ var Camera = function(position, orientation) {
   this.position = position;
   this.orientation = orientation;
   this.clipping_planes = [];
-} 
+}
 
 
 // A Clipping Plane.
@@ -207,7 +215,7 @@ var Light = function(type, intensity, vector) {
 
 // A Texture.
 var Texture = function(url) {
-  if (!(this instanceof Texture)) { return new Texture(url); } 
+  if (!(this instanceof Texture)) { return new Texture(url); }
 
   this.image = new Image();
   this.image.src = url;
@@ -254,7 +262,7 @@ var Multiply = function(k, vec) {
 
 // Computes dot product.
 var Dot = function(v1, v2) {
-  return v1.x*v2.x + v1.y*v2.y + v1.z*v2.z; 
+  return v1.x*v2.x + v1.y*v2.y + v1.z*v2.z;
 }
 
 
@@ -334,7 +342,7 @@ var MultiplyMM4 = function(matA, matB) {
       }
     }
   }
-  
+
   return result;
 }
 
@@ -377,7 +385,6 @@ var viewport_size = 1;
 var projection_plane_z = 1;
 
 
-
 var Interpolate = function(i0, d0, i1, d1) {
   if (i0 == i1) {
     return [d0];
@@ -401,7 +408,7 @@ var DrawLine = function(p0, p1, color) {
   if (Math.abs(dx) > Math.abs(dy)) {
     // The line is horizontal-ish. Make sure it's left to right.
     if (dx < 0) { var swap = p0; p0 = p1; p1 = swap; }
-  
+
     // Compute the Y values and draw.
     var ys = Interpolate(p0.x, p0.y, p1.x, p1.y);
     for (var x = p0.x; x <= p1.x; x++) {
@@ -429,12 +436,9 @@ var DrawWireframeTriangle = function(p0, p1, p2, color) {
 
 // Converts 2D viewport coordinates to 2D canvas coordinates.
 var ViewportToCanvas = function(p2d) {
-  return Pt(
-    (p2d.x * canvas.width / viewport_size) | 0,
-    (p2d.y * canvas.height / viewport_size) | 0
-  );
+  return Pt((p2d.x * canvas.width / viewport_size) | 0,
+    	    (p2d.y * canvas.height / viewport_size) | 0);
 }
-
 
 
 // Converts 2D canvas coordinates to 2D viewport coordinates.
@@ -447,10 +451,8 @@ var CanvasToViewport = function(p2d) {
 
 
 var ProjectVertex = function(v) {
-  return ViewportToCanvas(Pt(
-    v.x * projection_plane_z / v.z,
-    v.y * projection_plane_z / v.z
-  ));
+  return ViewportToCanvas(Pt(v.x * projection_plane_z / v.z,
+                             v.y * projection_plane_z / v.z));
 }
 
 
@@ -466,7 +468,7 @@ var UnProjectVertex = function(x, y, inv_z) {
 // Sort the points from bottom to top.
 // Technically, sort the indexes to the vertex indexes in the triangle from bottom to top.
 var SortedVertexIndexes = function(vertex_indexes, projected) {
-  indexes = [0, 1, 2]; 
+  indexes = [0, 1, 2];
 
   if (projected[vertex_indexes[indexes[1]]].y < projected[vertex_indexes[indexes[0]]].y) { var swap = indexes[0]; indexes[0] = indexes[1]; indexes[1] = swap; }
   if (projected[vertex_indexes[indexes[2]]].y < projected[vertex_indexes[indexes[0]]].y) { var swap = indexes[0]; indexes[0] = indexes[2]; indexes[2] = swap; }
@@ -477,8 +479,8 @@ var SortedVertexIndexes = function(vertex_indexes, projected) {
 
 
 var ComputeTriangleNormal = function(v0, v1, v2) {
-  var v0v1 = Add(v1, Multiply(-1, v0)); 
-  var v0v2 = Add(v2, Multiply(-1, v0)); 
+  var v0v1 = Add(v1, Multiply(-1, v0));
+  var v0v2 = Add(v2, Multiply(-1, v0));
   return Cross(v0v1, v0v2);
 }
 
@@ -502,7 +504,7 @@ var ComputeIllumination = function(vertex, normal, camera, lights) {
       var transformed_light = MultiplyMV(cameraMatrix, Vertex4(light.vector));
       vl = Add(transformed_light, Multiply(-1, vertex)); // light.vector - vertex
     }
- 
+
     // Diffuse component.
     var cos_alpha = Dot(vl, normal) / (Magnitude(vl) * Magnitude(normal));
     if (cos_alpha > 0) {
@@ -537,17 +539,17 @@ var EdgeInterpolate = function(y0, v0, y1, v1, y2, v2) {
   var v12 = Interpolate(y1, v1, y2, v2);
   var v02 = Interpolate(y0, v0, y2, v2);
   v01.pop();
-  var v012 = v01.concat(v12); 
+  var v012 = v01.concat(v12);
   return [v02, v012];
 }
 
 
-var RenderTriangle = function(triangle, vertexes, projected, camera, lights, orientation) {
-  // Compute triangle normal. Use the unsorted vertexes, otherwise the winding of the points may change.
-  var normal = ComputeTriangleNormal(vertexes[triangle.indexes[0]], vertexes[triangle.indexes[1]], vertexes[triangle.indexes[2]]);
+var RenderTriangle = function(triangle, vertices, projected, camera, lights, orientation) {
+  // Compute triangle normal. Use the unsorted vertices, otherwise the winding of the points may change.
+  var normal = ComputeTriangleNormal(vertices[triangle.indexes[0]], vertices[triangle.indexes[1]], vertices[triangle.indexes[2]]);
 
   // Backface culling.
-  var centre = Multiply(-1.0/3.0, Add(Add(vertexes[triangle.indexes[0]], vertexes[triangle.indexes[1]]), vertexes[triangle.indexes[2]]));
+  var centre = Multiply(-1.0/3.0, Add(Add(vertices[triangle.indexes[0]], vertices[triangle.indexes[1]]), vertices[triangle.indexes[2]]));
   if (Dot(centre, normal) < 0) {
     return;
   }
@@ -555,9 +557,9 @@ var RenderTriangle = function(triangle, vertexes, projected, camera, lights, ori
   // Sort by projected point Y.
   var indexes = SortedVertexIndexes(triangle.indexes, projected);
   var [i0, i1, i2] = indexes;
-  var [v0, v1, v2] = [ vertexes[triangle.indexes[i0]], vertexes[triangle.indexes[i1]], vertexes[triangle.indexes[i2]] ];
+  var [v0, v1, v2] = [ vertices[triangle.indexes[i0]], vertices[triangle.indexes[i1]], vertices[triangle.indexes[i2]] ];
 
-  // Get attribute values (X, 1/Z, U/Z, U/Z) at the vertexes.
+  // Get attribute values (X, 1/Z, U/Z, U/Z) at the vertices.
   var [p0, p1, p2] = [ projected[triangle.indexes[i0]], projected[triangle.indexes[i1]], projected[triangle.indexes[i2]] ];
 
   // Compute attribute values at the edges.
@@ -597,7 +599,7 @@ var RenderTriangle = function(triangle, vertexes, projected, camera, lights, ori
     var center = Vertex((v0.x + v1.x + v2.x)/3.0, (v0.y + v1.y + v2.y)/3.0, (v0.z + v1.z + v2.z)/3.0);
     var intensity = ComputeIllumination(center, normal0, camera, lights);
   } else if (ShadingModel == SM_GOURAUD) {
-    // Gouraud shading: compute lighting at the vertexes, and interpolate.
+    // Gouraud shading: compute lighting at the vertices, and interpolate.
     var i0 = ComputeIllumination(v0, normal0, camera, lights);
     var i1 = ComputeIllumination(v1, normal1, camera, lights);
     var i2 = ComputeIllumination(v2, normal2, camera, lights);
@@ -661,7 +663,7 @@ var RenderTriangle = function(triangle, vertexes, projected, camera, lights, ori
     if (triangle.texture) {
       var uzscan = Interpolate(xl, uz_left[y - p0.y], xr, uz_right[y - p0.y]);
       var vzscan = Interpolate(xl, vz_left[y - p0.y], xr, vz_right[y - p0.y]);
-    }  
+    }
 
     for (var x = xl; x <= xr; x++) {
       var inv_z = zscan[x - xl];
@@ -697,11 +699,11 @@ var RenderTriangle = function(triangle, vertexes, projected, camera, lights, ori
 }
 
 
-// Clips a triangle against a plane. Adds output to triangles and vertexes.
-var ClipTriangle = function(triangle, plane, triangles, vertexes) {
-  var v0 = vertexes[triangle.indexes[0]];
-  var v1 = vertexes[triangle.indexes[1]];
-  var v2 = vertexes[triangle.indexes[2]];
+// Clips a triangle against a plane. Adds output to triangles and vertices.
+var ClipTriangle = function(triangle, plane, triangles, vertices) {
+  var v0 = vertices[triangle.indexes[0]];
+  var v1 = vertices[triangle.indexes[1]];
+  var v2 = vertices[triangle.indexes[2]];
 
   var in0 = Dot(plane.normal, v0) + plane.distance > 0;
   var in1 = Dot(plane.normal, v1) + plane.distance > 0;
@@ -716,25 +718,26 @@ var ClipTriangle = function(triangle, plane, triangles, vertexes) {
   } else if (in_count == 1) {
     // The triangle has one vertex in. Output is one clipped triangle.
   } else if (in_count == 2) {
-    // The triangle has two vertexes in. Output is two clipped triangles.
+    // The triangle has two vertices in. Output is two clipped triangles.
   }
 }
 
 
 var TransformAndClip = function(clipping_planes, model, transform) {
   // Transform the bounding sphere, and attempt early discard.
-  center = MultiplyMV(transform, Vertex4(model.bounds_center)); 
+  center = MultiplyMV(transform, Vertex4(model.bounds_center));
+  var radius2 = model.bounds_radius*model.bounds_radius;
   for (var p = 0; p < clipping_planes.length; p++) {
-    var distance = Dot(clipping_planes[p].normal, center) + clipping_planes[p].distance;
-    if (distance < -model.bounds_radius) { 
+    var distance2 = Dot(clipping_planes[p].normal, center) + clipping_planes[p].distance;
+    if (distance2 < -radius2) {
       return null;
     }
   }
 
   // Apply modelview transform.
-  var vertexes = [];
-  for (var i = 0; i < model.vertexes.length; i++) {
-    vertexes.push(MultiplyMV(transform, Vertex4(model.vertexes[i])));
+  var vertices = [];
+  for (var i = 0; i < model.vertices.length; i++) {
+    vertices.push(MultiplyMV(transform, Vertex4(model.vertices[i])));
   }
 
   // Clip the entire model against each successive plane.
@@ -742,23 +745,22 @@ var TransformAndClip = function(clipping_planes, model, transform) {
   for (var p = 0; p < clipping_planes.length; p++) {
     new_triangles = []
     for (var i = 0; i < triangles.length; i++) {
-      ClipTriangle(triangles[i], clipping_planes[p], new_triangles, vertexes);
+      ClipTriangle(triangles[i], clipping_planes[p], new_triangles, vertices);
     }
     triangles = new_triangles;
   }
 
-  return Model(vertexes, triangles, center, model.bounds_radius);
+  return Model(vertices, triangles, center, model.bounds_radius);
 }
 
 
 var RenderModel = function(model, camera, lights, orientation) {
   var projected = [];
-  for (var i = 0; i < model.vertexes.length; i++) {
-    projected.push(ProjectVertex(Vertex4(model.vertexes[i])));
-    
+  for (var i = 0; i < model.vertices.length; i++) {
+    projected.push(ProjectVertex(Vertex4(model.vertices[i])));
   }
   for (var i = 0; i < model.triangles.length; i++) {
-    RenderTriangle(model.triangles[i], model.vertexes, projected, camera, lights, orientation);
+    RenderTriangle(model.triangles[i], model.vertices, projected, camera, lights, orientation);
   }
 }
 
@@ -778,18 +780,18 @@ var RenderScene = function(camera, instances, lights) {
 
 // ----- Sphere model generator -----
 var GenerateSphere = function(divs, color) {
-  var vertexes = [];
+  var vertices = [];
   var triangles = [];
 
   var delta_angle = 2.0*Math.PI / divs;
 
-  // Generate vertexes and normals.
+  // Generate vertices and normals.
   for (var d = 0; d < divs + 1; d++) {
     var y = (2.0 / divs) * (d - divs/2);
     var radius = Math.sqrt(1.0 - y*y);
     for (var i = 0; i < divs; i++) {
       var vertex = Vertex(radius*Math.cos(i*delta_angle), y, radius*Math.sin(i*delta_angle));
-      vertexes.push(vertex);
+      vertices.push(vertex);
     }
   }
 
@@ -801,17 +803,17 @@ var GenerateSphere = function(divs, color) {
       var i2 = divs*d + (i+1)%divs;
       var tri0 = [i0, i1, i2];
       var tri1 = [i0, i0+divs, i1];
-      triangles.push(Triangle(tri0, color, [vertexes[tri0[0]], vertexes[tri0[1]], vertexes[tri0[2]]]));
-      triangles.push(Triangle(tri1, color, [vertexes[tri1[0]], vertexes[tri1[1]], vertexes[tri1[2]]]));
+      triangles.push(Triangle(tri0, color, [vertices[tri0[0]], vertices[tri0[1]], vertices[tri0[2]]]));
+      triangles.push(Triangle(tri1, color, [vertices[tri1[0]], vertices[tri1[1]], vertices[tri1[2]]]));
     }
   }
 
-  return Model(vertexes, triangles, Vertex(0, 0, 0), 1.0);
+  return Model(vertices, triangles, Vertex(0, 0, 0), 1.0);
 }
 
 
 // ----- Cube model -----
-var vertexes = [
+var vertices = [
   Vertex(1, 1, 1),
   Vertex(-1, 1, 1),
   Vertex(-1, -1, 1),
@@ -841,15 +843,13 @@ var triangles = [
   Triangle([1, 5, 6], YELLOW, [Vertex(-1,  0,  0), Vertex(-1,  0,  0), Vertex(-1,  0,  0)], wood_texture, [Pt(0, 0), Pt(1, 0), Pt(1, 1)]),
   Triangle([1, 6, 2], YELLOW, [Vertex(-1,  0,  0), Vertex(-1,  0,  0), Vertex(-1,  0,  0)], wood_texture, [Pt(0, 0), Pt(1, 1), Pt(0, 1)]),
   Triangle([1, 0, 5], PURPLE, [Vertex( 0,  1,  0), Vertex( 0,  1,  0), Vertex( 0,  1,  0)], wood_texture, [Pt(0, 0), Pt(1, 0), Pt(1, 1)]),
-  Triangle([5, 0, 4], PURPLE, [Vertex( 0,  1,  0), Vertex( 0,  1,  0), Vertex( 0,  1,  0)], wood_texture, [Pt(0, 1), Pt(1, 1), Pt(0, 0)]), 
-  Triangle([2, 6, 7], CYAN,   [Vertex( 0, -1,  0), Vertex( 0, -1,  0), Vertex( 0, -1,  0)], wood_texture, [Pt(0, 0), Pt(1, 0), Pt(1, 1)]), 
+  Triangle([5, 0, 4], PURPLE, [Vertex( 0,  1,  0), Vertex( 0,  1,  0), Vertex( 0,  1,  0)], wood_texture, [Pt(0, 1), Pt(1, 1), Pt(0, 0)]),
+  Triangle([2, 6, 7], CYAN,   [Vertex( 0, -1,  0), Vertex( 0, -1,  0), Vertex( 0, -1,  0)], wood_texture, [Pt(0, 0), Pt(1, 0), Pt(1, 1)]),
   Triangle([2, 7, 3], CYAN,   [Vertex( 0, -1,  0), Vertex( 0, -1,  0), Vertex( 0, -1,  0)], wood_texture, [Pt(0, 0), Pt(1, 1), Pt(0, 1)]),
 ];
 
-var cube = Model(vertexes, triangles, Vertex(0, 0, 0), Math.sqrt(3));
+var cube = Model(vertices, triangles, Vertex(0, 0, 0), Math.sqrt(3));
 // ----------
-
-//var sphere = GenerateSphere(15, GREEN);
 
 var instances = [Instance(cube, Vertex(-1.5, 0, 7), Identity4x4, 0.75),
       	         Instance(cube, Vertex(1.25, 2.5, 7.5), MakeOYRotationMatrix(195)),
@@ -858,12 +858,7 @@ var instances = [Instance(cube, Vertex(-1.5, 0, 7), Identity4x4, 0.75),
 
 var camera = Camera(Vertex(-3, 1, 2), MakeOYRotationMatrix(-30));
 
-/*var instances = [Instance(cube, Vertex(0, 0, 7), MakeOYRotationMatrix(30)),
-];
-
-var camera = Camera(Vertex(0, 0, 0), Identity4x4);*/
-
-var s2 = Math.sqrt(2) / 2.0;  // Used in the side planes, to make sure the length of their normals are 1.
+var s2 = Math.sqrt(2);
 camera.clipping_planes = [
   Plane(Vertex(  0,   0,  1), -1), // Near
   Plane(Vertex( s2,   0, s2),  0), // Left
@@ -884,7 +879,7 @@ var SetUsePerspectiveCorrectDepth = function(use_perspective_correct_depth) {
 }
 
 function Render() {
-  ClearAll(); 
+  ClearAll();
   // This lets the browser clear the canvas before blocking to render the scene.
   setTimeout(function(){
     RenderScene(camera, instances, lights);
@@ -892,9 +887,10 @@ function Render() {
   }, 0);
 }
 
-// Ugly hack - wait for texture to load.
-setTimeout(function() { Render() }, 50 );
+if (wood_texture.image.complete) {
+  Render();
+} else {
+  wood_texture.image.addEventListener("load", Render);
+}
 
 </script>
-
-</body></html>

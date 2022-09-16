@@ -1,11 +1,20 @@
 <!--
 !!html_title Lines demo 1 - Computer Graphics from scratch
 -->
-<canvas id="canvas" width=600 height=600 style="border: 1px grey solid">
+
+# Lines demo 1
+
+This is an implementation of the initial, buggy [line drawing algorithm](../06-lines.html#drawing-lines).
+It works correctly for lines with <code>|slope| &leq; 1</code>, but not for the rest.
+
+<div class="centered">
+<canvas id="canvas" width=600 height=600 style="border: 1px grey solid"></canvas>
+</div>
+
 <script>
 
 // ======================================================================
-//  Low-level canvas access. 
+//  Low-level canvas access.
 // ======================================================================
 
 var canvas = document.getElementById("canvas");
@@ -16,8 +25,8 @@ var canvas_pitch = canvas_buffer.width * 4;
 
 // The PutPixel() function.
 var PutPixel = function(x, y, color) {
-  x = canvas.width/2 + Math.floor(x);
-  y = canvas.height/2 - Math.floor(y) - 1;
+  x = canvas.width/2 + (x | 0);
+  y = canvas.height/2 - (y | 0) - 1;
 
   if (x < 0 || x >= canvas.width || y < 0 || y >= canvas.height) {
     return;

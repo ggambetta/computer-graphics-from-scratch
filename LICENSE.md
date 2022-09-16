@@ -6,7 +6,7 @@ All the JavaScript code is licensed under the **MIT license**:
 
 MIT License
 
-Copyright (c) Gabriel Gambetta, 2017
+Copyright © Gabriel Gambetta, 2017
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -31,6 +31,5 @@ SOFTWARE.
 
 ## Text and images
 
-The text and images are licensed under the **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International**
-license, also known as **BY-NC-SA**. You can find it [here](https://creativecommons.org/licenses/by-nc-sa/4.0/).
-
+The text and images are licensed under the **Attribution-NonCommercial-NoDerivatives 4.0 International**
+license, also known as **CC BY-NC-ND 4.0**. You can find it [here](https://creativecommons.org/licenses/by-nc-nd/4.0/).

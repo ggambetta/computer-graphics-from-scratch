@@ -1,23 +1,33 @@
 <!--
 !!html_title Shadows demo - Computer Graphics from scratch
 -->
-<center>
-<canvas id="canvas" width=600 height=600 style="border: 1px grey solid"></canvas><br>
-<table>
-<tr bgcolor="#e0e0e0">
+
+# Shadows demo
+
+This demo extends the [previous demo](raytracer-03.html) by implementing [shadows](../04-shadows-and-reflections.html#shadows).
+
+You can control whether the shadow rays start at t=0 or at t=&epsilon; and see the impact of this choice on the output.
+
+<div class="centered">
+<canvas id="canvas" width=600 height=600 style="border: 1px grey solid"></canvas>
+
+<table class="cgfs-demo-controls">
+
+<tr>
 <td><b>Shadow ray start</b></td>
-<td>
-<input type="radio" name="shadow-ray-start" onClick="SetShadowEpsilon(0);">Zero</input><br>
-<input type="radio" name="shadow-ray-start" onClick="SetShadowEpsilon(0.001);" checked>Epsilon</input>
+<td class="text-left">
+<input type="radio" id="eps-0" name="shadow-ray-start" onClick="SetShadowEpsilon(0);"><label for='eps-0'>Zero</label><br>
+<input type="radio" id="eps-e" name="shadow-ray-start" onClick="SetShadowEpsilon(0.001);" checked><label for='eps-e'>Epsilon</label>
 </td>
 </tr>
+
 </table>
-</center>
+</div>
 
 <script>
 
 // ======================================================================
-//  Low-level canvas access. 
+//  Low-level canvas access.
 // ======================================================================
 
 var canvas = document.getElementById("canvas");
@@ -53,6 +63,7 @@ var ClearAll = function() {
   canvas.width = canvas.width;
 }
 
+
 // ======================================================================
 //  Linear algebra and helpers.
 // ======================================================================
@@ -63,7 +74,7 @@ var EPSILON = 0.001;
 
 // Dot product of two 3D vectors.
 var DotProduct = function(v1, v2) {
-  return v1[0]*v2[0] + v1[1]*v2[1] + v1[2]*v2[2];  
+  return v1[0]*v2[0] + v1[1]*v2[1] + v1[2]*v2[2];
 }
 
 
@@ -95,7 +106,7 @@ var Subtract = function(v1, v2) {
 var Clamp = function(vec) {
   return [Math.min(255, Math.max(0, vec[0])),
 	  Math.min(255, Math.max(0, vec[1])),
-	  Math.min(255, Math.max(0, vec[2]))]; 
+	  Math.min(255, Math.max(0, vec[2]))];
 }
 
 
@@ -130,7 +141,7 @@ var camera_position = [0, 0, 0];
 var background_color = [255, 255, 255];
 var spheres = [new Sphere([0, -1, 3], 1, [255, 0, 0], 500),
 	       new Sphere([2, 0, 4], 1, [0, 0, 255], 500),
-	       new Sphere([-2, 0, 4], 1, [0, 255, 0], 10), 
+	       new Sphere([-2, 0, 4], 1, [0, 255, 0], 10),
 	       new Sphere([0, -5001, 0], 5000, [255, 255, 0], 1000)];
 
 var lights = [
@@ -144,7 +155,7 @@ var lights = [
 var CanvasToViewport = function(p2d) {
   return [p2d[0] * viewport_size / canvas.width,
 	  p2d[1] * viewport_size / canvas.height,
-	  projection_plane_z]; 
+	  projection_plane_z];
 }
 
 
@@ -204,7 +215,7 @@ var ComputeLighting = function(point, normal, view, specular) {
 	var vec_r = Subtract(Multiply(2.0*DotProduct(normal, vec_l), normal), vec_l);
 	var r_dot_v = DotProduct(vec_r, view);
 	if (r_dot_v > 0) {
-	  intensity += light.intensity * Math.pow(r_dot_v / (Length(vec_r) * length_v), specular); 
+	  intensity += light.intensity * Math.pow(r_dot_v / (Length(vec_r) * length_v), specular);
 	}
       }
     }
@@ -218,7 +229,7 @@ var ComputeLighting = function(point, normal, view, specular) {
 var ClosestIntersection = function(origin, direction, min_t, max_t) {
   var closest_t = Infinity;
   var closest_sphere = null;
-  
+
   for (var i = 0; i < spheres.length; i++) {
     var ts = IntersectRaySphere(origin, direction, spheres[i]);
     if (ts[0] < closest_t && min_t < ts[0] && ts[0] < max_t) {
@@ -230,7 +241,7 @@ var ClosestIntersection = function(origin, direction, min_t, max_t) {
       closest_sphere = spheres[i];
     }
   }
-  
+
   if (closest_sphere) {
     return [closest_sphere, closest_t];
   }
@@ -265,7 +276,7 @@ var SetShadowEpsilon = function(epsilon) {
 
 
 var Render = function() {
-  ClearAll(); 
+  ClearAll();
 
   // This lets the browser clear the canvas before blocking to render the scene.
   setTimeout(function(){
