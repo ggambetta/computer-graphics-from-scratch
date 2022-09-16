@@ -14,8 +14,8 @@
    viewBox="0 0 744.09448819 1052.3622047"
    id="svg28722"
    version="1.1"
-   inkscape:version="0.91 r13725"
-   sodipodi:docname="08-lights4.svg">
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="08-shadow-cases.svg">
   <defs
      id="defs28724">
     <marker
@@ -591,16 +591,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.72416407"
-     inkscape:cx="264.45861"
-     inkscape:cy="533.74425"
+     inkscape:zoom="1.0241226"
+     inkscape:cx="-12.106456"
+     inkscape:cy="888.47605"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1920"
-     inkscape:window-height="1056"
+     inkscape:window-height="1025"
      inkscape:window-x="0"
-     inkscape:window-y="37"
+     inkscape:window-y="27"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata28727">
@@ -610,7 +610,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -621,21 +621,27 @@
     <circle
        style="fill:#808080;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="path4248"
-       cx="568.06635"
-       cy="169.17946"
-       r="39.285713" />
+       cx="112.36851"
+       cy="153.6443"
+       r="39.285713"
+       inkscape:export-filename="/home/gabriel/08-shadow-cases.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <g
        id="g4285"
-       transform="translate(32.829957,-57.578696)">
+       transform="translate(-422.86788,-73.11385)"
+       inkscape:export-filename="/home/gabriel/08-shadow-cases.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96">
       <path
          inkscape:connector-curvature="0"
          id="path4250"
-         d="m 471.74124,108.45618 0,31.42857"
+         d="m 471.74124,108.45618 v 31.42857"
          style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       <path
          inkscape:connector-curvature="0"
          id="path4250-0"
-         d="m 487.45553,124.17046 -31.42858,0"
+         d="M 487.45553,124.17046 H 456.02695"
          style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
       <path
          inkscape:connector-curvature="0"
@@ -650,57 +656,100 @@
     </g>
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 514.16765,319.49653 c 0,0 95.45941,-121.72338 212.13203,-152.02795"
+       d="m 58.469812,303.96138 c 0,0 95.459408,-121.72338 212.132028,-152.02795"
        id="path4293"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/gabriel/08-shadow-cases.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker4559)"
-       d="M 504.49233,66.283844 685.81472,181.44123"
+       d="M 48.794492,50.74869 230.11688,165.90608"
        id="path4295"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/gabriel/08-shadow-cases.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <path
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker4562);stroke-miterlimit:4;stroke-dasharray:3,3;stroke-dashoffset:0"
-       d="m 540.81084,139.69777 49.68611,102.02558"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:3, 3;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker4562)"
+       d="M 85.113002,124.16262 134.79911,226.1882"
        id="path4297"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/gabriel/08-shadow-cases.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 504.90176,66.285527 36.13762,73.976493"
+       d="m 49.203922,50.750373 36.13762,73.976497"
        id="path4297-7"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/gabriel/08-shadow-cases.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:20px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="684.66455"
-       y="198.43037"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="228.96672"
+       y="182.89522"
        id="text4587"
-       sodipodi:linespacing="125%"><tspan
+       inkscape:export-filename="/home/gabriel/08-shadow-cases.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
          sodipodi:role="line"
-         x="684.66455"
-         y="198.43037"
+         x="228.96672"
+         y="182.89522"
          id="tspan4591"
-         style="line-height:125%;text-align:start;writing-mode:lr-tb;text-anchor:start">Point</tspan><tspan
+         style="font-size:20px;line-height:125%;text-align:start;writing-mode:lr-tb;text-anchor:start">Point</tspan><tspan
          sodipodi:role="line"
-         x="684.66455"
-         y="223.43037"
-         style="line-height:125%;text-align:start;writing-mode:lr-tb;text-anchor:start"
+         x="228.96672"
+         y="207.89522"
+         style="font-size:20px;line-height:125%;text-align:start;writing-mode:lr-tb;text-anchor:start"
          id="tspan4601">is lit</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:20px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="590.17206"
-       y="260.58881"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="139.96674"
+       y="249.63074"
        id="text4595"
-       sodipodi:linespacing="125%"><tspan
+       inkscape:export-filename="/home/gabriel/08-shadow-cases.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
          sodipodi:role="line"
          id="tspan4597"
-         x="590.17206"
-         y="260.58881">Point is in</tspan><tspan
+         x="139.96674"
+         y="249.63074"
+         style="font-size:20px;line-height:1.25">Point is in</tspan><tspan
          sodipodi:role="line"
-         x="590.17206"
-         y="285.58881"
-         id="tspan4599">shadow</tspan></text>
+         x="139.96674"
+         y="274.63074"
+         id="tspan4599"
+         style="font-size:20px;line-height:1.25">shadow</tspan></text>
+    <path
+       style="fill:none;stroke:#c3c3c3;stroke-width:0.9375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 48.794492,50.74869 45.49353,213.89658"
+       id="path1578"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/gabriel/08-shadow-cases.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#c3c3c3;stroke-width:0.9375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 48.794492,50.74869 206.83363,177.16735"
+       id="path1580"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/gabriel/08-shadow-cases.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3.75000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 94.288022,264.64527 c 0,0 65.350828,-63.84702 112.545608,-87.47792"
+       id="path2359"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/gabriel/08-shadow-cases.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
   </g>
 </svg>

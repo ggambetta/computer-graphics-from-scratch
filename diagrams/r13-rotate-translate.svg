@@ -14,10 +14,24 @@
    viewBox="0 0 744.09448819 1052.3622047"
    id="svg2"
    version="1.1"
-   inkscape:version="0.91 r13725"
-   sodipodi:docname="r13-scene.svg">
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="r13-rotate-translate.svg">
   <defs
      id="defs4">
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker7220"
+       style="overflow:visible;"
+       inkscape:isstock="true">
+      <path
+         id="path7218"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#ff0000;stroke-width:1pt;stroke-opacity:1;fill:#ff0000;fill-opacity:1"
+         transform="scale(0.8) rotate(180) translate(12.5,0)" />
+    </marker>
     <marker
        inkscape:isstock="true"
        style="overflow:visible;"
@@ -25,10 +39,11 @@
        refX="0.0"
        refY="0.0"
        orient="auto"
-       inkscape:stockid="Arrow1Lend">
+       inkscape:stockid="Arrow1Lend"
+       inkscape:collect="always">
       <path
          transform="scale(0.8) rotate(180) translate(12.5,0)"
-         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+         style="fill-rule:evenodd;stroke:#ff0000;stroke-width:1pt;stroke-opacity:1;fill:#ff0000;fill-opacity:1"
          d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
          id="path7601" />
     </marker>
@@ -398,16 +413,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.81366258"
-     inkscape:cx="151.88847"
-     inkscape:cy="576.86722"
+     inkscape:zoom="1.1506927"
+     inkscape:cx="358.01128"
+     inkscape:cy="665.70219"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1920"
-     inkscape:window-height="1056"
+     inkscape:window-height="1025"
      inkscape:window-x="0"
-     inkscape:window-y="37"
+     inkscape:window-y="27"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata7">
@@ -417,7 +432,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -425,59 +440,78 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1">
+    <path
+       d="m 287.53265,447.52563 a 46.875,46.875 0 0 1 33.14563,13.72937 l -33.14563,33.14563 z"
+       sodipodi:end="5.4977871"
+       sodipodi:start="4.712389"
+       sodipodi:ry="46.875"
+       sodipodi:rx="46.875"
+       sodipodi:cy="494.40063"
+       sodipodi:cx="287.53265"
+       sodipodi:type="arc"
+       id="path3551"
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#808080;stroke-width:1.875;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="/home/gabriel/r13-rotate-translate.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="585.88849"
        y="456.37219"
        id="text4873"
-       sodipodi:linespacing="125%"><tspan
+       inkscape:export-filename="/home/gabriel/r13-rotate-translate.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
          sodipodi:role="line"
          id="tspan4875"
          x="585.88849"
-         y="456.37219" /></text>
+         y="456.37219"
+         style="font-size:40px;line-height:1.25"> </tspan></text>
     <g
-       id="g9805">
+       id="g9805"
+       inkscape:export-filename="/home/gabriel/r13-rotate-translate.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96">
       <path
          inkscape:connector-curvature="0"
          id="path4385"
          d="m 34.849415,557.58951 235.000005,0"
          style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker4667-3)" />
       <text
-         sodipodi:linespacing="125%"
          id="text5021-3-0"
          y="562.0498"
          x="279.92038"
-         style="font-style:normal;font-weight:normal;font-size:15px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
            y="562.0498"
            x="279.92038"
            id="tspan5023-3-9"
-           sodipodi:role="line">X</tspan></text>
+           sodipodi:role="line"
+           style="font-size:15px;line-height:1.25">X</tspan></text>
       <text
-         sodipodi:linespacing="125%"
          id="text5021-3-0-9"
          y="384.91418"
          x="162.93675"
-         style="font-style:normal;font-weight:normal;font-size:15px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
            y="384.91418"
            x="162.93675"
            id="tspan5023-3-9-4"
-           sodipodi:role="line">Z</tspan></text>
+           sodipodi:role="line"
+           style="font-size:15px;line-height:1.25">Z</tspan></text>
       <path
          inkscape:connector-curvature="0"
          id="path4402"
          d="m 152.34943,617.66281 0,-236.88082"
          style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker4664-3)" />
       <text
-         sodipodi:linespacing="125%"
          id="text7664-3"
          y="620.21069"
          x="63.724773"
-         style="font-style:normal;font-weight:normal;font-size:12px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
-           style="line-height:125%;text-align:center;writing-mode:lr-tb;text-anchor:middle"
+           style="font-size:12px;line-height:125%;text-align:center;writing-mode:lr-tb;text-anchor:middle"
            id="tspan7668-8"
            y="620.21069"
            x="63.724773"
@@ -494,46 +528,60 @@
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker4667-3-6)"
        d="m 323.45109,557.58951 235,0"
        id="path4385-8"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/gabriel/r13-rotate-translate.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:15px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="568.52203"
        y="562.0498"
        id="text5021-3-0-97"
-       sodipodi:linespacing="125%"><tspan
+       inkscape:export-filename="/home/gabriel/r13-rotate-translate.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
          sodipodi:role="line"
          id="tspan5023-3-9-7"
          x="568.52203"
-         y="562.0498">X</tspan></text>
+         y="562.0498"
+         style="font-size:15px;line-height:1.25">X</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:15px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="451.53842"
        y="384.91418"
        id="text5021-3-0-9-6"
-       sodipodi:linespacing="125%"><tspan
+       inkscape:export-filename="/home/gabriel/r13-rotate-translate.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
          sodipodi:role="line"
          id="tspan5023-3-9-4-4"
          x="451.53842"
-         y="384.91418">Z</tspan></text>
+         y="384.91418"
+         style="font-size:15px;line-height:1.25">Z</tspan></text>
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker4664-3-4)"
        d="m 440.9511,617.66281 0,-236.88082"
        id="path4402-3"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/gabriel/r13-rotate-translate.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:12px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="352.32645"
        y="620.21069"
        id="text7664-3-0"
-       sodipodi:linespacing="125%"><tspan
+       inkscape:export-filename="/home/gabriel/r13-rotate-translate.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
          sodipodi:role="line"
          x="352.32645"
          y="620.21069"
          id="tspan7668-8-3"
-         style="line-height:125%;text-align:center;writing-mode:lr-tb;text-anchor:middle">Rotation</tspan></text>
+         style="font-size:12px;line-height:125%;text-align:center;writing-mode:lr-tb;text-anchor:middle">Rotation</tspan></text>
     <rect
        style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect9766-0"
@@ -541,51 +589,68 @@
        height="35.175823"
        x="688.21033"
        y="64.829132"
-       transform="matrix(0.70710678,0.70710678,-0.70710678,0.70710678,0,0)" />
+       transform="matrix(0.70710678,0.70710678,-0.70710678,0.70710678,0,0)"
+       inkscape:export-filename="/home/gabriel/r13-rotate-translate.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker4667-3-9)"
        d="m 612.05273,557.58951 235.00001,0"
        id="path4385-5"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/gabriel/r13-rotate-translate.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:15px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="857.12372"
        y="562.0498"
        id="text5021-3-0-94"
-       sodipodi:linespacing="125%"><tspan
+       inkscape:export-filename="/home/gabriel/r13-rotate-translate.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
          sodipodi:role="line"
          id="tspan5023-3-9-6"
          x="857.12372"
-         y="562.0498">X</tspan></text>
+         y="562.0498"
+         style="font-size:15px;line-height:1.25">X</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:15px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="740.14008"
        y="384.91418"
        id="text5021-3-0-9-9"
-       sodipodi:linespacing="125%"><tspan
+       inkscape:export-filename="/home/gabriel/r13-rotate-translate.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
          sodipodi:role="line"
          id="tspan5023-3-9-4-2"
          x="740.14008"
-         y="384.91418">Z</tspan></text>
+         y="384.91418"
+         style="font-size:15px;line-height:1.25">Z</tspan></text>
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker4664-3-5)"
        d="m 729.55275,617.66281 0,-236.88082"
        id="path4402-2"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/gabriel/r13-rotate-translate.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:12px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="640.9281"
        y="620.21069"
        id="text7664-3-4"
-       sodipodi:linespacing="125%"><tspan
+       inkscape:export-filename="/home/gabriel/r13-rotate-translate.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
          sodipodi:role="line"
          x="640.9281"
          y="620.21069"
          id="tspan7668-8-7"
-         style="line-height:125%;text-align:center;writing-mode:lr-tb;text-anchor:middle">Translation</tspan></text>
+         style="font-size:12px;line-height:125%;text-align:center;writing-mode:lr-tb;text-anchor:middle">Translation</tspan></text>
     <rect
        style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect9766-7"
@@ -593,6 +658,70 @@
        height="35.175823"
        x="821.57184"
        y="-209.95374"
-       transform="matrix(0.70710678,0.70710678,-0.70710678,0.70710678,0,0)" />
+       transform="matrix(0.70710678,0.70710678,-0.70710678,0.70710678,0,0)"
+       inkscape:export-filename="/home/gabriel/r13-rotate-translate.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#ff0000;stroke-width:1.875;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path2682"
+       sodipodi:type="arc"
+       sodipodi:cx="287.53265"
+       sodipodi:cy="494.40063"
+       sodipodi:rx="46.875"
+       sodipodi:ry="46.875"
+       sodipodi:start="4.712389"
+       sodipodi:end="5.4977871"
+       d="M 287.53265,447.52563 A 46.875,46.875 0 0 1 320.67828,461.255"
+       sodipodi:open="true"
+       inkscape:export-filename="/home/gabriel/r13-rotate-translate.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#ff0000;stroke-width:0.9375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker7599)"
+       d="m 327.06452,465.8476 1.67383,1.28989"
+       id="path3553"
+       inkscape:connector-curvature="0"
+       inkscape:transform-center-x="2.1848915"
+       inkscape:transform-center-y="-1.7676121"
+       inkscape:export-filename="/home/gabriel/r13-rotate-translate.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:37.5px;line-height:1.25;font-family:ASIFuturaDW01_SC-SCDemi;-inkscape-font-specification:ASIFuturaDW01_SC-SCDemi;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="290.85745"
+       y="437.24356"
+       id="text7208"
+       inkscape:export-filename="/home/gabriel/r13-rotate-translate.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan7206"
+         x="290.85745"
+         y="437.24356"
+         style="font-size:12.5px;fill:#ff0000;fill-opacity:1;stroke-width:0.9375">R(45)</tspan></text>
+    <path
+       style="fill:none;stroke:#ff0000;stroke-width:0.9375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker7220)"
+       d="M 592.30629,508.93952 V 408.72814"
+       id="path7210"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/gabriel/r13-rotate-translate.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:37.5px;line-height:1.25;font-family:ASIFuturaDW01_SC-SCDemi;-inkscape-font-specification:ASIFuturaDW01_SC-SCDemi;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="603.56097"
+       y="463.97437"
+       id="text7208-6"
+       inkscape:export-filename="/home/gabriel/r13-rotate-translate.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan7206-2"
+         x="603.56097"
+         y="463.97437"
+         style="font-size:12.50000095px;fill:#ff0000;fill-opacity:1;stroke-width:0.9375">T</tspan></text>
   </g>
 </svg>

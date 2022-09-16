@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 744.09448819 1052.3622047"
+   id="svg4358"
+   version="1.1"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="bilinear-texture-weights.svg">
+  <defs
+     id="defs4360">
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible;"
+       id="marker8767"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend">
+      <path
+         transform="scale(0.8) rotate(180) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#ff0000;stroke-width:1pt;stroke-opacity:1;fill:#ff0000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path8769" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible;"
+       id="marker8721"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend">
+      <path
+         transform="scale(0.8) rotate(180) translate(12.5,0)"
+         style="fill-rule:evenodd;stroke:#ff0000;stroke-width:1pt;stroke-opacity:1;fill:#ff0000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path8723" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker8657"
+       style="overflow:visible;"
+       inkscape:isstock="true">
+      <path
+         id="path8659"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#ff0000;stroke-width:1pt;stroke-opacity:1;fill:#ff0000;fill-opacity:1"
+         transform="scale(0.8) rotate(180) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker8577"
+       style="overflow:visible;"
+       inkscape:isstock="true">
+      <path
+         id="path8579"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#00ff00;stroke-width:1pt;stroke-opacity:1;fill:#00ff00;fill-opacity:1"
+         transform="scale(0.8) rotate(180) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="marker8543"
+       style="overflow:visible;"
+       inkscape:isstock="true">
+      <path
+         id="path8545"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#00ff00;stroke-width:1pt;stroke-opacity:1;fill:#00ff00;fill-opacity:1"
+         transform="scale(0.8) rotate(180) translate(12.5,0)" />
+    </marker>
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="-149.81216 : 790.95173 : 1"
+       inkscape:vp_y="140.39666 : 925.11423 : 0"
+       inkscape:vp_z="931.22632 : 183.7801 : 1"
+       inkscape:persp3d-origin="502.6182 : 20.302366 : 1"
+       id="perspective7888" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.5009302"
+     inkscape:cx="333.39166"
+     inkscape:cy="870.91114"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1025"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     showguides="true"
+     inkscape:guide-bbox="true" />
+  <metadata
+     id="metadata4363">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:2.81250001;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect973"
+       width="303.56174"
+       height="303.56174"
+       x="101.18725"
+       y="79.215683"
+       inkscape:export-filename="/home/gabriel/bilinear-texture-weights.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="56.634026"
+       y="65.474213"
+       id="text977"
+       inkscape:export-filename="/home/gabriel/bilinear-texture-weights.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan975"
+         x="56.634026"
+         y="65.474213"
+         style="stroke-width:0.9375">TL</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="405.79636"
+       y="65.474213"
+       id="text981"
+       inkscape:export-filename="/home/gabriel/bilinear-texture-weights.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan979"
+         x="405.79636"
+         y="65.474213"
+         style="stroke-width:0.9375">TR</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="402.00607"
+       y="424.00186"
+       id="text985"
+       inkscape:export-filename="/home/gabriel/bilinear-texture-weights.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan983"
+         x="402.00607"
+         y="424.00186"
+         style="stroke-width:0.9375">BR</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="53.850822"
+       y="424.00186"
+       id="text989"
+       inkscape:export-filename="/home/gabriel/bilinear-texture-weights.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan987"
+         x="53.850822"
+         y="424.00186"
+         style="stroke-width:0.9375">BL</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.9375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 66.208942,291.58399 H 435.97963 v 2.49845 0"
+       id="path991"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/gabriel/bilinear-texture-weights.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.9375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 306.06021,50.483504 V 420.25419"
+       id="path993"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/gabriel/bilinear-texture-weights.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:37.5px;line-height:1.25;font-family:'Monotype Corsiva';-inkscape-font-specification:'Monotype Corsiva';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="188.63301"
+       y="111.10463"
+       id="text997"
+       inkscape:export-filename="/home/gabriel/bilinear-texture-weights.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan995"
+         x="188.63301"
+         y="111.10463"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:31.25px;font-family:'Monotype Corsiva';-inkscape-font-specification:'Monotype Corsiva';stroke-width:0.9375">fx</tspan></text>
+    <text
+       id="text1879"
+       y="197.89209"
+       x="118.08781"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:37.5px;line-height:1.25;font-family:'Monotype Corsiva';-inkscape-font-specification:'Monotype Corsiva';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       xml:space="preserve"
+       inkscape:export-filename="/home/gabriel/bilinear-texture-weights.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:31.25px;font-family:'Monotype Corsiva';-inkscape-font-specification:'Monotype Corsiva';stroke-width:0.9375"
+         y="197.89209"
+         x="118.08781"
+         id="tspan1877"
+         sodipodi:role="line">fy</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:37.5px;line-height:1.25;font-family:'Monotype Corsiva';-inkscape-font-specification:'Monotype Corsiva';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="112.46281"
+       y="344.14209"
+       id="text1883"
+       inkscape:export-filename="/home/gabriel/bilinear-texture-weights.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan1881"
+         x="112.46281"
+         y="344.14209"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:31.25px;font-family:'Monotype Corsiva';-inkscape-font-specification:'Monotype Corsiva';stroke-width:0.9375">1-fy</tspan></text>
+    <text
+       id="text1887"
+       y="114.85463"
+       x="331.13303"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:37.5px;line-height:1.25;font-family:'Monotype Corsiva';-inkscape-font-specification:'Monotype Corsiva';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       xml:space="preserve"
+       inkscape:export-filename="/home/gabriel/bilinear-texture-weights.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:31.25px;font-family:'Monotype Corsiva';-inkscape-font-specification:'Monotype Corsiva';stroke-width:0.9375"
+         y="114.85463"
+         x="331.13303"
+         id="tspan1885"
+         sodipodi:role="line">1-fx</tspan></text>
+    <text
+       id="text1891"
+       y="65.474213"
+       x="248.29636"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       xml:space="preserve"
+       inkscape:export-filename="/home/gabriel/bilinear-texture-weights.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         style="stroke-width:0.9375"
+         y="65.474213"
+         x="248.29636"
+         id="tspan1889"
+         sodipodi:role="line">CT</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="248.29636"
+       y="421.72421"
+       id="text1895"
+       inkscape:export-filename="/home/gabriel/bilinear-texture-weights.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         sodipodi:role="line"
+         id="tspan1893"
+         x="248.29636"
+         y="421.72421"
+         style="stroke-width:0.9375">CB</tspan></text>
+    <text
+       id="text1899"
+       y="282.97421"
+       x="272.67136"
+       style="font-style:normal;font-weight:normal;font-size:37.5px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       xml:space="preserve"
+       inkscape:export-filename="/home/gabriel/bilinear-texture-weights.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><tspan
+         style="stroke-width:0.9375"
+         y="282.97421"
+         x="272.67136"
+         id="tspan1897"
+         sodipodi:role="line">C</tspan></text>
+    <circle
+       style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.24968743;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path141"
+       cx="306.29666"
+       cy="79.147102"
+       r="5.5208483"
+       inkscape:export-filename="/home/gabriel/bilinear-texture-weights.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <circle
+       r="5.5208483"
+       cy="78.705437"
+       cx="405.23026"
+       id="circle978"
+       style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.24968743;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="/home/gabriel/bilinear-texture-weights.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <circle
+       style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.24968743;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="circle980"
+       cx="404.78857"
+       cy="382.13126"
+       r="5.5208483"
+       inkscape:export-filename="/home/gabriel/bilinear-texture-weights.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <circle
+       r="5.5208483"
+       cy="382.13126"
+       cx="306.29663"
+       id="circle982"
+       style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.24968743;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="/home/gabriel/bilinear-texture-weights.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <circle
+       style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.24968743;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="circle984"
+       cx="306.29663"
+       cy="292.03101"
+       r="5.5208483"
+       inkscape:export-filename="/home/gabriel/bilinear-texture-weights.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <circle
+       r="5.5208483"
+       cy="79.588768"
+       cx="101.80442"
+       id="circle986"
+       style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.24968743;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="/home/gabriel/bilinear-texture-weights.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <circle
+       r="5.5208483"
+       cy="381.68958"
+       cx="100.47941"
+       id="circle990"
+       style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.24968743;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="/home/gabriel/bilinear-texture-weights.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+  </g>
+</svg>

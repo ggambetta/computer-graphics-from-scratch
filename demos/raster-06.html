@@ -1,12 +1,23 @@
 <!--
 !!html_title Scene setup demo 1 - Computer Graphics from scratch
 -->
-<canvas id="canvas" width=600 height=600 style="border: 1px grey solid">
+
+# Scene setup demo 1
+
+In this demo we replace the hardcoded cube from the [previous demo](raster-05.html) with a cube
+defined as a set of vertices and triangles, as described in the [Representing a Cube](../10-describing-and-rendering-a-scene.html#representing-a-cube) section.
+
+This lets us draw any object made of triangles by using the appropriate lists of vertices and triangles,
+but leaving the rendering code unmodified.
+
+<div class="centered">
+  <canvas id="canvas" width=600 height=600 style="border: 1px grey solid"></canvas>
+</div>
 
 <script>
 
 // ======================================================================
-//  Low-level canvas access. 
+//  Low-level canvas access.
 // ======================================================================
 
 var canvas = document.getElementById("canvas");
@@ -17,8 +28,8 @@ var canvas_pitch = canvas_buffer.width * 4;
 
 // The PutPixel() function.
 var PutPixel = function(x, y, color) {
-  x = canvas.width/2 + Math.floor(x);
-  y = canvas.height/2 - Math.floor(y) - 1;
+  x = canvas.width/2 + (x | 0);
+  y = canvas.height/2 - (y | 0) - 1;
 
   if (x < 0 || x >= canvas.width || y < 0 || y >= canvas.height) {
     return;
@@ -39,27 +50,12 @@ var UpdateCanvas = function() {
 
 
 // ======================================================================
-//  Linear algebra and helpers.
+//  Data model.
 // ======================================================================
-
-// Computes k * vec.
-var Multiply = function(k, vec) {
-  return [k*vec[0], k*vec[1], k*vec[2]];
-}
-
-
-// ======================================================================
-//  Rasterization code.
-// ======================================================================
-
-// Scene setup.
-var viewport_size = 1;
-var projection_plane_z = 1;
-
 
 // A Point.
 var Pt = function(x, y, h) {
-  if (!(this instanceof Pt)) { return new Pt(x, y, h); } 
+  if (!(this instanceof Pt)) { return new Pt(x, y, h); }
 
   this.x = x;
   this.y = y;
@@ -69,7 +65,7 @@ var Pt = function(x, y, h) {
 
 // A 3D vertex.
 var Vertex = function(x, y, z) {
-  if (!(this instanceof Vertex)) { return new Vertex(x, y, z); } 
+  if (!(this instanceof Vertex)) { return new Vertex(x, y, z); }
 
   this.x = x;
   this.y = y;
@@ -86,6 +82,23 @@ var Triangle = function(v0, v1, v2, color) {
   this.v2 = v2;
   this.color = color;
 }
+
+// ======================================================================
+//  Linear algebra and helpers.
+// ======================================================================
+
+// Computes k * vec.
+var Multiply = function(k, vec) {
+  return [k*vec[0], k*vec[1], k*vec[2]];
+}
+
+// ======================================================================
+//  Rasterization code.
+// ======================================================================
+
+// Scene setup.
+var viewport_size = 1;
+var projection_plane_z = 1;
 
 
 var Interpolate = function(i0, d0, i1, d1) {
@@ -111,7 +124,7 @@ var DrawLine = function(p0, p1, color) {
   if (Math.abs(dx) > Math.abs(dy)) {
     // The line is horizontal-ish. Make sure it's left to right.
     if (dx < 0) { var swap = p0; p0 = p1; p1 = swap; }
-  
+
     // Compute the Y values and draw.
     var ys = Interpolate(p0.x, p0.y, p1.x, p1.y);
     for (var x = p0.x; x <= p1.x; x++) {
@@ -158,10 +171,10 @@ var RenderTriangle = function(triangle, projected) {
 }
 
 
-var RenderObject = function(vertexes, triangles) {
+var RenderObject = function(vertices, triangles) {
   var projected = [];
-  for (var i = 0; i < vertexes.length; i++) {
-    projected.push(ProjectVertex(vertexes[i]));
+  for (var i = 0; i < vertices.length; i++) {
+    projected.push(ProjectVertex(vertices[i]));
   }
   for (var i = 0; i < triangles.length; i++) {
     RenderTriangle(triangles[i], projected);
@@ -169,7 +182,7 @@ var RenderObject = function(vertexes, triangles) {
 }
 
 
-var vertexes = [
+var vertices = [
   Vertex(1, 1, 1),
   Vertex(-1, 1, 1),
   Vertex(-1, -1, 1),
@@ -202,12 +215,12 @@ var triangles = [
   Triangle(2, 7, 3, CYAN)
 ];
 
-for (var i = 0; i < vertexes.length; i++) {
-  vertexes[i].x -= 1.5;
-  vertexes[i].z += 7;
+for (var i = 0; i < vertices.length; i++) {
+  vertices[i].x -= 1.5;
+  vertices[i].z += 7;
 }
 
-RenderObject(vertexes, triangles);
+RenderObject(vertices, triangles);
 
 UpdateCanvas();
 

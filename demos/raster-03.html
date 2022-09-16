@@ -1,13 +1,19 @@
 <!--
-!!html_title Filled triangles demo - Computer Graphics from scratch
+!!html_title Filled triangle demo - Computer Graphics from scratch
 -->
 
-<canvas id="canvas" width=600 height=600 style="border: 1px grey solid">
+# Filled triangle demo
+
+This is an implementation of the [filled triangle algorithm](../07-filled-triangles.html#drawing-filled-triangles).
+
+<div class="centered">
+<canvas id="canvas" width=600 height=600 style="border: 1px grey solid"></canvas>
+</div>
 
 <script>
 
 // ======================================================================
-//  Low-level canvas access. 
+//  Low-level canvas access.
 // ======================================================================
 
 var canvas = document.getElementById("canvas");
@@ -18,8 +24,8 @@ var canvas_pitch = canvas_buffer.width * 4;
 
 // The PutPixel() function.
 var PutPixel = function(x, y, color) {
-  x = canvas.width/2 + Math.floor(x);
-  y = canvas.height/2 - Math.floor(y) - 1;
+  x = canvas.width/2 + (x | 0);
+  y = canvas.height/2 - (y | 0) - 1;
 
   if (x < 0 || x >= canvas.width || y < 0 || y >= canvas.height) {
     return;
@@ -40,17 +46,21 @@ var UpdateCanvas = function() {
 
 
 // ======================================================================
-//  Rasterization code.
+//  Data model.
 // ======================================================================
 
 // A Point.
 var Pt = function(x, y) {
-  if (!(this instanceof Pt)) { return new Pt(x, y); } 
+  if (!(this instanceof Pt)) { return new Pt(x, y); }
 
   this.x = x;
   this.y = y;
 }
 
+
+// ======================================================================
+//  Rasterization code.
+// ======================================================================
 
 var Interpolate = function(i0, d0, i1, d1) {
   if (i0 == i1) {
@@ -75,7 +85,7 @@ var DrawLine = function(p0, p1, color) {
   if (Math.abs(dx) > Math.abs(dy)) {
     // The line is horizontal-ish. Make sure it's left to right.
     if (dx < 0) { var swap = p0; p0 = p1; p1 = swap; }
-  
+
     // Compute the Y values and draw.
     var ys = Interpolate(p0.x, p0.y, p1.x, p1.y);
     for (var x = p0.x; x <= p1.x; x++) {
@@ -102,19 +112,19 @@ var DrawWireframeTriangle = function(p0, p1, p2, color) {
 
 
 var DrawFilledTriangle = function(p0, p1, p2, color) {
-  // Sort the points from bottom to top. 
+  // Sort the points from bottom to top.
   if (p1.y < p0.y) { var swap = p0; p0 = p1; p1 = swap; }
   if (p2.y < p0.y) { var swap = p0; p0 = p2; p2 = swap; }
   if (p2.y < p1.y) { var swap = p1; p1 = p2; p2 = swap; }
 
-  // Compute X coordinates of the edges. 
+  // Compute X coordinates of the edges.
   var x01 = Interpolate(p0.y, p0.x, p1.y, p1.x);
   var x12 = Interpolate(p1.y, p1.x, p2.y, p2.x);
   var x02 = Interpolate(p0.y, p0.x, p2.y, p2.x);
 
   // Merge the two short sides.
   x01.pop();
-  var x012 = x01.concat(x12); 
+  var x012 = x01.concat(x12);
 
   // Determine which is left and which is right.
   var x_left, x_right;

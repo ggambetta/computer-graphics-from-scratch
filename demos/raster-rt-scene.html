@@ -1,0 +1,776 @@
+<!--
+!!html_title Rasterized spheres demo - Computer Graphics from scratch
+-->
+
+# Rasterized spheres demo
+
+This demo uses the rasterizer to render the scene used to test the raytracer.
+
+<div class="centered">
+<canvas id="canvas" width=600 height=600 style="border: 1px grey solid"></canvas>
+</div>
+
+<script>
+
+// ======================================================================
+//  Low-level canvas access.
+// ======================================================================
+
+var canvas = document.getElementById("canvas");
+var canvas_context = canvas.getContext("2d");
+var canvas_buffer = canvas_context.getImageData(0, 0, canvas.width, canvas.height);
+var canvas_pitch = canvas_buffer.width * 4;
+
+
+// The PutPixel() function.
+var PutPixel = function(x, y, color) {
+  x = canvas.width/2 + (x | 0);
+  y = canvas.height/2 - (y | 0) - 1;
+
+  if (x < 0 || x >= canvas.width || y < 0 || y >= canvas.height) {
+    return;
+  }
+
+  var offset = 4*x + canvas_pitch*y;
+  canvas_buffer.data[offset++] = color[0];
+  canvas_buffer.data[offset++] = color[1];
+  canvas_buffer.data[offset++] = color[2];
+  canvas_buffer.data[offset++] = 255; // Alpha = 255 (full opacity)
+}
+
+
+// Displays the contents of the offscreen buffer into the canvas.
+var UpdateCanvas = function() {
+  canvas_context.putImageData(canvas_buffer, 0, 0);
+}
+
+
+// ======================================================================
+//  Depth buffer.
+// ======================================================================
+var depth_buffer = Array();
+depth_buffer.length = canvas.width * canvas.height;
+
+var UpdateDepthBufferIfCloser = function(x, y, inv_z) {
+  x = canvas.width/2 + (x | 0);
+  y = canvas.height/2 - (y | 0) - 1;
+
+  if (x < 0 || x >= canvas.width || y < 0 || y >= canvas.height) {
+    return false;
+  }
+
+  var offset = x + canvas.width*y;
+  if (depth_buffer[offset] == undefined || depth_buffer[offset] < inv_z) {
+    depth_buffer[offset] = inv_z;
+    return true;
+  }
+  return false;
+}
+
+
+// ======================================================================
+//  Data model.
+// ======================================================================
+
+// A Point.
+var Pt = function(x, y, h) {
+  if (!(this instanceof Pt)) { return new Pt(x, y, h); }
+
+  this.x = x;
+  this.y = y;
+  this.h = h;
+}
+
+
+// A 3D vertex.
+var Vertex = function(x, y, z) {
+  if (!(this instanceof Vertex)) { return new Vertex(x, y, z); }
+
+  this.x = x;
+  this.y = y;
+  this.z = z;
+}
+
+
+// A 4D vertex (a 3D vertex in homogeneous coordinates).
+var Vertex4 = function(arg1, y, z, w) {
+  if (!(this instanceof Vertex4)) { return new Vertex4(arg1, y, z, w); }
+
+  if (arg1 instanceof Vertex) {
+    this.x = arg1.x;
+    this.y = arg1.y;
+    this.z = arg1.z;
+    this.w = 1;
+  } else if (arg1 instanceof Vertex4) {
+    this.x = arg1.x;
+    this.y = arg1.y;
+    this.z = arg1.z;
+    this.w = arg1.w;
+  } else {
+    this.x = arg1;
+    this.y = y;
+    this.z = z;
+    this.w = w;
+  }
+}
+
+
+// A 4x4 matrix.
+var Mat4x4 = function(data) {
+  if (!(this instanceof Mat4x4)) { return new Mat4x4(data); }
+
+  this.data = data;
+}
+
+
+var Identity4x4 = Mat4x4([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]);
+
+
+// A Triangle.
+var Triangle = function(indexes, color, normals) {
+  if (!(this instanceof Triangle)) { return new Triangle(indexes, color, normals); }
+
+  this.indexes = indexes;
+  this.color = color;
+  this.normals = normals;
+}
+
+
+// A Model.
+var Model = function(vertices, triangles, bounds_center, bounds_radius) {
+  if (!(this instanceof Model)) { return new Model(vertices, triangles, bounds_center, bounds_radius); }
+
+  this.vertices = vertices;
+  this.triangles = triangles;
+  this.bounds_center = bounds_center;
+  this.bounds_radius = bounds_radius;
+}
+
+
+// An Instance.
+var Instance = function(model, position, orientation, scale, specular) {
+  if (!(this instanceof Instance)) { return new Instance(model, position, orientation, scale, specular); }
+
+  this.model = model;
+  this.position = position;
+  this.orientation = orientation || Identity4x4;
+  this.scale = scale || 1.0;
+  this.specular = specular || 50;
+
+  this.transform = MultiplyMM4(MakeTranslationMatrix(this.position), MultiplyMM4(this.orientation, MakeScalingMatrix(this.scale)));
+}
+
+
+// The Camera.
+var Camera = function(position, orientation) {
+  if (!(this instanceof Camera)) { return new Camera(position, orientation); }
+
+  this.position = position;
+  this.orientation = orientation;
+  this.clipping_planes = [];
+}
+
+
+// A Clipping Plane.
+var Plane = function(normal, distance) {
+  if (!(this instanceof Plane)) { return new Plane(normal, distance); }
+
+  this.normal = normal;
+  this.distance = distance;
+}
+
+
+// A Light.
+var LT_AMBIENT = 0;
+var LT_POINT = 1;
+var LT_DIRECTIONAL = 2;
+
+var Light = function(type, intensity, vector) {
+  if (!(this instanceof Light)) { return new Light(type, intensity, vector); }
+
+  this.type = type;
+  this.intensity = intensity;
+  this.vector = vector;
+}
+
+
+// ======================================================================
+//  Linear algebra and helpers.
+// ======================================================================
+
+// Computes k * vec.
+var Multiply = function(k, vec) {
+  return Vertex(k*vec.x, k*vec.y, k*vec.z);
+}
+
+
+// Computes dot product.
+var Dot = function(v1, v2) {
+  return v1.x*v2.x + v1.y*v2.y + v1.z*v2.z;
+}
+
+
+// Computes cross product.
+var Cross = function(v1, v2) {
+  return Vertex(
+    v1.y*v2.z - v1.z*v2.y,
+    v1.z*v2.x - v1.x*v2.z,
+    v1.x*v2.y - v1.y*v2.x);
+}
+
+
+// Computes v1 + v2.
+var Add = function(v1, v2) {
+  return Vertex(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
+}
+
+
+// Computes vector magnitude.
+var Magnitude = function(v1) {
+  return Math.sqrt(Dot(v1, v1));
+}
+
+// Makes a transform matrix for a rotation around the OY axis.
+var MakeOYRotationMatrix = function(degrees) {
+  var cos = Math.cos(degrees*Math.PI/180.0);
+  var sin = Math.sin(degrees*Math.PI/180.0);
+
+  return Mat4x4([[cos, 0, -sin, 0],
+                 [  0, 1,    0, 0],
+                 [sin, 0,  cos, 0],
+                 [  0, 0,    0, 1]])
+}
+
+
+// Makes a transform matrix for a translation.
+var MakeTranslationMatrix = function(translation) {
+  return Mat4x4([[1, 0, 0, translation.x],
+                 [0, 1, 0, translation.y],
+                 [0, 0, 1, translation.z],
+                 [0, 0, 0,             1]]);
+}
+
+
+// Makes a transform matrix for a scaling.
+var MakeScalingMatrix = function(scale) {
+  return Mat4x4([[scale,     0,     0, 0],
+                 [    0, scale,     0, 0],
+                 [    0,     0, scale, 0],
+                 [    0,     0,     0, 1]]);
+}
+
+
+// Multiplies a 4x4 matrix and a 4D vector.
+var MultiplyMV = function(mat4x4, vec4) {
+  var result = [0, 0, 0, 0];
+  var vec = [vec4.x, vec4.y, vec4.z, vec4.w];
+
+  for (var i = 0; i < 4; i++) {
+    for (var j = 0; j < 4; j++) {
+      result[i] += mat4x4.data[i][j]*vec[j];
+    }
+  }
+
+  return Vertex4(result[0], result[1], result[2], result[3]);
+}
+
+
+// Multiplies two 4x4 matrices.
+var MultiplyMM4 = function(matA, matB) {
+  var result = Mat4x4([[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]);
+
+  for (var i = 0; i < 4; i++) {
+    for (var j = 0; j < 4; j++) {
+      for (var k = 0; k < 4; k++) {
+        result.data[i][j] += matA.data[i][k]*matB.data[k][j];
+      }
+    }
+  }
+
+  return result;
+}
+
+
+// Transposes a 4x4 matrix.
+var Transposed = function(mat) {
+  var result = Mat4x4([[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]);
+  for (var i = 0; i < 4; i++) {
+    for (var j = 0; j < 4; j++) {
+      result.data[i][j] = mat.data[j][i];
+    }
+  }
+  return result;
+}
+
+
+var Clamp = function(value) {
+  if (value < 0) { return 0; }
+  if (value > 255) { return 255; }
+  return value;
+}
+
+
+// Adds two colors.
+var AddColor = function(c1, c2) {
+  return [Clamp(c1[0] + c2[0]), Clamp(c1[1] + c2[1]), Clamp(c1[2] + c2[2])];
+}
+
+
+var MultiplyColor = function(color, k) {
+  return [Clamp(color[0]*k), Clamp(color[1]*k), Clamp(color[2]*k)];
+}
+
+// ======================================================================
+//  Rasterization code.
+// ======================================================================
+
+// Scene setup.
+var viewport_size = 1;
+var projection_plane_z = 1;
+
+
+var Interpolate = function(i0, d0, i1, d1) {
+  if (i0 == i1) {
+    return [d0];
+  }
+
+  var values = [];
+  var a = (d1 - d0) / (i1 - i0);
+  var d = d0;
+  for (var i = i0; i <= i1; i++) {
+    values.push(d);
+    d += a;
+  }
+
+  return values;
+}
+
+
+var DrawLine = function(p0, p1, color) {
+  var dx = p1.x - p0.x, dy = p1.y - p0.y;
+
+  if (Math.abs(dx) > Math.abs(dy)) {
+    // The line is horizontal-ish. Make sure it's left to right.
+    if (dx < 0) { var swap = p0; p0 = p1; p1 = swap; }
+
+    // Compute the Y values and draw.
+    var ys = Interpolate(p0.x, p0.y, p1.x, p1.y);
+    for (var x = p0.x; x <= p1.x; x++) {
+      PutPixel(x, ys[(x - p0.x) | 0], color);
+    }
+  } else {
+    // The line is verical-ish. Make sure it's bottom to top.
+    if (dy < 0) { var swap = p0; p0 = p1; p1 = swap; }
+
+    // Compute the X values and draw.
+    var xs = Interpolate(p0.y, p0.x, p1.y, p1.x);
+    for (var y = p0.y; y <= p1.y; y++) {
+      PutPixel(xs[(y - p0.y) | 0], y, color);
+    }
+  }
+}
+
+
+var DrawWireframeTriangle = function(p0, p1, p2, color) {
+  DrawLine(p0, p1, color);
+  DrawLine(p1, p2, color);
+  DrawLine(p0, p2, color);
+}
+
+
+// Converts 2D viewport coordinates to 2D canvas coordinates.
+var ViewportToCanvas = function(p2d) {
+  return Pt((p2d.x * canvas.width / viewport_size) | 0,
+    	    (p2d.y * canvas.height / viewport_size) | 0);
+}
+
+
+// Converts 2D canvas coordinates to 2D viewport coordinates.
+var CanvasToViewport = function(p2d) {
+  return Pt(
+    (p2d.x * viewport_size / canvas.width),
+    (p2d.y * viewport_size / canvas.height)
+  );
+}
+
+
+var ProjectVertex = function(v) {
+  return ViewportToCanvas(Pt(v.x * projection_plane_z / v.z,
+                             v.y * projection_plane_z / v.z));
+}
+
+
+var UnProjectVertex = function(x, y, inv_z) {
+  var oz = 1.0 / inv_z;
+  var ux = x*oz / projection_plane_z;
+  var uy = y*oz / projection_plane_z;
+  var p2d = CanvasToViewport(Pt(ux, uy));
+  return Vertex(p2d.x, p2d.y, oz);
+}
+
+
+// Sort the points from bottom to top.
+// Technically, sort the indexes to the vertex indexes in the triangle from bottom to top.
+var SortedVertexIndexes = function(vertex_indexes, projected) {
+  indexes = [0, 1, 2];
+
+  if (projected[vertex_indexes[indexes[1]]].y < projected[vertex_indexes[indexes[0]]].y) { var swap = indexes[0]; indexes[0] = indexes[1]; indexes[1] = swap; }
+  if (projected[vertex_indexes[indexes[2]]].y < projected[vertex_indexes[indexes[0]]].y) { var swap = indexes[0]; indexes[0] = indexes[2]; indexes[2] = swap; }
+  if (projected[vertex_indexes[indexes[2]]].y < projected[vertex_indexes[indexes[1]]].y) { var swap = indexes[1]; indexes[1] = indexes[2]; indexes[2] = swap; }
+
+  return indexes;
+}
+
+
+var ComputeTriangleNormal = function(v0, v1, v2) {
+  var v0v1 = Add(v1, Multiply(-1, v0));
+  var v0v2 = Add(v2, Multiply(-1, v0));
+  return Cross(v0v1, v0v2);
+}
+
+
+var ComputeIllumination = function(vertex, normal, camera, lights, specular) {
+  var illumination = 0;
+  for (var l = 0; l < lights.length; l++) {
+    var light = lights[l];
+    if (light.type == LT_AMBIENT) {
+      illumination += light.intensity;
+      continue;
+    }
+
+    var vl;
+    if (light.type == LT_DIRECTIONAL) {
+      var cameraMatrix = Transposed(camera.orientation);
+      var rotated_light = MultiplyMV(cameraMatrix, Vertex4(light.vector));
+      vl = rotated_light;
+    } else if (light.type == LT_POINT) {
+      var cameraMatrix = MultiplyMM4(Transposed(camera.orientation), MakeTranslationMatrix(Multiply(-1, camera.position)));
+      var transformed_light = MultiplyMV(cameraMatrix, Vertex4(light.vector));
+      vl = Add(transformed_light, Multiply(-1, vertex)); // light.vector - vertex
+    }
+
+    // Diffuse component.
+    var cos_alpha = Dot(vl, normal) / (Magnitude(vl) * Magnitude(normal));
+    if (cos_alpha > 0) {
+      illumination += cos_alpha * light.intensity;
+    }
+
+    // Specular component.
+    var reflected = Add(Multiply(2*Dot(normal, vl), normal), Multiply(-1, vl));
+    var view = Add(camera.position, Multiply(-1, vertex));
+
+    var cos_beta = Dot(reflected, view) / (Magnitude(reflected) * Magnitude(view));
+    if (cos_beta > 0) {
+      illumination += Math.pow(cos_beta, specular) * light.intensity;
+    }
+  }
+  return illumination;
+}
+
+
+var SM_FLAT = 0;
+var SM_GOURAUD = 1;
+var SM_PHONG = 2;
+
+var ShadingModel = SM_PHONG;
+var UseVertexNormals = true;
+
+var EdgeInterpolate = function(y0, v0, y1, v1, y2, v2) {
+  var v01 = Interpolate(y0, v0, y1, v1);
+  var v12 = Interpolate(y1, v1, y2, v2);
+  var v02 = Interpolate(y0, v0, y2, v2);
+  v01.pop();
+  var v012 = v01.concat(v12);
+  return [v02, v012];
+}
+
+
+var RenderTriangle = function(triangle, vertices, projected, camera, lights, orientation, specular) {
+  // Compute triangle normal. Use the unsorted vertices, otherwise the winding of the points may change.
+  var normal = ComputeTriangleNormal(vertices[triangle.indexes[0]], vertices[triangle.indexes[1]], vertices[triangle.indexes[2]]);
+
+  // Backface culling.
+  var centre = Multiply(-1.0/3.0, Add(Add(vertices[triangle.indexes[0]], vertices[triangle.indexes[1]]), vertices[triangle.indexes[2]]));
+  if (Dot(centre, normal) < 0) {
+    return;
+  }
+
+  // Sort by projected point Y.
+  var indexes = SortedVertexIndexes(triangle.indexes, projected);
+  var [i0, i1, i2] = indexes;
+  var [v0, v1, v2] = [ vertices[triangle.indexes[i0]], vertices[triangle.indexes[i1]], vertices[triangle.indexes[i2]] ];
+
+  // Get attribute values (X, 1/Z) at the vertices.
+  var p0 = projected[triangle.indexes[i0]];
+  var p1 = projected[triangle.indexes[i1]];
+  var p2 = projected[triangle.indexes[i2]];
+
+  // Compute attribute values at the edges.
+  var [x02, x012] = EdgeInterpolate(p0.y, p0.x, p1.y, p1.x, p2.y, p2.x);
+  var [iz02, iz012] = EdgeInterpolate(p0.y, 1.0/v0.z, p1.y, 1.0/v1.z, p2.y, 1.0/v2.z);
+
+  if (UseVertexNormals) {
+    var transform = MultiplyMM4(Transposed(camera.orientation), orientation);
+    var normal0 = MultiplyMV(transform, Vertex4(triangle.normals[i0]));
+    var normal1 = MultiplyMV(transform, Vertex4(triangle.normals[i1]));
+    var normal2 = MultiplyMV(transform, Vertex4(triangle.normals[i2]));
+  } else {
+    var normal0 = normal;
+    var normal1 = normal;
+    var normal2 = normal;
+  }
+
+  if (ShadingModel == SM_FLAT) {
+    // Flat shading: compute lighting for the entire triangle.
+    var center = Vertex((v0.x + v1.x + v2.x)/3.0, (v0.y + v1.y + v2.y)/3.0, (v0.z + v1.z + v2.z)/3.0);
+    var intensity = ComputeIllumination(center, normal0, camera, lights, specular);
+  } else if (ShadingModel == SM_GOURAUD) {
+    // Gouraud shading: compute lighting at the vertices, and interpolate.
+    var i0 = ComputeIllumination(v0, normal0, camera, lights, specular);
+    var i1 = ComputeIllumination(v1, normal1, camera, lights, specular);
+    var i2 = ComputeIllumination(v2, normal2, camera, lights, specular);
+    var [i02, i012] = EdgeInterpolate(p0.y, i0, p1.y, i1, p2.y, i2);
+  } else if (ShadingModel == SM_PHONG) {
+    // Phong shading: interpolate normal vectors.
+    var [nx02, nx012] = EdgeInterpolate(p0.y, normal0.x, p1.y, normal1.x, p2.y, normal2.x);
+    var [ny02, ny012] = EdgeInterpolate(p0.y, normal0.y, p1.y, normal1.y, p2.y, normal2.y);
+    var [nz02, nz012] = EdgeInterpolate(p0.y, normal0.z, p1.y, normal1.z, p2.y, normal2.z);
+  }
+
+
+  // Determine which is left and which is right.
+  var m = (x02.length/2) | 0;
+  if (x02[m] < x012[m]) {
+    var [x_left, x_right] = [x02, x012];
+    var [iz_left, iz_right] = [iz02, iz012];
+    var [i_left, i_right] = [i02, i012];
+
+    var [nx_left, nx_right] = [nx02, nx012];
+    var [ny_left, ny_right] = [ny02, ny012];
+    var [nz_left, nz_right] = [nz02, nz012];
+  } else {
+    var [x_left, x_right] = [x012, x02];
+    var [iz_left, iz_right] = [iz012, iz02];
+    var [i_left, i_right] = [i012, i02];
+
+    var [nx_left, nx_right] = [nx012, nx02];
+    var [ny_left, ny_right] = [ny012, ny02];
+    var [nz_left, nz_right] = [nz012, nz02];
+  }
+
+
+  // Draw horizontal segments.
+  for (var y = p0.y; y <= p2.y; y++) {
+    var [xl, xr] = [x_left[y - p0.y] | 0, x_right[y - p0.y] | 0];
+
+    // Interpolate attributes for this scanline.
+    var [zl, zr] = [iz_left[y - p0.y], iz_right[y - p0.y]];
+    var zscan = Interpolate(xl, zl, xr, zr);
+
+    if (ShadingModel == SM_GOURAUD) {
+      var [il, ir] = [i_left[y - p0.y], i_right[y - p0.y]];
+      var iscan = Interpolate(xl, il, xr, ir);
+    } else if (ShadingModel == SM_PHONG) {
+      var [nxl, nxr] = [nx_left[y - p0.y], nx_right[y - p0.y]];
+      var [nyl, nyr] = [ny_left[y - p0.y], ny_right[y - p0.y]];
+      var [nzl, nzr] = [nz_left[y - p0.y], nz_right[y - p0.y]];
+
+      var nxscan = Interpolate(xl, nxl, xr, nxr);
+      var nyscan = Interpolate(xl, nyl, xr, nyr);
+      var nzscan = Interpolate(xl, nzl, xr, nzr);
+    }
+
+    for (var x = xl; x <= xr; x++) {
+      var inv_z = zscan[x - xl];
+      if (UpdateDepthBufferIfCloser(x, y, inv_z)) {
+
+        if (ShadingModel == SM_FLAT) {
+          // Just use the per-triangle intensity.
+        } else if (ShadingModel == SM_GOURAUD) {
+          intensity = iscan[x-xl];
+        } else if (ShadingModel == SM_PHONG) {
+          var vertex = UnProjectVertex(x, y, inv_z);
+          var normal = Vertex(nxscan[x - xl], nyscan[x - xl], nzscan[x - xl]);
+          var intensity = ComputeIllumination(vertex, normal, camera, lights, specular);
+        }
+
+        PutPixel(x, y, MultiplyColor(triangle.color, intensity));
+      }
+    }
+  }
+}
+
+
+// Clips a triangle against a plane. Adds output to triangles and vertices.
+var ClipTriangle = function(triangle, plane, triangles, vertices) {
+  var v0 = vertices[triangle.indexes[0]];
+  var v1 = vertices[triangle.indexes[1]];
+  var v2 = vertices[triangle.indexes[2]];
+
+  var in0 = Dot(plane.normal, v0) + plane.distance > 0;
+  var in1 = Dot(plane.normal, v1) + plane.distance > 0;
+  var in2 = Dot(plane.normal, v2) + plane.distance > 0;
+
+  var in_count = in0 + in1 + in2;
+  if (in_count == 0) {
+    // Nothing to do - the triangle is fully clipped out.
+  } else if (in_count == 3) {
+    // The triangle is fully in front of the plane.
+    triangles.push(triangle);
+  } else if (in_count == 1) {
+    // The triangle has one vertex in. Output is one clipped triangle.
+  } else if (in_count == 2) {
+    // The triangle has two vertices in. Output is two clipped triangles.
+  }
+}
+
+
+var TransformAndClip = function(clipping_planes, model, transform) {
+  // Transform the bounding sphere, and attempt early discard.
+  center = MultiplyMV(transform, Vertex4(model.bounds_center));
+  var radius2 = model.bounds_radius*model.bounds_radius;
+  for (var p = 0; p < clipping_planes.length; p++) {
+    var distance2 = Dot(clipping_planes[p].normal, center) + clipping_planes[p].distance;
+    if (distance2 < -radius2) {
+      return null;
+    }
+  }
+
+  // Apply modelview transform.
+  var vertices = [];
+  for (var i = 0; i < model.vertices.length; i++) {
+    vertices.push(MultiplyMV(transform, Vertex4(model.vertices[i])));
+  }
+
+  // Clip the entire model against each successive plane.
+  var triangles = model.triangles.slice();
+  for (var p = 0; p < clipping_planes.length; p++) {
+    new_triangles = []
+    for (var i = 0; i < triangles.length; i++) {
+      ClipTriangle(triangles[i], clipping_planes[p], new_triangles, vertices);
+    }
+    triangles = new_triangles;
+  }
+
+  return Model(vertices, triangles, center, model.bounds_radius);
+}
+
+
+var RenderModel = function(model, camera, lights, orientation, specular) {
+  var projected = [];
+  for (var i = 0; i < model.vertices.length; i++) {
+    projected.push(ProjectVertex(Vertex4(model.vertices[i])));
+  }
+  for (var i = 0; i < model.triangles.length; i++) {
+    RenderTriangle(model.triangles[i], model.vertices, projected, camera, lights, orientation, specular);
+  }
+}
+
+
+var RenderScene = function(camera, instances, lights) {
+  var cameraMatrix = MultiplyMM4(Transposed(camera.orientation), MakeTranslationMatrix(Multiply(-1, camera.position)));
+
+  for (var i = 0; i < instances.length; i++) {
+    var transform = MultiplyMM4(cameraMatrix, instances[i].transform);
+    var clipped = TransformAndClip(camera.clipping_planes, instances[i].model, transform);
+    if (clipped != null) {
+      RenderModel(clipped, camera, lights, instances[i].orientation, instances[i].specular);
+    }
+  }
+}
+
+
+// ----- Sphere model generator -----
+var GenerateSphere = function(divs, color) {
+  var vertices = [];
+  var triangles = [];
+
+  var delta_angle = 2.0*Math.PI / divs;
+
+  // Generate vertices and normals.
+  for (var d = 0; d < divs + 1; d++) {
+    var y = (2.0 / divs) * (d - divs/2);
+    var radius = Math.sqrt(1.0 - y*y);
+    for (var i = 0; i < divs; i++) {
+      var vertex = Vertex(radius*Math.cos(i*delta_angle), y, radius*Math.sin(i*delta_angle));
+      vertices.push(vertex);
+    }
+  }
+
+  // Generate triangles.
+  for (var d = 0; d < divs; d++) {
+    for (var i = 0; i < divs - 1; i++) {
+      var i0 = d*divs + i;
+      triangles.push(Triangle([i0, i0+divs+1, i0+1], color, [vertices[i0], vertices[i0+divs+1], vertices[i0+1]]));
+      triangles.push(Triangle([i0, i0+divs, i0+divs+1], color, [vertices[i0], vertices[i0+divs], vertices[i0+divs+1]]));
+    }
+  }
+
+  return Model(vertices, triangles, Vertex(0, 0, 0), 1.0);
+}
+
+
+// ----- Floor "plane" (because of approximate clipping, must fit in frustum -----
+size = 50;
+
+var vertices = [
+  Vertex(-(size - 1), 0, size),
+  Vertex(   size - 1, 0, size),
+  Vertex(      0.999, 0, 1.01),
+  Vertex(     -0.999, 0, 1.01),
+];
+
+var RED = [255, 0, 0];
+var GREEN = [0, 255, 0];
+var BLUE = [0, 0, 255];
+var YELLOW = [255, 255, 0];
+var PURPLE = [255, 0, 255];
+var CYAN = [0, 255, 255];
+
+var triangles = [
+  Triangle([0, 1, 2], YELLOW, [Vertex(0, 1, 0), Vertex(0, 1, 0), Vertex(0, 1, 0)]),
+  Triangle([0, 2, 3], YELLOW, [Vertex(0, 1, 0), Vertex(0, 1, 0), Vertex(0, 1, 0)]),
+];
+
+var floor = Model(vertices, triangles, Vertex(0, 0, 1000), 1);
+
+// ----------
+
+
+var green_sphere = GenerateSphere(15, GREEN);
+var red_sphere = GenerateSphere(15, RED);
+var blue_sphere = GenerateSphere(15, BLUE);
+
+var instances = [
+  Instance(red_sphere,   Vertex( 0,-1, 3), Identity4x4, 1, 500),
+  Instance(green_sphere, Vertex(-2, 0, 4), MakeOYRotationMatrix(180), 1, 10),
+  Instance(blue_sphere,  Vertex( 2, 0, 4), Identity4x4, 1, 500),
+  Instance(floor, Vertex(0, -1, 0), Identity4x4),
+];
+
+var camera = Camera(Vertex(0, 0, 0), Identity4x4);
+
+var s2 = Math.sqrt(2);
+camera.clipping_planes = [
+  Plane(Vertex(  0,   0,  1), -1), // Near
+  Plane(Vertex( s2,   0, s2),  0), // Left
+  Plane(Vertex(-s2,   0, s2),  0), // Right
+  Plane(Vertex(  0, -s2, s2),  0), // Top
+  Plane(Vertex(  0,  s2, s2),  0), // Bottom
+];
+
+lights = [
+  Light(LT_AMBIENT, 0.2),
+  Light(LT_POINT, 0.6, Vertex(2, 1, 0)),
+  Light(LT_DIRECTIONAL, 0.2, Vertex(1, 4, 4)),
+];
+
+
+function Render() {
+  RenderScene(camera, instances, lights);
+  UpdateCanvas();
+}
+
+Render();
+
+</script>

@@ -1,12 +1,20 @@
 <!--
 !!html_title Scene setup demo 2 - Computer Graphics from scratch
 -->
-<canvas id="canvas" width=600 height=600 style="border: 1px grey solid">
+
+# Scene setup demo 2
+
+This demo extends the [previous one](raster-06.html) by adding support for rendering multiple instances
+of the same model, as described in the [Models and Instances](../10-describing-and-rendering-a-scene.html#models-and-instances) section.
+
+<div class="centered">
+  <canvas id="canvas" width=600 height=600 style="border: 1px grey solid"></canvas>
+</div>
 
 <script>
 
 // ======================================================================
-//  Low-level canvas access. 
+//  Low-level canvas access.
 // ======================================================================
 
 var canvas = document.getElementById("canvas");
@@ -17,8 +25,8 @@ var canvas_pitch = canvas_buffer.width * 4;
 
 // The PutPixel() function.
 var PutPixel = function(x, y, color) {
-  x = canvas.width/2 + Math.floor(x);
-  y = canvas.height/2 - Math.floor(y) - 1;
+  x = canvas.width/2 + (x | 0);
+  y = canvas.height/2 - (y | 0) - 1;
 
   if (x < 0 || x >= canvas.width || y < 0 || y >= canvas.height) {
     return;
@@ -37,13 +45,14 @@ var UpdateCanvas = function() {
   canvas_context.putImageData(canvas_buffer, 0, 0);
 }
 
+
 // ======================================================================
 //  Data model.
 // ======================================================================
 
 // A Point.
 var Pt = function(x, y, h) {
-  if (!(this instanceof Pt)) { return new Pt(x, y, h); } 
+  if (!(this instanceof Pt)) { return new Pt(x, y, h); }
 
   this.x = x;
   this.y = y;
@@ -53,7 +62,7 @@ var Pt = function(x, y, h) {
 
 // A 3D vertex.
 var Vertex = function(x, y, z) {
-  if (!(this instanceof Vertex)) { return new Vertex(x, y, z); } 
+  if (!(this instanceof Vertex)) { return new Vertex(x, y, z); }
 
   this.x = x;
   this.y = y;
@@ -73,10 +82,10 @@ var Triangle = function(v0, v1, v2, color) {
 
 
 // A Model.
-var Model = function(vertexes, triangles) {
-  if (!(this instanceof Model)) { return new Model(vertexes, triangles); }
+var Model = function(vertices, triangles) {
+  if (!(this instanceof Model)) { return new Model(vertices, triangles); }
 
-  this.vertexes = vertexes;
+  this.vertices = vertices;
   this.triangles = triangles;
 }
 
@@ -115,7 +124,6 @@ var viewport_size = 1;
 var projection_plane_z = 1;
 
 
-
 var Interpolate = function(i0, d0, i1, d1) {
   if (i0 == i1) {
     return [d0];
@@ -139,7 +147,7 @@ var DrawLine = function(p0, p1, color) {
   if (Math.abs(dx) > Math.abs(dy)) {
     // The line is horizontal-ish. Make sure it's left to right.
     if (dx < 0) { var swap = p0; p0 = p1; p1 = swap; }
-  
+
     // Compute the Y values and draw.
     var ys = Interpolate(p0.x, p0.y, p1.x, p1.y);
     for (var x = p0.x; x <= p1.x; x++) {
@@ -189,8 +197,8 @@ var RenderTriangle = function(triangle, projected) {
 var RenderInstance = function(instance) {
   var projected = [];
   var model = instance.model;
-  for (var i = 0; i < model.vertexes.length; i++) {
-    projected.push(ProjectVertex(Add(instance.position, model.vertexes[i])));
+  for (var i = 0; i < model.vertices.length; i++) {
+    projected.push(ProjectVertex(Add(instance.position, model.vertices[i])));
   }
   for (var i = 0; i < model.triangles.length; i++) {
     RenderTriangle(model.triangles[i], projected);
@@ -205,8 +213,7 @@ var RenderScene = function(instances) {
 }
 
 
-
-var vertexes = [
+var vertices = [
   Vertex(1, 1, 1),
   Vertex(-1, 1, 1),
   Vertex(-1, -1, 1),
@@ -239,13 +246,17 @@ var triangles = [
   Triangle(2, 7, 3, CYAN)
 ];
 
-var cube = Model(vertexes, triangles);
+var cube = Model(vertices, triangles);
 
 var instances = [Instance(cube, Vertex(-1.5, 0, 7)),
-	         Instance(cube, Vertex(1.25, 2, 7.5))];
+	         Instance(cube, Vertex(1.25, 2, 7.5))
+];
 
-RenderScene(instances);
+var Render = function() {
+  RenderScene(instances);
+  UpdateCanvas();
+}
 
-UpdateCanvas();
+Render();
 
 </script>

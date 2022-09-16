@@ -14,8 +14,8 @@
    viewBox="0 0 744.09448819 1052.3622047"
    id="svg2"
    version="1.1"
-   inkscape:version="0.91 r13725"
-   sodipodi:docname="06-lights2.svg">
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="06-qrp.svg">
   <defs
      id="defs4">
     <marker
@@ -260,17 +260,25 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.64394531"
-     inkscape:cx="168.87922"
-     inkscape:cy="524.13374"
+     inkscape:zoom="2.1494636"
+     inkscape:cx="272.76942"
+     inkscape:cy="992.32174"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1920"
-     inkscape:window-height="1056"
+     inkscape:window-height="1025"
      inkscape:window-x="0"
-     inkscape:window-y="37"
-     inkscape:window-maximized="1" />
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     showguides="true"
+     inkscape:guide-bbox="true">
+    <sodipodi:guide
+       position="-43.615532,1028.8904"
+       orientation="1,0"
+       id="guide968"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -279,7 +287,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -289,72 +297,221 @@
      id="layer1">
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="M 89.671833,54.575956 159.2298,103.00394"
+       d="M 88.799522,80.745275 158.35749,129.17326"
        id="path4138-0-1-4-1-1"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="cc"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="/home/gabriel/06-qrp.png" />
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.14912939;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 55.919283,102.91444 104.107137,0"
+       d="M 55.046972,129.08376 H 159.15411"
        id="path6103-8"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="/home/gabriel/06-qrp.png" />
     <path
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:1, 1;stroke-dashoffset:0;stroke-opacity:1"
-       d="M 90.398543,54.651176 55.836583,103.07091"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.0003125;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:1.0003125,1.0003125;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 89.526232,80.820495 54.964272,129.24023"
        id="path4138-04-6-7-9"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
+       sodipodi:nodetypes="cc"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="/home/gabriel/06-qrp.png" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:15px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="153.98874"
-       y="117.66768"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="153.11642"
+       y="143.83699"
        id="text6171-2-7-6"
-       sodipodi:linespacing="125%"><tspan
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="/home/gabriel/06-qrp.png"><tspan
          sodipodi:role="line"
          id="tspan6173-1-8-4"
-         x="153.98874"
-         y="117.66768">P</tspan></text>
+         x="153.11642"
+         y="143.83699"
+         style="font-size:15px;line-height:1.25">P</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:15px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="84.202538"
-       y="49.542675"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="83.330231"
+       y="75.71199"
        id="text6171-2-7-5-3"
-       sodipodi:linespacing="125%"><tspan
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="/home/gabriel/06-qrp.png"><tspan
          sodipodi:role="line"
          id="tspan6173-1-8-7-3"
-         x="84.202538"
-         y="49.542675">Q</tspan></text>
+         x="83.330231"
+         y="75.71199"
+         style="font-size:15px;line-height:1.25">Q</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:15px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="49.470425"
-       y="117.66768"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="48.598114"
+       y="143.83699"
        id="text6171-2-7-8-3"
-       sodipodi:linespacing="125%"><tspan
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="/home/gabriel/06-qrp.png"><tspan
          sodipodi:role="line"
          id="tspan6173-1-8-5-8"
-         x="49.470425"
-         y="117.66768">R</tspan></text>
+         x="48.598114"
+         y="143.83699"
+         style="font-size:15px;line-height:1.25">R</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:15px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="66.256126"
-       y="99.453415"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="65.38382"
+       y="125.62273"
        id="text6171-2-7-9-3-6"
-       sodipodi:linespacing="125%"><tspan
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="/home/gabriel/06-qrp.png"><tspan
          sodipodi:role="line"
          id="tspan6173-1-8-75-8-0"
-         x="66.256126"
-         y="99.453415">α</tspan></text>
+         x="65.38382"
+         y="125.62273"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:1.25;font-family:'Lucida Sans Unicode';-inkscape-font-specification:'Lucida Sans Unicode'">α</tspan></text>
     <rect
        style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect6996"
-       width="3.9143412"
-       height="3.9143412"
-       x="105.3447"
-       y="-6.7518902"
-       transform="matrix(0.81945062,0.57314979,-0.57314979,0.81945062,0,0)" />
+       width="8.0818787"
+       height="8.081871"
+       x="119.62883"
+       y="15.192539"
+       transform="rotate(34.970164)"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="/home/gabriel/06-qrp.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.9375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 233.02802,168.98783 12.29903,0"
+       id="path952"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/gabriel/06-qrp.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.9375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 245.4029,185.0024 V 16.121589"
+       id="path954"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="/home/gabriel/06-qrp.png" />
+    <path
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.875;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path956"
+       sodipodi:type="arc"
+       sodipodi:cx="245.40291"
+       sodipodi:cy="168.80583"
+       sodipodi:rx="132.82738"
+       sodipodi:ry="132.82738"
+       sodipodi:start="4.5378561"
+       sodipodi:end="0.17453293"
+       sodipodi:open="true"
+       d="M 222.33768,37.9964 A 132.82738,132.82738 0 0 1 339.32605,74.882695 132.82738,132.82738 0 0 1 376.21234,191.87106"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="/home/gabriel/06-qrp.png" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.9375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 245.39991,168.75162 72.55732,-111.115577 0,110.782077"
+       id="path960"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccc"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="/home/gabriel/06-qrp.png" />
+    <text
+       id="text964"
+       y="51.255604"
+       x="313.13016"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="/home/gabriel/06-qrp.png"><tspan
+         style="font-size:15px;line-height:1.25"
+         y="51.255604"
+         x="313.13016"
+         id="tspan962"
+         sodipodi:role="line">P</tspan></text>
+    <text
+       id="text968"
+       y="185.62312"
+       x="311.88498"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="/home/gabriel/06-qrp.png"><tspan
+         style="font-size:15px;line-height:1.25"
+         y="185.62312"
+         x="311.88498"
+         id="tspan966"
+         sodipodi:role="line">Q</tspan></text>
+    <text
+       id="text972"
+       y="186.58022"
+       x="230.03873"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="/home/gabriel/06-qrp.png"><tspan
+         style="font-size:15px;line-height:1.25"
+         y="186.58022"
+         x="230.03873"
+         id="tspan970"
+         sodipodi:role="line">R</tspan></text>
+    <text
+       id="text976"
+       y="164.87671"
+       x="256.77063"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="/home/gabriel/06-qrp.png"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15px;line-height:1.25;font-family:'Lucida Sans Unicode';-inkscape-font-specification:'Lucida Sans Unicode'"
+         y="164.87671"
+         x="256.77063"
+         id="tspan974"
+         sodipodi:role="line">α</tspan></text>
+    <rect
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.9375;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect978"
+       width="8.8874664"
+       height="8.8874598"
+       x="309.06979"
+       y="160.10037"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="/home/gabriel/06-qrp.png" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:connector-curvature="0"
+       id="path970"
+       d="m 317.95723,168.98783 h 87.59126 v 0"
+       style="fill:none;stroke:#000000;stroke-width:0.9375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       sodipodi:nodetypes="ccc"
+       inkscape:export-filename="/home/gabriel/06-qrp.png" />
+    <path
+       sodipodi:nodetypes="cc"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:connector-curvature="0"
+       id="path972"
+       d="m 245.36436,168.98783 h 72.59287"
+       style="fill:none;stroke:#000000;stroke-width:1.0003125;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:1.0003125,1.0003125;stroke-dashoffset:0"
+       inkscape:export-filename="/home/gabriel/06-qrp.png" />
   </g>
 </svg>

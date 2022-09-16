@@ -1,0 +1,692 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 744.09448819 1052.3622047"
+   id="svg9122"
+   version="1.1"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="15-sv-reverse.svg"
+   inkscape:export-filename="/home/gabriel/Drive/Writing/Projects/Misc/CompGraf Book/images/r12-perspective2.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs9124">
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker8922"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path8920"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker6454"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path6452"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker4654"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:collect="always">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path4652"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker12600"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path12598"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker12454"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:collect="always">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path12452"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible;"
+       id="marker6992"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="scale(0.4) rotate(180) translate(10,0)"
+         style="fill-rule:evenodd;stroke:#ff0000;stroke-width:1pt;stroke-opacity:1;fill:#ff0000;fill-opacity:1"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path6990" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker4664-7"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4411-8"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker4667-8"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4669-6"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker8753"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path8755" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker6059-9"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend">
+      <path
+         inkscape:connector-curvature="0"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         id="path6061-6" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-5-1"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4145-9-0"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker4664"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4411"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker4667"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4669"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker4664-8"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4411-7"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker4667-9"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4669-2"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.3851633"
+     inkscape:cx="306.1899"
+     inkscape:cy="892.91828"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1025"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata9127">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:#cecece;fill-opacity:1;stroke:#000000;stroke-width:0.9375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 173.32911,343.95955 251.26775,113.02689 H 420.97924 L 198.3098,364.25908 175.66969,366.59966 Z"
+       id="path4240"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/gabriel/15-sv-reverse.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       d="m 205.86657,445.74594 a 22.235487,22.235487 0 0 1 22.23549,10e-6 l -11.11775,19.25649 z"
+       sodipodi:end="5.2359878"
+       sodipodi:start="4.1887902"
+       sodipodi:ry="22.235487"
+       sodipodi:rx="22.235487"
+       sodipodi:cy="465.00244"
+       sodipodi:cx="216.98431"
+       sodipodi:type="arc"
+       style="fill:none;stroke:#000000;stroke-width:1.34995532;stroke-opacity:1"
+       id="path4900"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="/home/gabriel/15-sv-reverse.png"
+       inkscape:transform-center-x="4.8269168"
+       inkscape:transform-center-y="-11.535433"
+       transform="rotate(-14.71739)" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:9.96944237px;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.83078688px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="487.13855"
+       y="214.68103"
+       id="text9570"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="/home/gabriel/15-sv-reverse.png"><tspan
+         sodipodi:role="line"
+         id="tspan9568"
+         x="487.13855"
+         y="214.68103"
+         style="font-size:12.46180344px;line-height:1.25;stroke-width:0.83078688px">Wall</tspan></text>
+    <rect
+       style="opacity:1;fill:#5746ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.68278009;stroke-miterlimit:4;stroke-dasharray:0.68278003, 2.04834008;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect9572"
+       width="22.760767"
+       height="22.760767"
+       x="137.03951"
+       y="359.96017"
+       transform="rotate(-5.9023831)"
+       inkscape:export-filename="/home/gabriel/15-sv-reverse.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#ababab;stroke-width:0.9375;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:2.81250001, 2.81250001;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 173.32911,343.95955 -24.63088,78.66783"
+       id="path12418"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/gabriel/15-sv-reverse.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#ababab;stroke-width:0.9375;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:2.81250001, 2.81250001;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 198.30979,364.25908 -49.61156,58.3683"
+       id="path12420"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/gabriel/15-sv-reverse.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       sodipodi:nodetypes="cc" />
+    <rect
+       style="opacity:1;fill:#646464;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.92231137;stroke-miterlimit:4;stroke-dasharray:0.92231135, 2.76693405;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect9566"
+       width="375.74387"
+       height="17.470434"
+       x="96.815285"
+       y="200.67886"
+       inkscape:export-filename="/home/gabriel/15-sv-reverse.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       id="text12426"
+       y="166.80176"
+       x="396.39746"
+       style="font-style:normal;font-weight:normal;font-size:9.96944237px;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.83078688px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"
+       inkscape:export-filename="/home/gabriel/15-sv-reverse.png"><tspan
+         style="font-size:12.46180344px;line-height:1.25;stroke-width:0.83078688px"
+         y="166.80176"
+         x="396.39746"
+         id="tspan12424"
+         sodipodi:role="line">Shadow</tspan><tspan
+         style="font-size:12.46180344px;line-height:1.25;stroke-width:0.83078688px"
+         y="182.37901"
+         x="396.39746"
+         sodipodi:role="line"
+         id="tspan12428">volume</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.9375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker4664-7)"
+       d="M 328.10376,394.65113 105.5505,117.69433"
+       id="path12430"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/gabriel/15-sv-reverse.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.9375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker12454)"
+       d="M 328.10376,394.65113 205.21376,89.506155"
+       id="path12576"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/gabriel/15-sv-reverse.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       sodipodi:nodetypes="cc" />
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       id="text12688"
+       y="401.03226"
+       x="332.73071"
+       style="font-style:normal;font-weight:normal;font-size:9.96944237px;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.83078688px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"
+       inkscape:export-filename="/home/gabriel/15-sv-reverse.png"><tspan
+         style="font-size:12.46180344px;line-height:1.25;stroke-width:0.83078688px"
+         y="401.03226"
+         x="332.73071"
+         id="tspan12686"
+         sodipodi:role="line">Camera</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:9.96944237px;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.83078688px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="109.88472"
+       y="447.06796"
+       id="text12692"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="/home/gabriel/15-sv-reverse.png"><tspan
+         sodipodi:role="line"
+         id="tspan12690"
+         x="109.88472"
+         y="447.06796"
+         style="font-size:12.46180344px;line-height:1.25;stroke-width:0.83078688px">Light</tspan></text>
+    <circle
+       style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.24198163;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path12694"
+       cx="186.16924"
+       cy="218.14929"
+       r="2.4854467"
+       inkscape:export-filename="/home/gabriel/15-sv-reverse.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <circle
+       r="2.4854467"
+       cy="218.14929"
+       cx="257.83838"
+       id="circle12696"
+       style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.24198163;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="/home/gabriel/15-sv-reverse.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       id="text12702"
+       y="162.79561"
+       x="217.34509"
+       style="font-style:normal;font-weight:normal;font-size:9.96944237px;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff0707;fill-opacity:1;stroke:none;stroke-width:0.83078688px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"
+       inkscape:export-filename="/home/gabriel/15-sv-reverse.png"><tspan
+         style="font-size:7.5px;line-height:1.25;fill:#ff0707;fill-opacity:1;stroke-width:0.83078688px"
+         y="162.79561"
+         x="217.34509"
+         id="tspan12700"
+         sodipodi:role="line">+1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:37.5px;line-height:1.25;font-family:ASIFuturaDW01_SC-SCDemi;-inkscape-font-specification:ASIFuturaDW01_SC-SCDemi;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.9375"
+       x="167.80115"
+       y="235.48981"
+       id="text12714"
+       inkscape:export-filename="/home/gabriel/15-sv-simple.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan12712"
+         x="167.80115"
+         y="268.66852"
+         style="stroke-width:0.9375" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:9.96944237px;line-height:0%;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.83078688px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="207.63623"
+       y="225.3633"
+       id="text12718"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="/home/gabriel/15-sv-reverse.png"><tspan
+         sodipodi:role="line"
+         x="207.63623"
+         y="225.3633"
+         style="font-size:7.5px;line-height:1.25;text-align:center;text-anchor:middle;stroke-width:0.83078688px"
+         id="tspan12720">0 (light)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:9.96944237px;line-height:0%;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.83078688px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="283.8103"
+       y="225.3633"
+       id="text12732"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       inkscape:export-filename="/home/gabriel/15-sv-reverse.png"><tspan
+         sodipodi:role="line"
+         x="283.8103"
+         y="225.3633"
+         style="font-size:7.5px;line-height:1.25;text-align:start;text-anchor:start;stroke-width:0.83078688px"
+         id="tspan12730"><tspan
+   id="tspan12734"
+   style="font-size:7.5px;line-height:1.25;text-align:center;text-anchor:middle;stroke-width:0.83078688px">1 </tspan>(shadow)</tspan></text>
+    <circle
+       style="opacity:1;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.24198163;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="circle12740"
+       cx="233.793"
+       cy="161.19171"
+       r="2.4854467"
+       inkscape:export-filename="/home/gabriel/15-sv-reverse.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <g
+       id="g4285"
+       transform="translate(-322.05869,297.83524)"
+       inkscape:export-filename="/home/gabriel/15-sv-reverse.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4250"
+         d="m 471.74124,108.45618 v 31.42857"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4250-0"
+         d="M 487.45553,124.17046 H 456.02695"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4250-4"
+         d="m 482.85292,113.05879 -22.22336,22.22335"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4250-0-4"
+         d="M 482.85292,135.28214 460.62956,113.05878"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+    <path
+       transform="rotate(11.359444)"
+       inkscape:transform-center-y="-11.464261"
+       inkscape:transform-center-x="-4.0350063"
+       inkscape:export-filename="/home/gabriel/15-sv-reverse.png"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       id="path4638"
+       style="fill:none;stroke:#000000;stroke-width:1.34995532;stroke-opacity:1"
+       sodipodi:type="arc"
+       sodipodi:cx="261.89966"
+       sodipodi:cy="283.08722"
+       sodipodi:rx="22.235487"
+       sodipodi:ry="22.235487"
+       sodipodi:start="4.1887902"
+       sodipodi:end="5.2359878"
+       d="m 250.78191,263.83072 a 22.235487,22.235487 0 0 1 22.23549,0 l -11.11774,19.2565 z" />
+    <text
+       inkscape:export-filename="/home/gabriel/15-sv-reverse.png"
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:9.96944237px;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.83078688px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="209.73544"
+       y="340.73108"
+       id="text4642"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan4640"
+         x="209.73544"
+         y="340.73108"
+         style="font-size:12.46180344px;line-height:1.25;stroke-width:0.83078688px">Camera</tspan></text>
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/gabriel/15-sv-reverse.png"
+       inkscape:connector-curvature="0"
+       id="path4650"
+       d="M 201.08965,329.19714 170.4668,96.636778"
+       style="fill:none;stroke:#000000;stroke-width:0.9375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker4654)"
+       sodipodi:nodetypes="cc" />
+    <path
+       sodipodi:nodetypes="cc"
+       style="fill:none;stroke:#000000;stroke-width:0.9375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker6454)"
+       d="M 201.08965,329.19714 324.87924,87.372975"
+       id="path6450"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/gabriel/15-sv-reverse.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       inkscape:export-filename="/home/gabriel/15-sv-reverse.png"
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:9.96944237px;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff0707;fill-opacity:1;stroke:none;stroke-width:0.83078688px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="313.44574"
+       y="124.06832"
+       id="text8270"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan8268"
+         x="313.44574"
+         y="124.06832"
+         style="font-size:7.5px;line-height:1.25;fill:#ff0707;fill-opacity:1;stroke-width:0.83078688px">+1</tspan></text>
+    <circle
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/gabriel/15-sv-reverse.png"
+       r="2.4854467"
+       cy="113.81065"
+       cx="311.26831"
+       id="circle8272"
+       style="opacity:1;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.24198163;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <path
+       sodipodi:nodetypes="cc"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/gabriel/15-sv-reverse.png"
+       inkscape:connector-curvature="0"
+       id="path8918"
+       d="M 327.9143,394.61626 375.75923,88.070412"
+       style="fill:none;stroke:#000000;stroke-width:0.9375px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker8922)" />
+    <text
+       inkscape:export-filename="/home/gabriel/15-sv-reverse.png"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       id="text9514"
+       y="225.3633"
+       x="376.38623"
+       style="font-style:normal;font-weight:normal;font-size:9.96944237px;line-height:0%;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.83078688px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         id="tspan9512"
+         style="font-size:7.5px;line-height:1.25;text-align:center;text-anchor:middle;stroke-width:0.83078688px"
+         y="225.3633"
+         x="376.38623"
+         sodipodi:role="line">0 (light)</tspan></text>
+    <circle
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/gabriel/15-sv-reverse.png"
+       style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.24198163;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="circle9540"
+       cx="355.33838"
+       cy="218.14929"
+       r="2.4854467" />
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       id="text9544"
+       y="124.06832"
+       x="373.44574"
+       style="font-style:normal;font-weight:normal;font-size:9.96944237px;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff0707;fill-opacity:1;stroke:none;stroke-width:0.83078688px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"
+       inkscape:export-filename="/home/gabriel/15-sv-reverse.png"><tspan
+         style="font-size:7.5px;line-height:1.25;fill:#ff0707;fill-opacity:1;stroke-width:0.83078688px"
+         y="124.06832"
+         x="373.44574"
+         id="tspan9542"
+         sodipodi:role="line">+1</tspan></text>
+    <circle
+       style="opacity:1;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.24198163;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="circle9546"
+       cx="371.26831"
+       cy="113.81065"
+       r="2.4854467"
+       inkscape:export-filename="/home/gabriel/15-sv-reverse.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       inkscape:export-filename="/home/gabriel/15-sv-reverse.png"
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:9.96944237px;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff0707;fill-opacity:1;stroke:none;stroke-width:0.83078688px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="363.73233"
+       y="190.3839"
+       id="text9550"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan9548"
+         x="363.73233"
+         y="190.3839"
+         style="font-size:7.5px;line-height:1.25;fill:#ff0707;fill-opacity:1;stroke-width:0.83078688px">-1</tspan></text>
+    <circle
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/gabriel/15-sv-reverse.png"
+       r="2.4854467"
+       cy="180.12622"
+       cx="361.5549"
+       id="circle9552"
+       style="opacity:1;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.24198163;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+  </g>
+</svg>

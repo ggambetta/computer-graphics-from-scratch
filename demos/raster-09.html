@@ -1,12 +1,23 @@
 <!--
 !!html_title Clipping demo - Computer Graphics from scratch
 -->
-<canvas id="canvas" width=600 height=600 style="border: 1px grey solid">
+
+# Clipping demo
+
+This demo extends the [previous one](raster-08.html) by implementing instance and triangle clipping,
+as described in the [Clipping](../11-clipping.html) chapter.
+
+Although the output looks identical, there's a cube located directly behind the camera. Thanks to the
+clipping algorithm, it's not visible in the rendered scene.
+
+<div class="centered">
+  <canvas id="canvas" width=600 height=600 style="border: 1px grey solid"></canvas>
+</div>
 
 <script>
 
 // ======================================================================
-//  Low-level canvas access. 
+//  Low-level canvas access.
 // ======================================================================
 
 var canvas = document.getElementById("canvas");
@@ -37,13 +48,14 @@ var UpdateCanvas = function() {
   canvas_context.putImageData(canvas_buffer, 0, 0);
 }
 
+
 // ======================================================================
 //  Data model.
 // ======================================================================
 
 // A Point.
 var Pt = function(x, y, h) {
-  if (!(this instanceof Pt)) { return new Pt(x, y, h); } 
+  if (!(this instanceof Pt)) { return new Pt(x, y, h); }
 
   this.x = x;
   this.y = y;
@@ -53,7 +65,7 @@ var Pt = function(x, y, h) {
 
 // A 3D vertex.
 var Vertex = function(x, y, z) {
-  if (!(this instanceof Vertex)) { return new Vertex(x, y, z); } 
+  if (!(this instanceof Vertex)) { return new Vertex(x, y, z); }
 
   this.x = x;
   this.y = y;
@@ -63,8 +75,8 @@ var Vertex = function(x, y, z) {
 
 // A 4D vertex (a 3D vertex in homogeneous coordinates).
 var Vertex4 = function(arg1, y, z, w) {
-  if (!(this instanceof Vertex4)) { return new Vertex4(arg1, y, z, w); } 
-  
+  if (!(this instanceof Vertex4)) { return new Vertex4(arg1, y, z, w); }
+
   if (arg1 instanceof Vertex) {
     this.x = arg1.x;
     this.y = arg1.y;
@@ -89,7 +101,7 @@ var Mat4x4 = function(data) {
   if (!(this instanceof Mat4x4)) { return new Mat4x4(data); }
 
   this.data = data;
-} 
+}
 
 
 var Identity4x4 = Mat4x4([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]);
@@ -107,10 +119,10 @@ var Triangle = function(v0, v1, v2, color) {
 
 
 // A Model.
-var Model = function(vertexes, triangles, bounds_center, bounds_radius) {
-  if (!(this instanceof Model)) { return new Model(vertexes, triangles, bounds_center, bounds_radius); }
+var Model = function(vertices, triangles, bounds_center, bounds_radius) {
+  if (!(this instanceof Model)) { return new Model(vertices, triangles, bounds_center, bounds_radius); }
 
-  this.vertexes = vertexes;
+  this.vertices = vertices;
   this.triangles = triangles;
   this.bounds_center = bounds_center;
   this.bounds_radius = bounds_radius;
@@ -137,7 +149,7 @@ var Camera = function(position, orientation) {
   this.position = position;
   this.orientation = orientation;
   this.clipping_planes = [];
-} 
+}
 
 
 // A Clipping Plane.
@@ -161,7 +173,7 @@ var Multiply = function(k, vec) {
 
 // Computes dot product.
 var Dot = function(v1, v2) {
-  return v1.x*v2.x + v1.y*v2.y + v1.z*v2.z; 
+  return v1.x*v2.x + v1.y*v2.y + v1.z*v2.z;
 }
 
 
@@ -227,7 +239,7 @@ var MultiplyMM4 = function(matA, matB) {
       }
     }
   }
-  
+
   return result;
 }
 
@@ -253,7 +265,6 @@ var viewport_size = 1;
 var projection_plane_z = 1;
 
 
-
 var Interpolate = function(i0, d0, i1, d1) {
   if (i0 == i1) {
     return [d0];
@@ -277,7 +288,7 @@ var DrawLine = function(p0, p1, color) {
   if (Math.abs(dx) > Math.abs(dy)) {
     // The line is horizontal-ish. Make sure it's left to right.
     if (dx < 0) { var swap = p0; p0 = p1; p1 = swap; }
-  
+
     // Compute the Y values and draw.
     var ys = Interpolate(p0.x, p0.y, p1.x, p1.y);
     for (var x = p0.x; x <= p1.x; x++) {
@@ -305,18 +316,14 @@ var DrawWireframeTriangle = function(p0, p1, p2, color) {
 
 // Converts 2D viewport coordinates to 2D canvas coordinates.
 var ViewportToCanvas = function(p2d) {
-  return Pt(
-    (p2d.x * canvas.width / viewport_size) | 0,
-    (p2d.y * canvas.height / viewport_size) | 0
-  );
+  return Pt((p2d.x * canvas.width / viewport_size) | 0,
+    	    (p2d.y * canvas.height / viewport_size) | 0);
 }
 
 
 var ProjectVertex = function(v) {
-  return ViewportToCanvas(Pt(
-    v.x * projection_plane_z / v.z,
-    v.y * projection_plane_z / v.z
-  ));
+  return ViewportToCanvas(Pt(v.x * projection_plane_z / v.z,
+                             v.y * projection_plane_z / v.z));
 }
 
 
@@ -328,11 +335,11 @@ var RenderTriangle = function(triangle, projected) {
 }
 
 
-// Clips a triangle against a plane. Adds output to triangles and vertexes.
-var ClipTriangle = function(triangle, plane, triangles, vertexes) {
-  var v0 = vertexes[triangle.v0];
-  var v1 = vertexes[triangle.v1];
-  var v2 = vertexes[triangle.v2];
+// Clips a triangle against a plane. Adds output to triangles and vertices.
+var ClipTriangle = function(triangle, plane, triangles, vertices) {
+  var v0 = vertices[triangle.v0];
+  var v1 = vertices[triangle.v1];
+  var v2 = vertices[triangle.v2];
 
   var in0 = Dot(plane.normal, v0) + plane.distance > 0;
   var in1 = Dot(plane.normal, v1) + plane.distance > 0;
@@ -347,25 +354,26 @@ var ClipTriangle = function(triangle, plane, triangles, vertexes) {
   } else if (in_count == 1) {
     // The triangle has one vertex in. Output is one clipped triangle.
   } else if (in_count == 2) {
-    // The triangle has two vertexes in. Output is two clipped triangles.
+    // The triangle has two vertices in. Output is two clipped triangles.
   }
 }
 
 
 var TransformAndClip = function(clipping_planes, model, transform) {
   // Transform the bounding sphere, and attempt early discard.
-  center = MultiplyMV(transform, Vertex4(model.bounds_center)); 
+  center = MultiplyMV(transform, Vertex4(model.bounds_center));
+  var radius2 = model.bounds_radius*model.bounds_radius;
   for (var p = 0; p < clipping_planes.length; p++) {
-    var distance = Dot(clipping_planes[p].normal, center) + clipping_planes[p].distance;
-    if (distance < -model.bounds_radius) { 
+    var distance2 = Dot(clipping_planes[p].normal, center) + clipping_planes[p].distance;
+    if (distance2 < -radius2) {
       return null;
     }
   }
 
   // Apply modelview transform.
-  var vertexes = [];
-  for (var i = 0; i < model.vertexes.length; i++) {
-    vertexes.push(MultiplyMV(transform, Vertex4(model.vertexes[i])));
+  var vertices = [];
+  for (var i = 0; i < model.vertices.length; i++) {
+    vertices.push(MultiplyMV(transform, Vertex4(model.vertices[i])));
   }
 
   // Clip the entire model against each successive plane.
@@ -373,19 +381,19 @@ var TransformAndClip = function(clipping_planes, model, transform) {
   for (var p = 0; p < clipping_planes.length; p++) {
     new_triangles = []
     for (var i = 0; i < triangles.length; i++) {
-      ClipTriangle(triangles[i], clipping_planes[p], new_triangles, vertexes);
+      ClipTriangle(triangles[i], clipping_planes[p], new_triangles, vertices);
     }
     triangles = new_triangles;
   }
 
-  return Model(vertexes, triangles, center, model.bounds_radius);
+  return Model(vertices, triangles, center, model.bounds_radius);
 }
 
 
 var RenderModel = function(model) {
   var projected = [];
-  for (var i = 0; i < model.vertexes.length; i++) {
-    projected.push(ProjectVertex(Vertex4(model.vertexes[i])));
+  for (var i = 0; i < model.vertices.length; i++) {
+    projected.push(ProjectVertex(Vertex4(model.vertices[i])));
   }
   for (var i = 0; i < model.triangles.length; i++) {
     RenderTriangle(model.triangles[i], projected);
@@ -406,8 +414,7 @@ var RenderScene = function(camera, instances) {
 }
 
 
-
-var vertexes = [
+var vertices = [
   Vertex(1, 1, 1),
   Vertex(-1, 1, 1),
   Vertex(-1, -1, 1),
@@ -440,15 +447,16 @@ var triangles = [
   Triangle(2, 7, 3, CYAN)
 ];
 
-var cube = Model(vertexes, triangles, Vertex(0, 0, 0), Math.sqrt(3));
+var cube = Model(vertices, triangles, Vertex(0, 0, 0), Math.sqrt(3));
 
 var instances = [Instance(cube, Vertex(-1.5, 0, 7), Identity4x4, 0.75),
-      	         Instance(cube, Vertex(1.25, 2.5, 7.5), MakeOYRotationMatrix(195)),
+	               Instance(cube, Vertex(1.25, 2.5, 7.5), MakeOYRotationMatrix(195)),
+                 Instance(cube, Vertex(0, 0, -10), MakeOYRotationMatrix(195)),
 ];
 
 var camera = Camera(Vertex(-3, 1, 2), MakeOYRotationMatrix(-30));
 
-var s2 = Math.sqrt(2) / 2.0;  // Used in the side planes, to make sure the length of their normals are 1.
+var s2 = Math.sqrt(2);
 camera.clipping_planes = [
   Plane(Vertex(0, 0, 1), -1), // Near
   Plane(Vertex(s2, 0, s2), 0), // Left
@@ -457,8 +465,11 @@ camera.clipping_planes = [
   Plane(Vertex(0, s2, s2), 0), // Bottom
 ];
 
-RenderScene(camera, instances);
+var Render = function() {
+  RenderScene(camera, instances);
+  UpdateCanvas();
+}
 
-UpdateCanvas();
+Render();
 
 </script>
