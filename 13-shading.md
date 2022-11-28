@@ -111,7 +111,7 @@ What we do have is the projection of $P$; that is, the $x'$ and $y'$ we're about
 
 $$x' = {xd \over z}$$
 
-$$y' = {xd \over z}$$
+$$y' = {yd \over z}$$
 
 We also happen to have an interpolated but geometrically correct value for $1 \over z$ as part of the depth-buffering algorithm, so
 
