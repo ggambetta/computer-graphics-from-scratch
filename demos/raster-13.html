@@ -749,13 +749,13 @@ var ClipTriangle = function(triangle, plane, triangles, vertices) {
 }
 
 
-var TransformAndClip = function(clipping_planes, model, transform) {
+var TransformAndClip = function(clipping_planes, model, scale, transform) {
   // Transform the bounding sphere, and attempt early discard.
   center = MultiplyMV(transform, Vertex4(model.bounds_center));
-  var radius2 = model.bounds_radius*model.bounds_radius;
+  var radius = model.bounds_radius*scale;
   for (var p = 0; p < clipping_planes.length; p++) {
-    var distance2 = Dot(clipping_planes[p].normal, center) + clipping_planes[p].distance;
-    if (distance2 < -radius2) {
+    var distance = Dot(clipping_planes[p].normal, center) + clipping_planes[p].distance;
+    if (distance < -radius) {
       return null;
     }
   }
@@ -796,7 +796,7 @@ var RenderScene = function(camera, instances, lights) {
 
   for (var i = 0; i < instances.length; i++) {
     var transform = MultiplyMM4(cameraMatrix, instances[i].transform);
-    var clipped = TransformAndClip(camera.clipping_planes, instances[i].model, transform);
+    var clipped = TransformAndClip(camera.clipping_planes, instances[i].model, instances[i].scale, transform);
     if (clipped != null) {
       RenderModel(clipped, camera, lights, instances[i].orientation);
     }
