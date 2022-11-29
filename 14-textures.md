@@ -87,7 +87,7 @@ $$CB = (1 - fx) \cdot BL + fx \cdot BR$$
 
 Finally, we compute $C$, linearly interpolating between $CT$ and $CB$:
 
-$$C = (1 - fy) \cdot BT + fy \cdot CB$$
+$$C = (1 - fy) \cdot CT + fy \cdot CB$$
 
 In pseudocode, we can write a function to get the interpolated color corresponding to a fractional texel:
 
