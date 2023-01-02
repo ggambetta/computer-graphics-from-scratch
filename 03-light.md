@@ -177,7 +177,7 @@ The lighting equation is fairly straightforward to translate to pseudocode (List
                 if light.type == point {
                    ❷L = light.position - P
                 } else {
-                   ❸L = light.direction
+                   ❸L = -light.direction
                 }
 
                 n_dot_l = dot(N, L)
@@ -359,7 +359,7 @@ At the code level, we need to change `ComputeLighting` to compute the specular t
                 if light.type == point {
                     L = light.position - P
                 } else {
-                    L = light.direction
+                    L = -light.direction
                 }
 
                 // Diffuse
