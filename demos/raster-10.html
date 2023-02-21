@@ -454,8 +454,8 @@ var RenderTriangle = function(triangle, vertices, projected) {
 
   // Backface culling.
   if (backfaceCullingEnabled) {
-    var centre = Multiply(-1.0/3.0, Add(Add(vertices[triangle.indexes[0]], vertices[triangle.indexes[1]]), vertices[triangle.indexes[2]]));
-    if (Dot(centre, normal) < 0) {
+    var vertex = vertices[triangle.indexes[0]];
+    if (Dot(vertex, normal) <= 0) {
       return;
     }
   }
