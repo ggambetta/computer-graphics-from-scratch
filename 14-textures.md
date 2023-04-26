@@ -32,6 +32,8 @@ By now you can probably see where this is going. Yes, it's our good friend linea
 
 The results are a little underwhelming. The exterior shape of the crates looks fine, but if you pay close attention to the diagonal planks, you'll notice they look deformed, as if bent in weird ways. What went wrong?
 
+## Pespective-Correct Texture Mapping
+
 As in [Chapter 12 (Hidden Surface Removal)](12-hidden-surface-removal.html), we made an implicit assumption that turns out not to be true: namely, that $u$ and $v$ vary linearly across the screen. This is clearly not the case. Consider the wall of a very long corridor painted with alternating vertical black and white stripes. As the wall recedes into the distance, the vertical stripes should look thinner and thinner. If we make the $u$ coordinate vary linearly with $x'$, we get incorrect results, as illustrated in Figure&nbsp;14-4.
 
 ![Figure&nbsp;14-4: Linear interpolation of $u$ and $v$ (left) doesn't produce the expected perspective-correct results (right).](/computer-graphics-from-scratch/images/r17-linear-texture.png){#fig:linear_texture}

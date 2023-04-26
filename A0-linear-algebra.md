@@ -164,7 +164,7 @@ We use the cross product to compute the *normal vector* of a surface---that is, 
 
 A *matrix* is a rectangular array of numbers. For the purposes of this book, matrices represent *transformations* that can be applied to points or vectors, and we refer to them with a capital letter, such as $M$. This is the same way we refer to points, but it will be clear by the context whether we're talking about a matrix or a point.
 
-A matrix is characterized by its size in terms of columns and rows. For example, this is a $4 \times 3$ matrix:
+A matrix is characterized by its size in terms of rows and columns. For example, this is a $3 \times 4$ matrix:
 
 $$\begin{pmatrix}
 1 & 2 & 3 & 4 \\

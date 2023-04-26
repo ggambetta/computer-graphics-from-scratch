@@ -454,8 +454,8 @@ var RenderTriangle = function(triangle, vertices, projected) {
 
   // Backface culling.
   if (backfaceCullingEnabled) {
-    var vertex = vertices[triangle.indexes[0]];
-    if (Dot(vertex, normal) <= 0) {
+    var vertex_to_camera = Multiply(-1, vertices[triangle.indexes[0]]);  // Should be Subtract(camera.position, vertices[triangle.indexes[0]])
+    if (Dot(vertex_to_camera, normal) <= 0) {
       return;
     }
   }
@@ -625,7 +625,7 @@ var instances = [Instance(cube, Vertex(-1.5, 0, 7), Identity4x4, 0.75),
 
 var camera = Camera(Vertex(-3, 1, 2), MakeOYRotationMatrix(-30));
 
-var s2 = Math.sqrt(2);
+var s2 = 1.0 / Math.sqrt(2);
 camera.clipping_planes = [
   Plane(Vertex(0, 0, 1), -1), // Near
   Plane(Vertex(s2, 0, s2), 0), // Left
