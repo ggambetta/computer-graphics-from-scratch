@@ -1,6 +1,7 @@
-!!html_class cgfs
-!!html_title Hidden Surface Removal - Computer Graphics from Scratch
-# Hidden Surface Removal {#ch:hidden_surface_removal}
+{% block header %}{% endblock %}
+{% set html_class="cgfs" %}
+{% set html_title="Hidden Surface Removal - Computer Graphics from Scratch" %}
+# Hidden Surface Removal {{'{#'}}ch:hidden_surface_removal}
 
 We can now render any scene from any point of view, but the resulting image is visually simple: we're rendering objects in wireframe, giving the impression that we're looking at the blueprint of a set of objects, not at the objects themselves.
 
@@ -10,7 +11,7 @@ The remaining chapters of this book focus on improving the visual quality of the
 
 The first idea that comes to mind when we want to make solid objects look solid is to use the function `DrawFilledTriangle` that we developed in [Chapter 7 (Filled Triangles)](07-filled-triangles.html) to draw each triangle of the objects using a random color (Figure&nbsp;12-1).
 
-![Figure&nbsp;12-1: Using `DrawFilledTriangle` instead of `DrawWireframeTriangle` doesn't produce the results we expect.](/computer-graphics-from-scratch/images/raster-10a.png){#fig:raster_10}
+![Figure&nbsp;12-1: Using `DrawFilledTriangle` instead of `DrawWireframeTriangle` doesn't produce the results we expect.](/computer-graphics-from-scratch/images/raster-10a.png){{'{#'}}fig:raster_10}
 
 The shapes in Figure&nbsp;12-1 don't quite look like cubes, do they? If you look closely, you'll see what the problem is: parts of the back faces of the cube are drawn on top of the front faces! This is because we're blindly drawing 2D triangles on the canvas in a "random order" or, more precisely, in the order they happen to be defined in the `Triangles` list of the model, without taking into account the spatial relationships between them.
 
@@ -30,7 +31,7 @@ Second, it requires us to know the whole list of triangles at once. This require
 
 Third, even if we'd be willing to live with these limitations, there are cases where a correct ordering of triangles just *doesn't exist at all*. Consider the case in Figure&nbsp;12-2. We will *never* be able to sort these triangles in a way that produces the correct results.
 
-![Figure&nbsp;12-2: There is no way to sort these triangles "back-to-front."](/computer-graphics-from-scratch/images/r15-impossible-sort.png){#fig:impossible_sort}
+![Figure&nbsp;12-2: There is no way to sort these triangles "back-to-front."](/computer-graphics-from-scratch/images/r15-impossible-sort.png){{'{#'}}fig:impossible_sort}
 
 ## Depth Buffering
 
@@ -38,7 +39,7 @@ We can't solve the ordering problem at the triangle level, so let's try to solve
 
 For each pixel on the canvas, we want to paint it with the "correct" color, where the "correct" color is the color of the object that is closest to the camera. In Figure&nbsp;12-3, that's $P_1$.
 
-![Figure&nbsp;12-3: Both *P~1~* and *P~2~* project to the same *P '* on the canvas. Because *P~1~* is closer to the camera than *P~2~*, we want to paint *P '* the color of *P~1~*.](/computer-graphics-from-scratch/images/r15-depth.png){#fig:depth}
+![Figure&nbsp;12-3: Both *P~1~* and *P~2~* project to the same *P '* on the canvas. Because *P~1~* is closer to the camera than *P~2~*, we want to paint *P '* the color of *P~1~*.](/computer-graphics-from-scratch/images/r15-depth.png){{'{#'}}fig:depth}
 
 At any time during rendering, each pixel on the canvas represents one point in the scene (before we draw anything, it represents a point infinitely far away). Suppose that for each pixel on the canvas, we kept the $Z$ coordinate of the point it currently represents. When we need to decide whether to paint a pixel with the color of an object, we will do it only if the $Z$ coordinate of the point we're about to paint is smaller than the $Z$ coordinate of the point that is already there. This guarantees that a pixel representing a point in the scene is never drawn over by a pixel representing a point that is farther away from the camera.
 
@@ -64,26 +65,26 @@ For this to work correctly, every entry in `depth_buffer` should be initialized 
 
 The results we get now are much better---check out Figure&nbsp;12-4.
 
-![Figure&nbsp;12-4: The cubes now look like cubes, regardless of the ordering of their triangles.](/computer-graphics-from-scratch/images/raster-10b.png){#fig:raster_10b}
+![Figure&nbsp;12-4: The cubes now look like cubes, regardless of the ordering of their triangles.](/computer-graphics-from-scratch/images/raster-10b.png){{'{#'}}fig:raster_10b}
 
 <a class="cgfs_demo" href="https://gabrielgambetta.com/cgfs/depth-demo">Source code and live demo &gt;&gt;</a>
 
 
-### Using 1/Z instead of Z {#why-1z-instead-of-z}
+### Using 1/Z instead of Z {{'{#'}}why-1z-instead-of-z}
 
 The results look much better, but what we're doing is subtly wrong. The values of $Z$ for the vertices are correct (they come from data, after all), but in most cases the linearly interpolated values of $Z$ for the rest of the pixels are incorrect. This might not even result in a visible difference at this point, but it would become an issue later.
 
 To see how the values are wrong, consider the simple case of a line segment from $A (-1, 0, 2)$ to $B (1, 0, 10)$, with its midpoint $M$ at $(0, 0, 6)$. Specifically, because $M$ is the midpoint of $AB$, we know that $M_z = (A_z + B_z) / 2 = 6$. Figure&nbsp;12-5 shows this line segment.
 
-![Figure&nbsp;12-5: A line segment *AB* and its midpoint *M*](/computer-graphics-from-scratch/images/r15-linear-z-1.png){#fig:linear_z_1}
+![Figure&nbsp;12-5: A line segment *AB* and its midpoint *M*](/computer-graphics-from-scratch/images/r15-linear-z-1.png){{'{#'}}fig:linear_z_1}
 
 Let's compute the projection of these points with $d = 1$. Applying the perspective projection equations, we get $A\, '_x = A_x / A_z = -1 / 2 = -0.5$. Similarly, $B\, '_x = 0.1$ and $M\, '_x = 0$. Figure&nbsp;12-6 shows the projected points.
 
-![Figure&nbsp;12-6: The points *A*, *B*, and *M* projected onto the projection plane](/computer-graphics-from-scratch/images/r15-linear-z-2.png){#fig:linear_z_2}
+![Figure&nbsp;12-6: The points *A*, *B*, and *M* projected onto the projection plane](/computer-graphics-from-scratch/images/r15-linear-z-2.png){{'{#'}}fig:linear_z_2}
 
 $A\, 'B\, '$ is a horizontal segment on the viewport. We know the values of $A_z$ and $B_z$. Let's see what happens if we try to compute the value of $M_z$ using linear interpolation. The implied linear function looks like Figure&nbsp;12-7.
 
-![Figure&nbsp;12-7: The values of *A~z~* and *B~z~* for *A~x'~* and *B~x'~* define a linear function *z = f(x')*.](/computer-graphics-from-scratch/images/r15-linear-z.png){#fig:linear_z}
+![Figure&nbsp;12-7: The values of *A~z~* and *B~z~* for *A~x'~* and *B~x'~* define a linear function *z = f(x')*.](/computer-graphics-from-scratch/images/r15-linear-z.png){{'{#'}}fig:linear_z}
 
 The slope of the function is constant, so we can write
 
@@ -115,15 +116,15 @@ $$Ax + By + Cz + D = 0$$
 
 On the other hand we have the perspective projection equations:
 
-$$x' = {{x \cdot d} \over z}$$
+$$x' = {{'{{'}}x \cdot d} \over z}$$
 
-$$y' = {{x \cdot d} \over z}$$
+$$y' = {{'{{'}}x \cdot d} \over z}$$
 
 We can get $x$ and $y$ back from these:
 
-$$x = {{z \cdot x'} \over d}$$
+$$x = {{'{{'}}z \cdot x'} \over d}$$
 
-$$y = {{z \cdot y'} \over d}$$
+$$y = {{'{{'}}z \cdot y'} \over d}$$
 
 If we replace $x$ and $y$ in the plane equation with these expressions, we get
 
@@ -151,7 +152,7 @@ $${ M_{1 \over z} - A_{1 \over z} \over M'_x - A'_x } = { B_{1 \over z} - A_{1 \
 
 $$M_{1 \over z} = A_{1 \over z} + (M'_x - A'_x) ({B_{1 \over z} - A_{1 \over z} \over B'_x - A'_x})$$
 
-$$M_{1 \over z} = {1 \over 2} + (0 - (-0.5)) ({{1 \over 10} - {1 \over 2} \over 0.1 - (-0.5)}) = 0.166666$$
+$$M_{1 \over z} = {1 \over 2} + (0 - (-0.5)) ({{'{{'}}1 \over 10} - {1 \over 2} \over 0.1 - (-0.5)}) = 0.166666$$
 
 And therefore
 
@@ -171,15 +172,15 @@ Can we discard pixels earlier, before we go into all of this computation? It tur
 
 So far we've been talking informally about *front faces* and *back faces*. Imagine every triangle has two distinct sides; it's impossible to see both sides of a triangle at the same time. In order to distinguish between the two sides, we'll stick an imaginary arrow on each triangle, perpendicular to its surface. Then we'll take the cube and make sure every arrow is pointing out. Figure&nbsp;12-8 shows this idea.
 
-![Figure&nbsp;12-8: A cube viewed from above, with arrows on each triangle pointing out](/computer-graphics-from-scratch/images/r15-cube-normals.png){#fig:cube_normals}
+![Figure&nbsp;12-8: A cube viewed from above, with arrows on each triangle pointing out](/computer-graphics-from-scratch/images/r15-cube-normals.png){{'{#'}}fig:cube_normals}
 
 These arrows let us classify each triangle as "front" or "back," depending on whether they point toward the camera or away from the camera. More formally, if the view vector and this arrow (which is actually a normal vector of the triangle) form an angle of less than $90^\circ$, the triangle is front-facing; otherwise, it's back-facing (Figure&nbsp;12-9).
 
-![Figure&nbsp;12-9: The angle between the view vector and the normal vector of a triangle lets us classify it as front- facing or back-facing.](/computer-graphics-from-scratch/images/r15-culling.png){#fig:culling}
+![Figure&nbsp;12-9: The angle between the view vector and the normal vector of a triangle lets us classify it as front- facing or back-facing.](/computer-graphics-from-scratch/images/r15-culling.png){{'{#'}}fig:culling}
 
 At this point, we need to impose a restriction on our 3D models: that they are *closed*. The exact definition of closed is pretty involved, but fortunately an intuitive understanding is enough. The cube we've been working with is closed; we can only see its exterior. If we removed one of its faces, it wouldn't be closed because we could see inside it. This doesn't mean we can't have objects with holes or concavities; we would just model these with thin "walls." See Figure&nbsp;12-10 for some examples.
 
-![Figure&nbsp;12-10: Some examples of open and closed objects](/computer-graphics-from-scratch/images/r15-closed-objects.png){#fig:closed-objects}
+![Figure&nbsp;12-10: Some examples of open and closed objects](/computer-graphics-from-scratch/images/r15-closed-objects.png){{'{#'}}fig:closed-objects}
 
 Why impose this restriction? Closed objects have the interesting property that the set of front faces completely covers the set of back faces, no matter the orientation of the model or the camera. This means we don't need to draw the back faces at all, saving valuable computation time.
 
@@ -203,7 +204,7 @@ Suppose we have the normal vector $\vec{N}$ of a triangle and the vector $\vec{V
 
 We can again use the properties of the dot product to make this simpler. Remember that if $\alpha$ is the angle between $\vec{N}$ and $\vec{V}$, then
 
-$${{\langle \vec{N}, \vec{V} \rangle} \over {|\vec{N}||\vec{V}|}} = \cos(\alpha)$$
+$${{'{{'}}\langle \vec{N}, \vec{V} \rangle} \over {|\vec{N}||\vec{V}|}} = \cos(\alpha)$$
 
 Because $\cos(\alpha)$ is non-negative for $|\alpha| \le 90^\circ$, we only need to know the sign of this expression to classify a triangle as front-facing or back-facing. Note that $|\vec{N}|$ and $|\vec{V}|$ are always positive, so they don't affect the sign of the expression. Therefore
 

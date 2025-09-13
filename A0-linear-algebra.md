@@ -1,6 +1,7 @@
-!!html_class cgfs
-!!html_title Linear Algebra - Computer Graphics from Scratch
-# Linear Algebra {#ch:linear_algebra_appendix .unnumbered}
+{% block header %}{% endblock %}
+{% set html_class="cgfs" %}
+{% set html_title="Linear Algebra - Computer Graphics from Scratch" %}
+# Linear Algebra {{'{#'}}ch:linear_algebra_appendix .unnumbered}
 
 This appendix serves as a cheat sheet for linear algebra. The subject is presented as a set of tools, their properties, and what you can use them for. If you're interested in the theory behind all this, you can pick up any introductory linear algebra textbook.
 
@@ -16,7 +17,7 @@ Each of the numbers in the point's sequence is called a *coordinate*. The number
 
 The order of the numbers is important; $(4, 3)$ is not the same as $(3, 4)$. By convention, the coordinates are called $x$ and $y$ in 2D, and $x$, $y$, and $z$ in 3D; so the point $(4, 3)$ has an $x$ coordinate of $4$ and a $y$ coordinate of $3$. Figure&nbsp;A-1 shows $P$, a 2D point with coordinates $(4, 3)$.
 
-![Figure&nbsp;A-1: The 2D point *P* has coordinates (4, 3).](/computer-graphics-from-scratch/images/aa-points.png){#fig:aa-points}
+![Figure&nbsp;A-1: The 2D point *P* has coordinates (4, 3).](/computer-graphics-from-scratch/images/aa-points.png){{'{#'}}fig:aa-points}
 
 We can also refer to specific coordinates of a point using a subscript, like $P_x$ or $Q_y$. So the point $P$ can also be written as $(P_x, P_y, P_z)$ when convenient.
 
@@ -28,7 +29,7 @@ A *vector* represents the difference between two points. Intuitively, imagine a 
 
 We represent a vector as a set of numbers between parentheses, and refer to them using a capital letter. This is the same representation we use for points, so we add a small arrow on top to remember they're vectors and not points. For example, $(2, 1)$ is a vector, which we might decide to call $\vec{A}$. Figure&nbsp;A-2 shows two equal vectors, $\vec{A}$ and $\vec{B}$.
 
-![Figure&nbsp;A-2: The vectors $\vec{\mathsf{A}}$ and $\vec{\mathsf{B}}$ are equal. Vectors don't have a position.](/computer-graphics-from-scratch/images/aa-vectors.png){#fig:aa-vectors}
+![Figure&nbsp;A-2: The vectors $\vec{\mathsf{A}}$ and $\vec{\mathsf{B}}$ are equal. Vectors don't have a position.](/computer-graphics-from-scratch/images/aa-vectors.png){{'{#'}}fig:aa-vectors}
 
 Despite sharing their representation with points, vectors don't represent or have a position; they are, after all, the *difference* between two positions. When you have a diagram like Figure&nbsp;A-2, you have to draw vectors somewhere; but the vectors $\vec{A}$ and $\vec{B}$ are equal, because they represent the same displacement.
 
@@ -42,7 +43,7 @@ The direction can be further decomposed into *orientation* (the slope of the lin
 
 You can compute the magnitude of a vector from its coordinates. The magnitude is also called the *length* or *norm* of the vector. It's denoted by putting the vector between vertical pipes, as in $|\vec{V}|$, and it's computed as follows:
 
-$$|\vec{V}| = \sqrt{{V_x}^2 + {V_y}^2 + {V_z}^2}$$
+$$|\vec{V}| = \sqrt{{'{{'}}V_x}^2 + {V_y}^2 + {V_z}^2}$$
 
 A vector with a magnitude equal to $1.0$ is called a *unit vector*.
 
@@ -58,7 +59,7 @@ $$\vec{V} = P - Q$$
 
 In this case, you can think of $\vec{V}$ as "going" from $Q$ to $P$, as in Figure&nbsp;A-3.
 
-![Figure&nbsp;A-3: The vector $\vec{\mathsf{V}}$ is the difference between *P* and *Q*.](/computer-graphics-from-scratch/images/aa-point-diff.png){#fig:aa-point-diff}
+![Figure&nbsp;A-3: The vector $\vec{\mathsf{V}}$ is the difference between *P* and *Q*.](/computer-graphics-from-scratch/images/aa-point-diff.png){{'{#'}}fig:aa-point-diff}
 
 Algebraically, you subtract each of the coordinates separately:
 
@@ -80,13 +81,13 @@ $$Q + \vec{V} = P$$
 
 In other words, you can add a vector to a point and get a new point. This makes intuitive and geometric sense; given a starting position (a point) and a displacement (a vector), you end up in a new position (another point). Figure&nbsp;A-4 presents an example.
 
-![Figure&nbsp;A-4: Adding $\vec{\mathsf{V}}$ to *Q* gives us *P*.](/computer-graphics-from-scratch/images/aa-point-plus-vector.png){#fig:aa-point-plus-vector}
+![Figure&nbsp;A-4: Adding $\vec{\mathsf{V}}$ to *Q* gives us *P*.](/computer-graphics-from-scratch/images/aa-point-plus-vector.png){{'{#'}}fig:aa-point-plus-vector}
 
 ### Adding Vectors
 
 You can add two vectors. Geometrically, imagine putting one vector "after" another, as in Figure&nbsp;A-5.
 
-![Figure&nbsp;A-5: Adding two vectors. Addition is commutative. Remember, vectors don't have a position.](/computer-graphics-from-scratch/images/aa-vector-plus-vector.png){#fig:aa-vector-plus-vector}
+![Figure&nbsp;A-5: Adding two vectors. Addition is commutative. Remember, vectors don't have a position.](/computer-graphics-from-scratch/images/aa-vector-plus-vector.png){{'{#'}}fig:aa-vector-plus-vector}
 
 As you can see, vector addition is commutative---that is, the order of the operands doesn't matter. In the diagram, we can see that $\vec{V} + \vec{W} = \vec{W} + \vec{V}$.
 
@@ -98,7 +99,7 @@ $$\vec{V} + \vec{W} = (V_x, V_y, V_z) + (W_x, W_y, W_z) = (V_x + W_x, V_y + W_y,
 
 You can multiply a vector by a number. This is called the *scalar product*. This makes the vector shorter or longer, as you can see in Figure&nbsp;A-6.
 
-![Figure&nbsp;A-6: Multiplying a vector by a number](/computer-graphics-from-scratch/images/aa-vector-scaling.png){#fig:aa-vector-scaling}
+![Figure&nbsp;A-6: Multiplying a vector by a number](/computer-graphics-from-scratch/images/aa-vector-scaling.png){{'{#'}}fig:aa-vector-scaling}
 
 If the number is negative, the vector will point the other way; this means it changes its sense and therefore its direction. But multiplying a vector by a number never changes its orientation---that is, it will remain along the same line.
 
@@ -150,7 +151,7 @@ The cross product between two vectors gives you another vector. It's expressed u
 
 The cross product of two vectors is a vector perpendicular to both of them. In this book we only use the cross product on 3D vectors, shown in Figure&nbsp;A-7.
 
-![Figure&nbsp;A-7: The cross product of two vectors is a vector perpendicular to both of them.](/computer-graphics-from-scratch/images/aa-vector-cross-product.png){#fig:aa-vector-cross-product}
+![Figure&nbsp;A-7: The cross product of two vectors is a vector perpendicular to both of them.](/computer-graphics-from-scratch/images/aa-vector-cross-product.png){{'{#'}}fig:aa-vector-cross-product}
 
 The computation is a bit more involved than the dot product. If $\vec{R} = \vec{V} \times \vec{W}$, then
 

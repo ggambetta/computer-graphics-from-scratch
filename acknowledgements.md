@@ -1,6 +1,7 @@
-!!html_class cgfs
-!!html_title Acknowledgments - Computer Graphics from Scratch
-# Acknowledgments {#acknowledgments .unnumbered}
+{% block header %}{% endblock %}
+{% set html_class="cgfs" %}
+{% set html_title="Acknowledgments - Computer Graphics from Scratch" %}
+# Acknowledgments {{'{#'}}acknowledgments .unnumbered}
 
 Few books happen overnight; the one you're about to read has been almost 20 years in the making. As you might suspect, many people have been part of its story, in one way or another, and I want to thank them. In chronological order:
 

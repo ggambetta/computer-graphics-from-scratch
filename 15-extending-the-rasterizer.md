@@ -1,6 +1,7 @@
-!!html_class cgfs
-!!html_title Extending the Rasterizer - Computer Graphics from Scratch
-# Extending the Rasterizer {#ch:extending_the_rasterizer}
+{% block header %}{% endblock %}
+{% set html_class="cgfs" %}
+{% set html_title="Extending the Rasterizer - Computer Graphics from Scratch" %}
+# Extending the Rasterizer {{'{#'}}ch:extending_the_rasterizer}
 
 We'll conclude this second part of the book the same way we concluded the first one: with a set of possible extensions to the rasterizer we've developed in the preceding chapters.
 
@@ -22,7 +23,7 @@ There are a couple of practical considerations to keep in mind. First, the orien
 
 Second, a very popular way to encode normal maps is as textures, mapping the values of $X$, $Y$, and $Z$ to $R$, $G$, and $B$ values. This gives normal maps a very characteristic purple-ish appearance, because purple, a combination of red and blue but no green, encodes flat areas of the surface. Figure&nbsp;15-2 shows the normal map used in the examples in Figure&nbsp;15-1.
 
-![Figure&nbsp;15-2: The normal map used for the examples in Figure&nbsp;15-1, encoded as a RGB texture](/computer-graphics-from-scratch/images/bump-map.png){#fig:bump-map}
+![Figure&nbsp;15-2: The normal map used for the examples in Figure&nbsp;15-1, encoded as a RGB texture](/computer-graphics-from-scratch/images/bump-map.png){{'{#'}}fig:bump-map}
 
 While this technique can drastically improve the perceived complexity of surfaces in a scene, it's not without limitations. For example, since flat surfaces remain flat, it can't change the silhouette of an object. For the same reason, the illusion breaks down when a normal-mapped surface is viewed from an extreme angle or up close, or when the features represented by the normal map are too big compared to the size of the surface. This technique is better suited to subtle detail, such as pores on the skin, the pattern on a stucco wall, or the irregular appearance of an orange peel. For this reason, the technique is also known as *bump mapping*.
 
@@ -80,7 +81,7 @@ This gives us the "sides" of the shadow volume. The "front" of the volume is mad
 
 Figure&nbsp;15-4 shows the shadow volume created this way for a cube with respect to a point light.
 
-![Figure&nbsp;15-4: The shadow volume of a cube with respect to a point light](/computer-graphics-from-scratch/images/15-shadow-volume.png){#fig:shadow-volume}
+![Figure&nbsp;15-4: The shadow volume of a cube with respect to a point light](/computer-graphics-from-scratch/images/15-shadow-volume.png){{'{#'}}fig:shadow-volume}
 
 Next, we'll see how to use the shadow volumes to determine which pixels in the canvas are in shadow with respect to a light.
 
@@ -92,7 +93,7 @@ We can keep track of this with a counter that starts at zero. Every time the ray
 
 However, this only works if the camera itself is not inside a shadow volume! If a ray starts inside the shadow volume and doesn't leave it before hitting the surface, our algorithm would incorrectly conclude that it's illuminated.
 
-![Figure&nbsp;15-5: Counting the intersections between rays and shadow volumes tells us whether a point along the ray is illuminated or in shadow.](/computer-graphics-from-scratch/images/15-sv-direct.png){#fig:shadow-volume-direct}
+![Figure&nbsp;15-5: Counting the intersections between rays and shadow volumes tells us whether a point along the ray is illuminated or in shadow.](/computer-graphics-from-scratch/images/15-sv-direct.png){{'{#'}}fig:shadow-volume-direct}
 
 We could check for this condition and adjust the counter accordingly, but counting how many shadow volumes a point is inside of is an expensive operation. Fortunately, there's a way to overcome this limitation that is simpler and cheaper, if somewhat counter-intuitive.
 
@@ -102,7 +103,7 @@ Suppose we keep track of the intersections between the ray and the shadow volume
 
 This means counting intersections between the ray and the shadow volume before the ray hits the surface is equivalent to counting the intersections after it---but in this case, we don't have to worry about the position of the camera! Figure&nbsp;15-6 shows how this technique always produces correct results.
 
-![Figure&nbsp;15-6: The counters have a value of zero for points that receive light, and a nonzero value for points that are in shadow, regardless of whether the camera is inside or outside the shadow volume.](/computer-graphics-from-scratch/images/15-sv-reverse.png){#fig:shadow-volume-reverse}
+![Figure&nbsp;15-6: The counters have a value of zero for points that receive light, and a nonzero value for points that are in shadow, regardless of whether the camera is inside or outside the shadow volume.](/computer-graphics-from-scratch/images/15-sv-reverse.png){{'{#'}}fig:shadow-volume-reverse}
 
 #### Setting up the Stencil Buffer
 

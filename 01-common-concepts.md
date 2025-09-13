@@ -1,6 +1,7 @@
-!!html_class cgfs
-!!html_title Introductory Concepts - Computer Graphics from Scratch
-# Introductory Concepts {#ch:common_concepts}
+{% block header %}{% endblock %}
+{% set html_class="cgfs" %}
+{% set html_title="Introductory Concepts - Computer Graphics from Scratch" %}
+# Introductory Concepts {{'{#'}}ch:common_concepts}
 
 A raytracer and a rasterizer take very different approaches to rendering a 3D scene onto a 2D screen. However, there are a few fundamental concepts that are common to both approaches.
 
@@ -22,11 +23,11 @@ This method has three arguments: an `x` coordinate, a `y` coordinate, and a colo
 
 The canvas has a width and a height, measured in pixels, which we'll call $C_w$ and $C_h$. We need a coordinate system to refer to its pixels. For most computer screens, the origin is at the top left; $x$ increases toward the right of the screen, and $y$ increases toward the bottom, as in Figure&nbsp;1-1.
 
-![Figure&nbsp;1-1: The coordinate system used by most computer screens](/computer-graphics-from-scratch/images/00-coordinates1.png){#fig:coordinates1}
+![Figure&nbsp;1-1: The coordinate system used by most computer screens](/computer-graphics-from-scratch/images/00-coordinates1.png){{'{#'}}fig:coordinates1}
 
 This coordinate system is very natural for a computer because of the way video memory is organized, but it's not the most natural for humans to work with. Instead, 3D graphics programmers tend to use the coordinate system typically used to draw graphs on paper: the origin is at the center, $x$ increases toward the right and decreases toward the left, while $y$ increases toward the top and decreases toward the bottom, as in Figure&nbsp;1-2.
 
-![Figure&nbsp;1-2: The coordinate system we'll use for our canvas](/computer-graphics-from-scratch/images/00-coordinates2.png){#fig:coordinates2}
+![Figure&nbsp;1-2: The coordinate system we'll use for our canvas](/computer-graphics-from-scratch/images/00-coordinates2.png){{'{#'}}fig:coordinates2}
 
 Using this coordinate system, the range of the $x$ coordinate is $[{-C_w \over 2}, {C_w \over 2})$ and the range of the $y$ coordinate is $[{-C_h \over 2}, {C_h \over 2})$. Let's assume that using the `PutPixel` function with coordinates outside these ranges does nothing.
 
@@ -54,7 +55,7 @@ Every color imaginable can be described as a combination of different wavelength
 
 The *subtractive color model* is a fancy name for that thing you did with crayons as a toddler. You take a white piece of paper and red, blue, and yellow crayons. You draw a yellow circle, then a blue circle that overlaps it, and you get green! Yellow and red---orange! Red and blue---purple! Mix the three together---something darkish! Wasn't kindergarten amazing? Figure&nbsp;1-3 shows the primary colors of the subtractive model, and the colors that result from mixing them.
 
-![Figure&nbsp;1-3: Subtractive primary colors and their combinations](/computer-graphics-from-scratch/images/01-primaries1.png){#fig:primaries1}
+![Figure&nbsp;1-3: Subtractive primary colors and their combinations](/computer-graphics-from-scratch/images/01-primaries1.png){{'{#'}}fig:primaries1}
 
 Objects are of different colors because they absorb and reflect light in different ways. Let's start with white light, like sunlight (sunlight isn't quite white, but it's close enough for our purposes). White light contains light of every wavelength. When it hits an object, the object's surface absorbs some of the wavelengths and reflects others, depending on the material. Some of the reflected light then hits our eyes, and our brains convert that to color. What color? The sum of the wavelengths that were reflected by the surface.
 
@@ -68,7 +69,7 @@ This model isn't quite right, though. The actual primary colors in the subtracti
 
 You can see evidence of this color model directly on the cartridges of color printers, or sometimes in the shapes of cheaply printed flyers where the different colors are slightly offset from one another.
 
-![Figure&nbsp;1-4: The four subtractive primary colors used by printers](/computer-graphics-from-scratch/images/01-primaries2.png){#fig:primaries2}
+![Figure&nbsp;1-4: The four subtractive primary colors used by printers](/computer-graphics-from-scratch/images/01-primaries2.png){{'{#'}}fig:primaries2}
 
 ### Additive Color Model
 
@@ -80,7 +81,7 @@ Different primary colors are necessary for this. Most colors can be created by a
 
 The combination of additive primary colors is *lighter* than its components, whereas the combination of subtractive primary colors is *darker*; all the additive primaries add up to white, while all the subtractive primaries add up to black.
 
-![Figure&nbsp;1-5: The additive primary colors and some of their combinations](/computer-graphics-from-scratch/images/01-primaries3.png){#fig:add_color}
+![Figure&nbsp;1-5: The additive primary colors and some of their combinations](/computer-graphics-from-scratch/images/01-primaries3.png){{'{#'}}fig:add_color}
 
 ### Forget the Details
 
@@ -134,7 +135,7 @@ We need a coordinate system to talk about objects within the scene. We can't use
 
 The choice of axes is arbitrary, so we'll pick something useful for our purposes. We'll say that $Y$ is up and $X$ and $Z$ are horizontal, and all three axes are perpendicular to each other. Think of the plane $XZ$ as the "floor," while $XY$ and $YZ$ are vertical "walls" in a square room. This is consistent with the coordinate system we chose for the canvas, where $Y$ is up and $X$ is horizontal. Figure&nbsp;1-6 shows what this looks like.
 
-![Figure&nbsp;1-6: The coordinate system we'll use for our scenes](/computer-graphics-from-scratch/images/coordinate-system.png){#fig:coordinate-system}
+![Figure&nbsp;1-6: The coordinate system we'll use for our scenes](/computer-graphics-from-scratch/images/coordinate-system.png){{'{#'}}fig:coordinate-system}
 
 The choice of scene units is somewhat arbitrary; it depends on what your scene represents. A measurement of "1" could mean 1 inch if you're modeling a teacup, or it could mean 1 astronomical unit if you're modeling the Solar System. As long as we use our chosen units consistently, it doesn't matter what they are, so we can safely ignore them from now on.
 

@@ -1,6 +1,7 @@
-!!html_class cgfs
-!!html_title Textures - Computer Graphics from Scratch
-# Textures {#ch:textures}
+{% block header %}{% endblock %}
+{% set html_class="cgfs" %}
+{% set html_title="Textures - Computer Graphics from Scratch" %}
+# Textures {{'{#'}}ch:textures}
 
 Our rasterizer can render objects like cubes or spheres. But we usually don't want to render abstract geometric objects like cubes and spheres; instead, we want to render real-world objects, like crates and planets or dice and marbles. In this chapter, we'll look at how we can add visual detail to the surface of our objects by using *textures*.
 
@@ -14,11 +15,11 @@ Note that the two options aren't incompatible: you can choose the right balance 
 
 First, we need an image to paint on our triangles; in this context, we call this image a *texture*. Figure&nbsp;14-1 shows a wooden crate texture.
 
-![Figure&nbsp;14-1: Wooden crate texture (by Filter Forge--- Attribution 2.0 Generic (CC BY 2.0) license)](/computer-graphics-from-scratch/images/crate-texture.jpg){#fig:texture_crate}
+![Figure&nbsp;14-1: Wooden crate texture (by Filter Forge--- Attribution 2.0 Generic (CC BY 2.0) license)](/computer-graphics-from-scratch/images/crate-texture.jpg){{'{#'}}fig:texture_crate}
 
 Next, we need to specify how this texture is applied to the model. We can define this mapping on a per-triangle basis, by specifying which points of the texture should go on each vertex of the triangle (Figure&nbsp;14-2).
 
-![Figure&nbsp;14-2: We associate a point in the texture with each vertex of the triangle.](/computer-graphics-from-scratch/images/r17-texture-mapping.png){#fig:texture_vertex_map}
+![Figure&nbsp;14-2: We associate a point in the texture with each vertex of the triangle.](/computer-graphics-from-scratch/images/r17-texture-mapping.png){{'{#'}}fig:texture_vertex_map}
 
 To define this mapping, we need a coordinate system to refer to points in the texture. Remember, a texture is just an image, represented as a rectangular array of pixels. We could use $x$ and $y$ coordinates and talk about pixels in the texture, but we're already using these names for the canvas. Therefore, we use $u$ and $v$ for the texture coordinates and we call the texture's pixels *texels* (a contraction of *tex*ture *el*ements).
 
@@ -28,15 +29,15 @@ The basic idea of texture mapping is simple: we compute the $(u, v)$ coordinates
 
 By now you can probably see where this is going. Yes, it's our good friend linear interpolation. We can use attribute mapping to interpolate the values of $u$ and $v$ across the face of the triangle, giving us $(u, v)$ at each pixel. From this we can compute $(tx, ty)$, fetch the texel, apply shading, and paint the pixel with the resulting color. You can see the result of doing this in Figure&nbsp;14-3.
 
-![Figure&nbsp;14-3: The texture looks deformed when applied to the objects.](/computer-graphics-from-scratch/images/raster-12b.png){#fig:texture_linear_uv}
+![Figure&nbsp;14-3: The texture looks deformed when applied to the objects.](/computer-graphics-from-scratch/images/raster-12b.png){{'{#'}}fig:texture_linear_uv}
 
 The results are a little underwhelming. The exterior shape of the crates looks fine, but if you pay close attention to the diagonal planks, you'll notice they look deformed, as if bent in weird ways. What went wrong?
 
-## Pespective-Correct Texture Mapping
+## Perspective-Correct Texture Mapping
 
 As in [Chapter 12 (Hidden Surface Removal)](12-hidden-surface-removal.html), we made an implicit assumption that turns out not to be true: namely, that $u$ and $v$ vary linearly across the screen. This is clearly not the case. Consider the wall of a very long corridor painted with alternating vertical black and white stripes. As the wall recedes into the distance, the vertical stripes should look thinner and thinner. If we make the $u$ coordinate vary linearly with $x'$, we get incorrect results, as illustrated in Figure&nbsp;14-4.
 
-![Figure&nbsp;14-4: Linear interpolation of $u$ and $v$ (left) doesn't produce the expected perspective-correct results (right).](/computer-graphics-from-scratch/images/r17-linear-texture.png){#fig:linear_texture}
+![Figure&nbsp;14-4: Linear interpolation of $u$ and $v$ (left) doesn't produce the expected perspective-correct results (right).](/computer-graphics-from-scratch/images/r17-linear-texture.png){{'{#'}}fig:linear_texture}
 
 The situation is very similar to the one we encountered in [Chapter 12 (Hidden Surface Removal)](12-hidden-surface-removal.html), and the solution is also very similar: although $u$ and $v$ aren't linear in screen coordinates, $u \over z$ and $v \over z$ are. (The proof is very similar to the ${1 \over z}$ proof: consider that $u$ varies linearly in 3D space, and substitute $x$ and $y$ with their screen-space expressions.) Since we already have interpolated values of $1 \over z$ at each pixel, it's enough to interpolate $u \over z$ and $v \over z$ and get $u$ and $v$ back:
 
@@ -46,11 +47,11 @@ $$v = { {v \over z} \over {1 \over z}}$$
 
 This produces the result we expect, as you can see in Figure&nbsp;14-5.
 
-![Figure&nbsp;14-5: Linear interpolation of *u*/*z* and *v*/*z* does produce perspective-correct results.](/computer-graphics-from-scratch/images/raster-12.png){#fig:texture_linear_uz_vz}
+![Figure&nbsp;14-5: Linear interpolation of *u*/*z* and *v*/*z* does produce perspective-correct results.](/computer-graphics-from-scratch/images/raster-12.png){{'{#'}}fig:texture_linear_uz_vz}
 
 Figure&nbsp;14-6 shows the two results side by side, to make it easier to appreciate the difference.
 
-![Figure&nbsp;14-6: A comparison of the "linear *u* and *v*" result (left) and the "linear *u*/*z* and *v*/*z*" result (right)](/computer-graphics-from-scratch/images/raster-12-sxs.png){#fig:texture_linear_comparison}
+![Figure&nbsp;14-6: A comparison of the "linear *u* and *v*" result (left) and the "linear *u*/*z* and *v*/*z*" result (right)](/computer-graphics-from-scratch/images/raster-12-sxs.png){{'{#'}}fig:texture_linear_comparison}
 
 <a class="cgfs_demo" href="https://gabrielgambetta.com/cgfs/textures-demo">Source code and live demo &gt;&gt;</a>
 
@@ -61,7 +62,7 @@ These examples look nice because the size of the texture and the size of the tri
 
 Suppose we place the camera very close to one of the cubes. We'll see something like Figure&nbsp;14-7.
 
-![Figure&nbsp;14-7: A textured object rendered from up close](/computer-graphics-from-scratch/images/texture-close-nearest.png){#fig:texture_nearest_close}
+![Figure&nbsp;14-7: A textured object rendered from up close](/computer-graphics-from-scratch/images/texture-close-nearest.png){{'{#'}}fig:texture_nearest_close}
 
 The image looks very blocky. Why does this happen? The triangle on the screen has more pixels than the texture has texels, so each texel is mapped to many consecutive pixels.
 
@@ -71,11 +72,11 @@ Even if $(u, v)$ varies smoothly across the face of the triangle, the resulting 
 
 We can do better. Instead of rounding $tx$ and $ty$ down, we can interpret a fractional texel coordinate $(tx, ty)$ as describing a position *between* four integer texel coordinates (obtained by the combinations of rounding $tx$ and $ty$ up and down). We can take the four colors of the surrounding integer texels, and compute a linearly interpolated color for the fractional texel. This will produce a noticeably smoother result (Figure&nbsp;14-8).
 
-![Figure&nbsp;14-8: A textured object rendered from up close, using interpolated colors](/computer-graphics-from-scratch/images/texture-close-linear.png){#fig:texture_bilinear_texture}
+![Figure&nbsp;14-8: A textured object rendered from up close, using interpolated colors](/computer-graphics-from-scratch/images/texture-close-linear.png){{'{#'}}fig:texture_bilinear_texture}
 
 Let's call the four surrounding pixels $TL$, $TR$, $BL$, and $BR$ (for top-left, top-right, bottom-left, and bottom-right, respectively). Let's take the fractional parts of $tx$ and $ty$ and call them $fx$ and $fy$. Figure&nbsp;14-9 shows $C$, the exact position described by $(tx, ty)$, surrounded by the texels at integer coordinates, and its distance to them.
 
-![Figure&nbsp;14-9: We linearly interpolate a color at *C* from the four texels that surround it.](/computer-graphics-from-scratch/images/bilinear-texture-weights.png){#fig:texture_bilinear_weights}
+![Figure&nbsp;14-9: We linearly interpolate a color at *C* from the four texels that surround it.](/computer-graphics-from-scratch/images/bilinear-texture-weights.png){{'{#'}}fig:texture_bilinear_weights}
 
 First, we linearly interpolate the color at $CT$, which is between $TL$ and $TR$:
 
@@ -83,7 +84,7 @@ $$CT = (1 - fx) \cdot TL + fx \cdot TR$$
 
 Note that the weight for $TR$ is $fx$, not $(1 - fx)$. This is because as $fx$ becomes closer to 1.0, we want $CT$ to become closer to $TR$. Indeed, if $fx = 0.0$, then $CT = TL$, and if $fx = 1.0$, then $CT = TR$.
 
-We can compute $CB$, between $TL$ and $TR$, in a similar way:
+We can compute $CB$, between $BL$ and $BR$, in a similar way:
 
 $$CB = (1 - fx) \cdot BL + fx \cdot BR$$
 
@@ -122,13 +123,13 @@ Let's consider the opposite situation, rendering an object from far away. In thi
 
 Consider a square texture in which half the pixels are black and half the pixels are white, laid out in a checkerboard pattern (Figure&nbsp;14-10).
 
-![Figure&nbsp;14-10: A black-and-white checkerboard texture](/computer-graphics-from-scratch/images/checkerboard.png){#fig:texture_checkerboard}
+![Figure&nbsp;14-10: A black-and-white checkerboard texture](/computer-graphics-from-scratch/images/checkerboard.png){{'{#'}}fig:texture_checkerboard}
 
 Suppose we map this texture onto a square in the viewport such that when it's drawn on the canvas, the width of the square in pixels is exactly half the width of the texture in texels. This means that only one-quarter of the texels will actually be used.
 
 We'd intuitively expect the square to look gray. However, given the way we're doing texture mapping, we might be unlucky and get all the white pixels, or all the black pixels. It's true that we might be lucky and get a 50/50 combination of black and white pixels, but the 50-percent gray we expect is not guaranteed. Take a look at Figure&nbsp;14-11, which shows the unlucky case.
 
-![Figure&nbsp;14-11: Mapping a big texture on a small object can lead to unexpected results, depending on which texels happen to be selected.](/computer-graphics-from-scratch/images/bad-texture-minification.png){#fig:texture_checkerboard_cases}
+![Figure&nbsp;14-11: Mapping a big texture on a small object can lead to unexpected results, depending on which texels happen to be selected.](/computer-graphics-from-scratch/images/bad-texture-minification.png){{'{#'}}fig:texture_checkerboard_cases}
 
 How to fix this? Each pixel of the square represents, in some sense, a $2\times2$ texel area of the texture, so we could compute the average color of that area and use that color for the pixel. Averaging black and white pixels would give us the gray we are looking for.
 
@@ -146,7 +147,7 @@ Computing all these smaller-scale textures does come at a memory cost, but it's 
 
 Say the original area of the texture, in texels, is $A$, and its width is $w$. The width of the half-width texture is $w \over 2$, but it requires only $A \over 4$ texels; the quarter-width texture requires $A \over 16$ texels; and so on. Figure&nbsp;14-12 shows the original texture and the first three reduced versions.
 
-![Figure&nbsp;14-12: A texture and its progressively smaller mipmaps](/computer-graphics-from-scratch/images/mipmap-levels.png){#fig:texture_mip_sizes}
+![Figure&nbsp;14-12: A texture and its progressively smaller mipmaps](/computer-graphics-from-scratch/images/mipmap-levels.png){{'{#'}}fig:texture_mip_sizes}
 
 We can express the sum of the texture sizes as an infinite series:
 
@@ -154,7 +155,7 @@ $$A + \frac{A}{4} + \frac{A}{16} + \frac{A}{64} + .\, .\, . = \sum_{n=0}^\infty 
 
 This series converges to $A \cdot$ 4/3, or $A \cdot 1.3333$, meaning that all the smaller textures down to $1\times1$ texel only take one-third more space than the original texture.
 
-## Trilinear Filtering {#linear-filtering}
+## Trilinear Filtering {{'{#'}}linear-filtering}
 
 Let's take this one step further. Imagine an object far away from the camera. We render it using the mipmap level most appropriate for its size.
 

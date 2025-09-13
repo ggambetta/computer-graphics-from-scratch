@@ -1,6 +1,7 @@
-!!html_class cgfs
-!!html_title Shadows and Reflections - Computer Graphics from Scratch
-# Shadows and Reflections {#ch:shadows_and_reflections}
+{% block header %}{% endblock %}
+{% set html_class="cgfs" %}
+{% set html_title="Shadows and Reflections - Computer Graphics from Scratch" %}
+# Shadows and Reflections {{'{#'}}ch:shadows_and_reflections}
 
 Our quest to render the scene in progressively more realistic ways continues. In the previous chapter, we modeled the way rays of light interact with surfaces. In this chapter, we'll model two aspects of the way light interacts with the scene: objects casting shadows and objects reflecting on other objects.
 
@@ -18,7 +19,7 @@ Conceptually, what we're trying to do is relatively simple. We want to add a lit
 
 The two cases we want to distinguish are shown in Figure&nbsp;4-1.
 
-![Figure&nbsp;4-1: A shadow is cast over a point whenever there's an object between the light source and that point.](/computer-graphics-from-scratch/images/08-shadow-cases.png){#fig:08-shadow-cases.png}
+![Figure&nbsp;4-1: A shadow is cast over a point whenever there's an object between the light source and that point.](/computer-graphics-from-scratch/images/08-shadow-cases.png){{'{#'}}fig:08-shadow-cases.png}
 
 It turns out we already have all of the tools we need to do this. Let's start with a directional light. We know $P$; that's the point we're interested in. We know $\vec{L}$; that's part of the definition of the light. Knowing $P$ and $\vec{L}$, we can define a ray, namely $P + t\vec{L}$, that goes from the point on the surface to the infinitely distant light source. Does this ray intersect any other object? If it doesn't, there's nothing between the point and the light, so we compute the illumination from this light as before. If it does, the point is in shadow, so we ignore the illumination from this light.
 
@@ -36,7 +37,7 @@ The parameters for this function are slightly different, though:
 
 Figure&nbsp;4-2 shows two points, $P_0$ and $P_1$. When tracing a ray from $P_0$ in the direction of the light, we find no intersections with any objects; this means the light can reach $P_0$, so there's no shadow over it. In the case of $P_1$, we find two intersections between the ray and the sphere, with $t > 0$ (meaning the intersection is between the surface and the light); therefore, the point is in shadow.
 
-![Figure&nbsp;4-2: The sphere casts a shadow over *P*~1~, but not over *P*~0~.](/computer-graphics-from-scratch/images/08-shadow-directional.png){#fig:08-shadow-directional.png}
+![Figure&nbsp;4-2: The sphere casts a shadow over *P*~1~, but not over *P*~0~.](/computer-graphics-from-scratch/images/08-shadow-directional.png){{'{#'}}fig:08-shadow-directional.png}
 
 We can treat point lights in a very similar way, with two exceptions. First, $\vec{L}$ is not constant, but we already know how to compute it from $P$ and the position of the light. Second, we don't want objects farther away from the light to be able to cast a shadow over $P$, so in this case we need $t_{max} = 1$ so that the ray "stops" at the light.
 
@@ -44,7 +45,7 @@ Figure&nbsp;4-3 shows these situations. When we cast a ray from $P_0$ with direc
 
 There's a literal edge case we need to consider. Consider the ray $P + t\vec{L}$. If we look for intersections starting from $t_{min} = 0$, we'll find one at $P$ itself! We know $P$ is on a sphere, so for $t = 0$, $P + 0\vec{L} = P$ ; in other words, every point would be casting a shadow over itself!
 
-![Figure&nbsp;4-3: We use the value of *t* at the intersections to determine whether they cast a shadow over the point.](/computer-graphics-from-scratch/images/08-shadow-point.png){#fig:08-shadow-point.png}
+![Figure&nbsp;4-3: We use the value of *t* at the intersections to determine whether they cast a shadow over the point.](/computer-graphics-from-scratch/images/08-shadow-point.png){{'{#'}}fig:08-shadow-point.png}
 
 The simplest workaround is to set $t_{min}$ to a very small value $\epsilon$ instead of $0$. Geometrically, we're saying we want the ray to start just a tiny bit off the surface where $P$ is, rather than exactly at $P$. So the range will be $[\epsilon, +\infty]$ for directional lights and $[\epsilon, 1]$ for point lights.
 
@@ -135,7 +136,7 @@ Then, we need to add the shadow check ❶ to `ComputeLighting` (Listing 4-3).
 
 Figure&nbsp;4-4 shows what the freshly rendered scene looks like.
 
-![Figure&nbsp;4-4: A raytraced scene, now with shadows](/computer-graphics-from-scratch/images/raytracer-04.png){#fig:raytracer-04.png}
+![Figure&nbsp;4-4: A raytraced scene, now with shadows](/computer-graphics-from-scratch/images/raytracer-04.png){{'{#'}}fig:raytracer-04.png}
 
 <a class="cgfs_demo" href="https://gabrielgambetta.com/cgfs/shadows-demo">Source code and live demo &gt;&gt;</a>
 
@@ -150,7 +151,7 @@ In the previous chapter, we talked about surfaces that are "mirror-like," but th
 
 Let's look at how mirrors work. When you look at a mirror, what you're seeing are the rays of light that bounce off the mirror. Rays of light are reflected symmetrically with respect to the surface normal, as you can see in Figure&nbsp;4-5.
 
-![Figure&nbsp;4-5: A ray of light bounces off a mirror in a direction symmetrical to the mirror's normal.](/computer-graphics-from-scratch/images/08-mirror.png){#fig:08-mirror.png}
+![Figure&nbsp;4-5: A ray of light bounces off a mirror in a direction symmetrical to the mirror's normal.](/computer-graphics-from-scratch/images/08-mirror.png){{'{#'}}fig:08-mirror.png}
 
 Suppose we're tracing a ray, and the closest intersection happens to be with a mirror. What color is this ray of light? It's not the color of the mirror itself, because we're looking at reflected light. So we need to figure out where this light is coming from and what color it is. So all we have to do is compute the direction of the reflected ray and figure out the color of the light coming from that direction.
 
@@ -168,11 +169,11 @@ When we design a recursive algorithm (one that calls itself), we need to ensure 
 
 There are many ways to prevent an infinite recursion. We'll just introduce a *recursion limit* to the algorithm; this will control how "deep" it can go. Let's call it $r$. When $r = 0$, we see objects but no reflections. When $r = 1$, we see objects and the reflections of some objects on them (Figure&nbsp;4-6).
 
-![Figure&nbsp;4-6: Reflections limited to one recursive call (*r* = 1). We see spheres reflected on spheres, but the reflected spheres don't look reflective themselves.](/computer-graphics-from-scratch/images/raytracer-05-r1-zoom.png){#fig:raytracer-05-r1-zoom.png}
+![Figure&nbsp;4-6: Reflections limited to one recursive call (*r* = 1). We see spheres reflected on spheres, but the reflected spheres don't look reflective themselves.](/computer-graphics-from-scratch/images/raytracer-05-r1-zoom.png){{'{#'}}fig:raytracer-05-r1-zoom.png}
 
 When $r = 2$, we see objects, the reflections of some objects, and the reflections of the reflections of some objects (and so on for greater values of $r$). Figure&nbsp;4-7 shows the result of $r = 3$. In general, it doesn't make much sense to go deeper than three levels, since the differences are barely noticeable at that point.
 
-![Figure&nbsp;4-7: Reflections limited to three recursive calls (*r* = 3). Now we can see the reflections of the reflections of the reflections of the spheres.](/computer-graphics-from-scratch/images/raytracer-05-r3-zoom.png){#fig:raytracer-05-r3-zoom.png}
+![Figure&nbsp;4-7: Reflections limited to three recursive calls (*r* = 3). Now we can see the reflections of the reflections of the reflections of the spheres.](/computer-graphics-from-scratch/images/raytracer-05-r3-zoom.png){{'{#'}}fig:raytracer-05-r3-zoom.png}
 
 We'll make another distinction. "Reflectiveness" doesn't have to be an all-or-nothing proposition; objects may be only partially reflective. We'll assign a number between $0$ and $1$ to every surface, specifying how reflective it is. Then we'll compute the weighted average of the locally illuminated color and the reflected color using that number as the weight.
 
@@ -190,7 +191,7 @@ Finally, what are the parameters for the recursive call to `TraceRay`?
 
 Now we're ready to turn this into actual pseudocode.
 
-### Rendering with Reflections {#rendering-with-reflection}
+### Rendering with Reflections {{'{#'}}rendering-with-reflection}
 
 Let's add reflections to our raytracer. First, we modify the scene definition by adding a `reflective` property to each surface, describing how reflective it is, from 0.0 (not reflective at all) to 1.0 (a perfect mirror):
 
@@ -281,7 +282,7 @@ Finally, once we have the sphere's local color and the reflected color, we blend
 
 I'll let the results speak for themselves. Check out Figure&nbsp;4-8.
 
-![Figure&nbsp;4-8: The raytraced scene, now with reflections](/computer-graphics-from-scratch/images/raytracer-05.png){#fig:raytracer-05.png}
+![Figure&nbsp;4-8: The raytraced scene, now with reflections](/computer-graphics-from-scratch/images/raytracer-05.png){{'{#'}}fig:raytracer-05.png}
 
 <a class="cgfs_demo" href="https://gabrielgambetta.com/cgfs/reflections-demo">Source code and live demo &gt;&gt;</a>
 

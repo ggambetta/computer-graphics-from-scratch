@@ -1,6 +1,7 @@
-!!html_class cgfs
-!!html_title Basic Raytracing - Computer Graphics from Scratch
-# Basic Raytracing {#ch:raytracing_intro}
+{% block header %}{% endblock %}
+{% set html_class="cgfs" %}
+{% set html_title="Basic Raytracing - Computer Graphics from Scratch" %}
+# Basic Raytracing {{'{#'}}ch:raytracing_intro}
 
 In this chapter, we'll introduce raytracing, the first major algorithm we'll cover. We start by motivating the algorithm and laying out some basic pseudocode. Then we look at how to represent rays of light and objects in a scene. Finally, we derive a way to compute which rays of light make up the visible image of each of the objects in our scene and see how we can represent them on the canvas.
 
@@ -8,7 +9,7 @@ In this chapter, we'll introduce raytracing, the first major algorithm we'll cov
 
 Suppose you're visiting some exotic place and come across a stunning landscape---so stunning, you just *need* to make a painting capturing its beauty. Figure&nbsp;2-1 shows one such landscape.
 
-![Figure&nbsp;2-1: A breathtaking Swiss landscape](/computer-graphics-from-scratch/images/image-000.jpg){#fig:swiss_landscape}
+![Figure&nbsp;2-1: A breathtaking Swiss landscape](/computer-graphics-from-scratch/images/image-000.jpg){{'{#'}}fig:swiss_landscape}
 
 You have a canvas and a paint brush, but you absolutely lack artistic talent. Is all hope lost?
 
@@ -16,7 +17,7 @@ Not necessarily. You may not have artistic talent, but you are methodical. So yo
 
 You haven't started the painting yet, but now you have a fixed point of view and a fixed frame through which you can see the landscape. Moreover, this fixed frame is divided into small squares by the insect net. Now comes the methodical part. You draw a grid on the canvas, giving it the same number of squares as the insect net. Then you look at the top-left square of the net. What's the predominant color you can see through it? Sky blue. So you paint the top-left square of the canvas sky blue. You do this for every square, and soon enough the canvas contains a pretty good painting of the landscape, as seen through the frame. The resulting painting is shown in Figure&nbsp;2-2.
 
-![Figure&nbsp;2-2: A crude approximation of the landscape](/computer-graphics-from-scratch/images/image-001.png){#fig:crude_landscape}
+![Figure&nbsp;2-2: A crude approximation of the landscape](/computer-graphics-from-scratch/images/image-001.png){{'{#'}}fig:crude_landscape}
 
 When you think about it, a computer is essentially a very methodical machine absolutely lacking artistic talent. We can describe the process of creating our painting as follows:
 
@@ -45,13 +46,13 @@ First of all, we'll assume a fixed viewing position. The viewing position, the p
 
 Second, we'll assume a fixed camera orientation. The camera orientation determines where the camera is pointing. We'll assume it looks in the direction of the positive $Z$ axis (which we'll shorten to $\vec{Z_+}$), with the positive Y axis ($\vec{Y_+}$) up and the positive X axis ($\vec{X_+}$) to the right (Figure&nbsp;2-3).
 
-![Figure&nbsp;2-3: The position and orientation of the camera](/computer-graphics-from-scratch/images/03-camera-orientation.png){#fig:camera_orientation}
+![Figure&nbsp;2-3: The position and orientation of the camera](/computer-graphics-from-scratch/images/03-camera-orientation.png){{'{#'}}fig:camera_orientation}
 
 The camera position and orientation are now fixed. Still missing from the analogy is the "frame" through which we look at the scene. We'll assume this frame has dimensions $V_w$ and $V_h$, and is frontal to the camera orientation---that is, perpendicular to $\vec{Z_+}$. We'll also assume it's at a distance $d$, its sides are parallel to the $X$ and $Y$ axes, and it's centered with respect to $\vec{Z}$. That's a mouthful, but it's actually quite simple. Take a look at Figure&nbsp;2-4.
 
 The rectangle that will act as our window to the world is called the *viewport*. Essentially, we'll draw on the canvas whatever we see through the viewport. Note that the size of the viewport and the distance to the camera determine the angle visible from the camera, called the *field of view*, or FOV for short. Humans have an almost $180^\circ$ horizontal FOV (although much of it is blurry peripheral vision with no sense of depth). For simplicity, we'll set $V_w = V_h = d = 1$; this results in a FOV of approximately $53^\circ$, which produces reasonable-looking images that are not overly distorted.
 
-![Figure&nbsp;2-4: The position and orientation of the viewport](/computer-graphics-from-scratch/images/03-viewport.png){#fig:viewport}
+![Figure&nbsp;2-4: The position and orientation of the viewport](/computer-graphics-from-scratch/images/03-viewport.png){{'{#'}}fig:viewport}
 
 Let's go back to the "algorithm" presented earlier, use the appropriate technical terms, and number the steps in Listing 2-1:
 
@@ -87,7 +88,7 @@ In the real world, light comes from a light source (the Sun, a light bulb, and s
 
 Instead, we'll consider the rays of light "in reverse"; we'll start with a ray originating from the camera, going through a point in the viewport, and tracing its path until it hits some object in the scene. This object is what the camera "sees" through that point of the viewport. So, as a first approximation, we'll just take the color of that object as "the color of the light coming through that point," as shown in Figure&nbsp;2-5.
 
-![Figure&nbsp;2-5: A tiny square in the viewport, representing a single pixel in the canvas, painted with the color of the object the camera sees through it](/computer-graphics-from-scratch/images/03-basic-raytracer.png){#fig:basic_raytracer}
+![Figure&nbsp;2-5: A tiny square in the viewport, representing a single pixel in the canvas, painted with the color of the object the camera sees through it](/computer-graphics-from-scratch/images/03-basic-raytracer.png){{'{#'}}fig:basic_raytracer}
 
 Now we just need some equations.
 
@@ -105,7 +106,7 @@ $$P = O + t\vec{D}$$
 
 An intuitive way to understand this equation is that we start the ray at the origin ($O$) and "advance" along the direction of the ray ($\vec{D}$) by some amount ($t$); it's easy to see that this includes all the points along the ray. You can read more details about these vector operations in the Linear Algebra appendix. Figure&nbsp;2-6 shows our equation in action.
 
-![Figure&nbsp;2-6: Some points of the ray *O* + *t*$\vec{\mathsf{D}}$ for different values of *t*.](/computer-graphics-from-scratch/images/04-parametric.png){#fig:parametric}
+![Figure&nbsp;2-6: Some points of the ray *O* + *t*$\vec{\mathsf{D}}$ for different values of *t*.](/computer-graphics-from-scratch/images/04-parametric.png){{'{#'}}fig:parametric}
 
 Figure&nbsp;2-6 shows the points along the ray that corresponds to $t = 0.5$ and $t = 1.0$. Every value of $t$ yields a different point along the ray.
 
@@ -115,7 +116,7 @@ Now we need to have some sort of object in the scene, so that our rays can hit *
 
 What is a sphere? A sphere is the set of points that lie at a fixed distance from a fixed point. That distance is called the *radius* of the sphere, and the point is called the *center* of the sphere. Figure&nbsp;2-7 shows a sphere, defined by its center $C$ and its radius $r$.
 
-![Figure&nbsp;2-7: A sphere, defined by its center and its radius](/computer-graphics-from-scratch/images/04-sphere.png){#fig:sphere}
+![Figure&nbsp;2-7: A sphere, defined by its center and its radius](/computer-graphics-from-scratch/images/04-sphere.png){{'{#'}}fig:sphere}
 
 According to our definition above, if $C$ is the center and $r$ is the radius of a sphere, the points $P$ on the surface of that sphere must satisfy the following equation:
 
@@ -187,11 +188,11 @@ $$at^2 + bt + c = 0$$
 
 This is nothing more and nothing less than a good old quadratic equation! Its solutions are the values of the parameter $t$ where the ray intersects the sphere:
 
-$$\{ t_1, t_2 \} = {{-b \pm \sqrt{ b^2 -4ac} \over {2a}}}$$
+$$\{ t_1, t_2 \} = {{'{{'}}-b \pm \sqrt{ b^2 -4ac} \over {2a}}}$$
 
 Fortunately, this makes geometrical sense. As you may remember, a quadratic equation can have no solutions, one double solution, or two different solutions, depending on the value of the discriminant $b^2 -4ac$. This corresponds exactly to the cases where the ray doesn't intersect the sphere, the ray is tangent to the sphere, and the ray enters and exits the sphere, respectively (Figure&nbsp;2-8).
 
-![Figure&nbsp;2-8: The geometrical interpretation of the solutions to the quadratic equation: no solutions, one solution, or two solutions.](/computer-graphics-from-scratch/images/04-sphere-solutions.png){#fig:sphere_solutions}
+![Figure&nbsp;2-8: The geometrical interpretation of the solutions to the quadratic equation: no solutions, one solution, or two solutions.](/computer-graphics-from-scratch/images/04-sphere-solutions.png){{'{#'}}fig:sphere_solutions}
 
 Once we have found the value of $t$, we can plug it back into the ray equation, and we finally get the intersection point $P$ corresponding to that value of $t$.
 
@@ -207,7 +208,7 @@ $$P = O + t(V - O)$$
 
 Since the origin and direction of the ray are fixed, varying $t$ across all the real numbers will yield every point $P$ in this ray. Note that for $t = 0$ we get $P = O$, and for $t = 1$ we get $P = V$. Negative values of $t$ yield points in the *opposite* direction---that is, *behind* the camera. So, we can divide the parameter space into three parts, as in Table&nbsp;2-1. Figure&nbsp;2-9 shows a diagram of the parameter space.
 
-::: {#tab:parameter_space}
+::: {{'{#'}}tab:parameter_space}
   ------------- ------------------------------------------------------ --
   *t* \< 0      Behind the camera                                      
   0 ≤ *t* ≤ 1   Between the camera and the projection plane/viewport   
@@ -217,7 +218,7 @@ Since the origin and direction of the ray are fixed, varying $t$ across all the 
   : Table&nbsp;2-1: Subdivisions of the Parameter Space
 :::
 
-![Figure&nbsp;2-9: A few points in parameter space](/computer-graphics-from-scratch/images/04-parameter-space.png){#fig:parameter_space}
+![Figure&nbsp;2-9: A few points in parameter space](/computer-graphics-from-scratch/images/04-parameter-space.png){{'{#'}}fig:parameter_space}
 
 Note that nothing in the intersection equation says that the sphere has to be *in front* of the camera; the equation will happily produce solutions for intersections *behind* the camera. Obviously, this isn't what we want, so we should ignore any solutions with $t < 0$. To avoid further mathematical unpleasantness, we'll restrict the solutions to $t > 1$; that is, we'll render whatever is *beyond* the projection plane.
 
@@ -298,7 +299,7 @@ Finally, `IntersectRaySphere` (Listing 2-5) just solves the quadratic equation.
 
 To put all of this into practice, let's define a very simple scene, shown in Figure&nbsp;2-10.
 
-![Figure&nbsp;2-10: A very simple scene, viewed from above (left) and from the right (right)](/computer-graphics-from-scratch/images/04-simple-scene.png){#fig:simple-scene}
+![Figure&nbsp;2-10: A very simple scene, viewed from above (left) and from the right (right)](/computer-graphics-from-scratch/images/04-simple-scene.png){{'{#'}}fig:simple-scene}
 
 In pseudoscene language, it's something like this:
 
@@ -324,7 +325,7 @@ In pseudoscene language, it's something like this:
 
 When we run our algorithm on this scene, we're finally rewarded with an incredibly awesome raytraced scene (Figure&nbsp;2-11).
 
-![Figure&nbsp;2-11: An incredibly awesome raytraced scene](/computer-graphics-from-scratch/images/raytracer-01.png){#fig:incredibly_awesome}
+![Figure&nbsp;2-11: An incredibly awesome raytraced scene](/computer-graphics-from-scratch/images/raytracer-01.png){{'{#'}}fig:incredibly_awesome}
 
 <a class="cgfs_demo" href="https://gabrielgambetta.com/cgfs/basic-rays-demo">Source code and live demo &gt;&gt;</a>
 

@@ -1,6 +1,7 @@
-!!html_class cgfs
-!!html_title Extending the Raytracer - Computer Graphics from Scratch
-# Extending the Raytracer {#ch:beyond_the_basics}
+{% block header %}{% endblock %}
+{% set html_class="cgfs" %}
+{% set html_title="Extending the Raytracer - Computer Graphics from Scratch" %}
+# Extending the Raytracer {{'{#'}}ch:beyond_the_basics}
 
 We'll conclude the first part of the book with a quick discussion of several interesting topics that we haven't yet covered: placing the camera anywhere in the scene, performance optimizations, primitives other than spheres, modeling objects using constructive solid geometry, supporting transparent surfaces, and supersampling. We won't implement all of these changes, but I encourage you to give them a try! The preceding chapters, plus the descriptions offered below, give you solid foundations to explore and implement them by yourself.
 
@@ -30,12 +31,12 @@ We apply the camera's rotation matrix ❶, which describes its orientation in sp
 
 Figure&nbsp;5-1 shows what our scene looks like when rendered from a different position and with a different camera orientation.
 
-![Figure&nbsp;5-1: Our familiar scene, rendered with a different camera position and orientation](/computer-graphics-from-scratch/images/raytracer-06.png){#fig:raytracer-06.png}
+![Figure&nbsp;5-1: Our familiar scene, rendered with a different camera position and orientation](/computer-graphics-from-scratch/images/raytracer-06.png){{'{#'}}fig:raytracer-06.png}
 
 <a class="cgfs_demo" href="https://gabrielgambetta.com/cgfs/camera-demo">Source code and live demo &gt;&gt;</a>
 
 
-## Performance Optimizations {#optimization}
+## Performance Optimizations {{'{#'}}optimization}
 
 The preceding chapters focused on the clearest possible way to explain and implement the different features of a raytracer. As a result, it is fully functional but not particularly fast. Here are some ideas you can explore by yourself to make the raytracer faster. Just for fun, measure before-and-after times for each of these. You'll be surprised by the results!
 
@@ -45,7 +46,7 @@ The most obvious way to make a raytracer faster is to trace more than one ray at
 
 Spawning a thread per ray is probably not a good idea, though; the overhead of managing potentially millions of threads would probably negate the speed-up you'd obtain. A more sensible idea would be to create a set of "tasks," each of them responsible for raytracing a section of the canvas (a rectangular area, down to a single pixel), and dispatch them to worker threads running on the physical cores as they become available.
 
-### Caching Immutable Values {#value-caching}
+### Caching Immutable Values {{'{#'}}value-caching}
 
 *Caching* is a way to avoid repeating the same computation over and over again. Whenever there's an expensive computation and you expect to use the result of this computation repeatedly, it might be a good idea to store (cache) this result and just reuse it next time it's needed, especially if this value doesn't change often.
 
@@ -71,7 +72,7 @@ There are many other computations that can be reused. Use your imagination! Not 
 
 When a point of a surface is in shadow because there is another object in the way, it's quite likely that the point right next to it will also be in the shadow of the same object (this is called *shadow coherence*). You can see an example of this in Figure&nbsp;5-2.
 
-![Figure&nbsp;5-2: Points that are close together are likely to be in the shadow of the same object.](/computer-graphics-from-scratch/images/09-shadow-coherence.png){#fig:shadow_coherence}
+![Figure&nbsp;5-2: Points that are close together are likely to be in the shadow of the same object.](/computer-graphics-from-scratch/images/09-shadow-coherence.png){{'{#'}}fig:shadow_coherence}
 
 When searching for objects between the point and the light, to determine whether the point is in shadow, we'd normally check for intersections with every other object. However, if we know that the point immediately next to it is in the shadow of a specific object, we can check for intersections with that object first. If we find one, we're done and we don't need to check every other object! If we don't find intersections with that object, we just revert back to checking every object.
 
@@ -99,7 +100,7 @@ If you skip every other pixel in both the horizontal and vertical directions, yo
 
 Of course, you may well miss a very thin object; this is an "impure" optimization, in the sense that, unlike the ones discussed before, it results in an image that closely resembles, but is not guaranteed to be identical to, the image without the optimization. In a way, it's "cheating" by cutting corners. The trick is to know what corners can be cut while maintaining satisfactory results; in many areas of computer graphics, what matters is the subjective quality of the results.
 
-## Supporting Other Primitives {#other-primitives}
+## Supporting Other Primitives {{'{#'}}other-primitives}
 
 In the previous chapters, we've used spheres as primitives because they're mathematically easy to manipulate; that is, the equations to find the intersections between rays and spheres are relatively simple. But once you have a basic raytracer than can render spheres, adding support to render other primitives doesn't require much additional work.
 
@@ -121,7 +122,7 @@ We can easily describe these objects in plain language. A magnifying glass looks
 
 We can express this more formally as the result of applying set operations (such as union, intersection, or difference) to other objects. Continuing with our examples above, a lens can be described as the intersection of two spheres and the Death Star as a big sphere from which we subtract a smaller sphere (see Figure&nbsp;5-3).
 
-![Figure&nbsp;5-3: Constructive solid geometry in action. *A* $\cap$ *B* gives us a lens. *C* -- *D* gives us the Death Star.](/computer-graphics-from-scratch/images/rt-csg.png){#fig:csg}
+![Figure&nbsp;5-3: Constructive solid geometry in action. *A* $\cap$ *B* gives us a lens. *C* -- *D* gives us the Death Star.](/computer-graphics-from-scratch/images/rt-csg.png){{'{#'}}fig:csg}
 
 You might be thinking that computing Boolean operations of solid objects is a very tricky geometrical problem. And you'd be completely correct! Fortunately, it turns out that *constructive solid geometry* lets us render the results of set operations between objects without ever having to explicitly compute these results!
 
@@ -129,7 +130,7 @@ How can we do this in our raytracer? For every object, you can compute the point
 
 More generally, if you want to compute the intersection between a ray and the object $A \bigodot B$ (where $\bigodot$ is any set operation), you first compute the intersection between the ray and $A$ and $B$ separately, which gives you the ranges of $t$ that are "inside" for each object, $R_A$ and $R_B$. Then you compute $R_A \bigodot R_B$, which is the "inside" range for $A \bigodot B$. Once you have this, the closest intersection between the ray and $A \bigodot B$ is the smallest value of $t$ that is both in the "inside" range of the object, and between $t_{min}$ and $t_{max}$. Figure&nbsp;5-4 shows the inside range for the union, intersection, and subtraction of two spheres.
 
-![Figure&nbsp;5-4: Union, intersection, and subtraction of two spheres](/computer-graphics-from-scratch/images/09-csg.png){#fig:constructive_solid_geometry}
+![Figure&nbsp;5-4: Union, intersection, and subtraction of two spheres](/computer-graphics-from-scratch/images/09-csg.png){{'{#'}}fig:constructive_solid_geometry}
 
 The normal at the intersection is either the normal of the object that produced the intersection or its opposite, depending on whether you're looking at the "outside" or "inside" of the original object.
 
@@ -161,7 +162,7 @@ $$\alpha_2 = \arcsin({\sin(60) \over 1.33}) = 40.628^\circ$$
 
 This example is shown in Figure&nbsp;5-5.
 
-![Figure&nbsp;5-5: A ray of light is refracted (changes direction) as it leaves air and enters water.](/computer-graphics-from-scratch/images/09-refraction.png){#fig:09-refraction.png}
+![Figure&nbsp;5-5: A ray of light is refracted (changes direction) as it leaves air and enters water.](/computer-graphics-from-scratch/images/09-refraction.png){{'{#'}}fig:09-refraction.png}
 
 At the implementation level, each ray would have to carry an additional piece of information: the refraction index of the material it is currently going through. When the ray intersects a partially transparent object, you compute the new direction of the ray from that point, based on the refraction indices of the current material and the new material, and then proceed as before.
 

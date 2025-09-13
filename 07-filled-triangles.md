@@ -1,6 +1,7 @@
-!!html_class cgfs
-!!html_title Filled Triangles - Computer Graphics from Scratch
-# Filled Triangles {#ch:filled_triangles}
+{% block header %}{% endblock %}
+{% set html_class="cgfs" %}
+{% set html_title="Filled Triangles - Computer Graphics from Scratch" %}
+# Filled Triangles {{'{#'}}ch:filled_triangles}
 
 In the previous chapter, we took our first steps toward drawing simple shapes---namely, straight line segments---using only `PutPixel` and an algorithm based on simple math. In this chapter, we'll reuse some of the math to draw something more interesting: a filled triangle.
 
@@ -18,7 +19,7 @@ We can use the `DrawLine` method to draw the outline of a triangle:
 
 This kind of outline is called a *wireframe*, because it looks like a triangle made of wires, as you can see in Figure&nbsp;7-1.
 
-![Figure&nbsp;7-1: A wireframe triangle with vertices (--200,--250), (200,50), and (20,250)](/computer-graphics-from-scratch/images/raster-03.png){#fig:triangle_wireframe}
+![Figure&nbsp;7-1: A wireframe triangle with vertices (--200,--250), (200,50), and (20,250)](/computer-graphics-from-scratch/images/raster-03.png){{'{#'}}fig:triangle_wireframe}
 
 This is a promising start! Next we'll explore how to fill that triangle with a color.
 
@@ -26,7 +27,7 @@ This is a promising start! Next we'll explore how to fill that triangle with a c
 
 We want to draw a triangle filled with a color of our choice. As is often the case in computer graphics, there's more than one way to approach this problem. We'll draw filled triangles by thinking of them as a collection of horizontal line segments that look like a triangle when drawn together. Figure&nbsp;7-2 shows what one such triangle would look like if we could see the individual segments.
 
-![Figure&nbsp;7-2: Drawing a filled triangle using horizontal segments](/computer-graphics-from-scratch/images/triangle-horizontal-segments.png){#fig:filled_triangle_segments}
+![Figure&nbsp;7-2: Drawing a filled triangle using horizontal segments](/computer-graphics-from-scratch/images/triangle-horizontal-segments.png){{'{#'}}fig:filled_triangle_segments}
 
 The following is a very rough first approximation of what we want to do:
 
@@ -123,7 +124,7 @@ Let's see what's going on here. The function receives the three vertices of the 
 
 Figure&nbsp;7-3 shows the results; for verification purposes, we call `DrawFilledTriangle` and then `DrawWireframeTriangle` with the same coordinates but different colors. Verify your results whenever you can---this is a very effective way to find bugs in the code!
 
-![Figure&nbsp;7-3: A filled triangle, with wireframe edges for verification](/computer-graphics-from-scratch/images/raster-03b.png){#fig:filled_triangle_with_edges}
+![Figure&nbsp;7-3: A filled triangle, with wireframe edges for verification](/computer-graphics-from-scratch/images/raster-03b.png){{'{#'}}fig:filled_triangle_with_edges}
 
 <a class="cgfs_demo" href="https://gabrielgambetta.com/cgfs/triangle-demo">Source code and live demo &gt;&gt;</a>
 

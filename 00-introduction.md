@@ -1,6 +1,7 @@
-!!html_class cgfs
-!!html_title Introduction - Computer Graphics from Scratch
-# Introduction {#ch:Introduction .unnumbered}
+{% block header %}{% endblock %}
+{% set html_class="cgfs" %}
+{% set html_title="Introduction - Computer Graphics from Scratch" %}
+# Introduction {{'{#'}}ch:Introduction .unnumbered}
 
 Computer graphics is a fascinating topic. How do you go from a few algorithms and some geometric data to the special effects for movies like *Star Wars* and *The Avengers*, animated movies like *Toy Story* and *Frozen*, or the graphics of popular video games like *Fortnite* or *Call of Duty*?
 
@@ -20,15 +21,15 @@ There's little prerequisite knowledge and no hardware or software dependencies. 
 
 This book starts from scratch and builds up to two complete, fully functional renderers: a raytracer and a rasterizer. Although they follow very different approaches, they produce similar results when used to render a simple scene. Figure&nbsp;1 shows a comparison.
 
-![Figure&nbsp;1: A simple scene rendered by the raytracer (left) and the rasterizer (right) developed in this book.](/computer-graphics-from-scratch/images/comparison-1.png){#fig:result-comparison-1}
+![Figure&nbsp;1: A simple scene rendered by the raytracer (left) and the rasterizer (right) developed in this book.](/computer-graphics-from-scratch/images/comparison-1.png){{'{#'}}fig:result-comparison-1}
 
 While the features of the raytracer and rasterizer have considerable overlap, they are not identical, and this book explores their specific strengths, some of which can be seen in Figure&nbsp;2.
 
-![Figure&nbsp;2: The raytracer and the rasterizer have their own unique features. Left: raytraced shadows and recursive reflections; right: rasterized textures.](/computer-graphics-from-scratch/images/comparison-2.png){#fig:result-comparison-2}
+![Figure&nbsp;2: The raytracer and the rasterizer have their own unique features. Left: raytraced shadows and recursive reflections; right: rasterized textures.](/computer-graphics-from-scratch/images/comparison-2.png){{'{#'}}fig:result-comparison-2}
 
 The book provides informal pseudocode throughout the text, as well as links to fully working implementations written in JavaScript that can run directly in any web browser.
 
-## Why Read This Book? {#why-read-this}
+## Why Read This Book? {{'{#'}}why-read-this}
 
 This book should give you all the knowledge you need to write software renderers. It does not make use of, or teach you how to use, existing rendering APIs such as OpenGL, Vulkan, Metal, or DirectX.
 

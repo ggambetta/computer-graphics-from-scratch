@@ -1,6 +1,7 @@
-!!html_class cgfs
-!!html_title Describing and Rendering a Scene - Computer Graphics from Scratch
-# Describing and Rendering a Scene {#ch:scene_setup}
+{% block header %}{% endblock %}
+{% set html_class="cgfs" %}
+{% set html_title="Describing and Rendering a Scene - Computer Graphics from Scratch" %}
+# Describing and Rendering a Scene {{'{#'}}ch:scene_setup}
 
 In the last few chapters, we've developed algorithms to draw 2D triangles on the canvas given their 2D coordinates, and we've explored the math required to transform the 3D coordinates of points in the scene to the 2D coordinates of points on the canvas.
 
@@ -10,7 +11,7 @@ At the end of the previous chapter, we cobbled together a program that used both
 
 Let's think again about how to represent and manipulate a cube, this time with the goal of finding a more general approach. The edges of our cube are 2 units long and are parallel to the coordinate axes, and it's centered on the origin, as shown in Figure&nbsp;10-1.
 
-![Figure&nbsp;10-1: Our standard cube](/computer-graphics-from-scratch/images/r13-cube.png){#fig:cube}
+![Figure&nbsp;10-1: Our standard cube](/computer-graphics-from-scratch/images/r13-cube.png){{'{#'}}fig:cube}
 
 These are the coordinates of its vertices:
 
@@ -118,7 +119,7 @@ $$V\, ' = V + \vec{T}$$
 
 At this point, we can take the cube, translate each vertex, and then apply the algorithm in Listing 10-1 to get our first 3D cube (Figure&nbsp;10-2).
 
-![Figure&nbsp;10-2: Our cube, translated in front of the camera, rendered with wireframe triangles](/computer-graphics-from-scratch/images/raster-06.png){#fig:raster06}
+![Figure&nbsp;10-2: Our cube, translated in front of the camera, rendered with wireframe triangles](/computer-graphics-from-scratch/images/raster-06.png){{'{#'}}fig:raster06}
 
 <a class="cgfs_demo" href="https://gabrielgambetta.com/cgfs/scene-demo">Source code and live demo &gt;&gt;</a>
 
@@ -185,7 +186,7 @@ There are no hard and fast rules to define a model space; it depends on the need
 
 Figure&nbsp;10-3 shows a simple scene with two instances of our cube.
 
-![Figure&nbsp;10-3: A scene with two instances of the same cube model, placed in different positions](/computer-graphics-from-scratch/images/raster-07.png){#fig:two_cubes}
+![Figure&nbsp;10-3: A scene with two instances of the same cube model, placed in different positions](/computer-graphics-from-scratch/images/raster-07.png){{'{#'}}fig:two_cubes}
 
 <a class="cgfs_demo" href="https://gabrielgambetta.com/cgfs/instances-demo">Source code and live demo &gt;&gt;</a>
 
@@ -211,11 +212,11 @@ We can extend the algorithm in Listing 10-2 to accommodate the new transforms. H
 
 To understand the difference in the results, take a look at Figure&nbsp;10-4, which shows a $45^\circ$ rotation around the origin followed by a translation along the Z axis.
 
-![Figure&nbsp;10-4: Applying rotation and then translation](/computer-graphics-from-scratch/images/r13-rotate-translate.png){#fig:cube_rotate_translate}
+![Figure&nbsp;10-4: Applying rotation and then translation](/computer-graphics-from-scratch/images/r13-rotate-translate.png){{'{#'}}fig:cube_rotate_translate}
 
 Figure&nbsp;10-5 shows the translation applied before the rotation
 
-![Figure&nbsp;10-5: Applying translation and then rotation](/computer-graphics-from-scratch/images/r13-translate-rotate.png){#fig:cube_translate_rotate}
+![Figure&nbsp;10-5: Applying translation and then rotation](/computer-graphics-from-scratch/images/r13-translate-rotate.png){{'{#'}}fig:cube_translate_rotate}
 
 Strictly speaking, given a rotation followed by a translation, we can find a translation followed by a rotation (perhaps not around the origin) that achieves the same result. However, it's far more natural to express this kind of transform using the first form.
 
@@ -252,19 +253,19 @@ The previous sections explored how we can position instances of models at differ
 
 Imagine you're a camera floating in the middle of a completely empty coordinate system. Suddenly, a red cube appears exactly in front of you (Figure&nbsp;10-6).
 
-![Figure&nbsp;10-6: A red cube appears in front of the camera.](/computer-graphics-from-scratch/images/camera-movement-redcube-1.png){#fig:cm_redcube_1}
+![Figure&nbsp;10-6: A red cube appears in front of the camera.](/computer-graphics-from-scratch/images/camera-movement-redcube-1.png){{'{#'}}fig:cm_redcube_1}
 
 A second later, the cube moves 1 unit toward you (Figure&nbsp;10-7).
 
-![Figure&nbsp;10-7: The red cube moves toward the camera . . . or does it?](/computer-graphics-from-scratch/images/camera-movement-redcube-2.png){#fig:cm_redcube_2}
+![Figure&nbsp;10-7: The red cube moves toward the camera . . . or does it?](/computer-graphics-from-scratch/images/camera-movement-redcube-2.png){{'{#'}}fig:cm_redcube_2}
 
 But did the cube really move 1 unit toward you? Or did you move 1 unit toward the cube? Since there are no points of reference at all, and the coordinate system isn't visible, there's no way to tell just by looking at what you see, because the *relative* position of the cube and the camera are identical in both cases (Figure&nbsp;10-8).
 
-![Figure&nbsp;10-8: Without the coordinate system, we can't tell whether it was the object or the camera that moved.](/computer-graphics-from-scratch/images/camera-movement-1.png){#fig:relative_translation}
+![Figure&nbsp;10-8: Without the coordinate system, we can't tell whether it was the object or the camera that moved.](/computer-graphics-from-scratch/images/camera-movement-1.png){{'{#'}}fig:relative_translation}
 
 Now the cube rotates around you $45^\circ$ clockwise. Or does it? Maybe it was you who rotated $45^\circ$ counterclockwise? Again, there's no way to tell (Figure&nbsp;10-9).
 
-![Figure&nbsp;10-9: Without the coordinate system, we can't tell whether it was the object or the camera that rotated.](/computer-graphics-from-scratch/images/camera-movement-2.png){#fig:relative_rotation}
+![Figure&nbsp;10-9: Without the coordinate system, we can't tell whether it was the object or the camera that rotated.](/computer-graphics-from-scratch/images/camera-movement-2.png){{'{#'}}fig:relative_rotation}
 
 What this thought experiment shows is that there's no difference between moving the camera around a fixed scene and keeping the camera fixed while rotating and translating the scene around it!
 
@@ -290,11 +291,11 @@ $$V_{translated} = V_{world} - camera.translation$$ $$V_{camera} = inverse(camer
 
 Next, we apply the perspective equations to get viewport coordinates:
 
-$$v_x = {{V_{camera}x  \cdot  d} \over {V_{camera}z}}$$ $$v_y = {{V_{camera}y  \cdot  d} \over {V_{camera}z}}$$
+$$v_x = {{'{{'}}V_{camera}x  \cdot  d} \over {V_{camera}z}}$$ $$v_y = {{'{{'}}V_{camera}y  \cdot  d} \over {V_{camera}z}}$$
 
 And finally we map the viewport coordinates to canvas coordinates:
 
-$$c_x = {{v_x  \cdot  c_w} \over {v_w}}$$ $$c_y = {{v_y  \cdot  c_h} \over {v_h}}$$
+$$c_x = {{'{{'}}v_x  \cdot  c_w} \over {v_w}}$$ $$c_y = {{'{{'}}v_y  \cdot  c_h} \over {v_h}}$$
 
 As you can see, it's a lot of computation and a lot of intermediate values for each vertex. Wouldn't it be nice if we could reduce all of that to a more compact and efficient form?
 
@@ -425,7 +426,7 @@ $$V\, ' = F \cdot V$$
 
 Furthermore, we can decompose the transform into three parts:
 
-$$M_{Projection} = M \cdot P$$ $$M_{Camera} = C_R^{-1} \cdot C_T^{-1}$$ $$M_{Model} = I_T \cdot I_R \cdot I_S$$ $$M = M_{Projection} \cdot M_{Camera} \cdot M_{Model}$$
+$$M_{Projection} = M \cdot P$$ $$M_{Camera} = C_R^{-1} \cdot C_T^{-1}$$ $$M_{Model} = I_T \cdot I_R \cdot I_S$$ $$F = M_{Projection} \cdot M_{Camera} \cdot M_{Model}$$
 
 These matrices don't need to be computed from scratch for every vertex (that's the point of using a matrix after all). Because matrix multiplication is associative, we can reuse the parts of the expression that don't change.
 
@@ -460,7 +461,7 @@ A very high level of the scene rendering pseudocode would look like Listing 10-5
 
 We can now draw a scene containing several instances of different models, possibly moving around and rotating, and we can move the camera throughout the scene. Figure&nbsp;10-10 shows two instances of our cube model, each with a different transform (including translation and rotation), rendered from a translated and rotated camera.
 
-![Figure&nbsp;10-10: A scene with two instances of the same cube model, having different instance transforms, and a transformed camera](/computer-graphics-from-scratch/images/raster-08.png){#fig:raster08}
+![Figure&nbsp;10-10: A scene with two instances of the same cube model, having different instance transforms, and a transformed camera](/computer-graphics-from-scratch/images/raster-08.png){{'{#'}}fig:raster08}
 
 <a class="cgfs_demo" href="https://gabrielgambetta.com/cgfs/transforms-demo">Source code and live demo &gt;&gt;</a>
 

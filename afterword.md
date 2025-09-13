@@ -1,6 +1,7 @@
-!!html_class cgfs
-!!html_title Afterword - Computer Graphics from Scratch
-# Afterword {#afterword .unnumbered}
+{% block header %}{% endblock %}
+{% set html_class="cgfs" %}
+{% set html_title="Afterword - Computer Graphics from Scratch" %}
+# Afterword {{'{#'}}afterword .unnumbered}
 
 Congratulations! You now have a good understanding of how 3D rendering works. You've created a raytracer and a rasterizer and gained a good conceptual understanding of the algorithms and math that power them.
 

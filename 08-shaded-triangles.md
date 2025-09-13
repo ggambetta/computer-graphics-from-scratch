@@ -1,6 +1,7 @@
-!!html_class cgfs
-!!html_title Shaded Triangles - Computer Graphics from Scratch
-# Shaded Triangles {#ch:shaded_triangles}
+{% block header %}{% endblock %}
+{% set html_class="cgfs" %}
+{% set html_title="Shaded Triangles - Computer Graphics from Scratch" %}
+# Shaded Triangles {{'{#'}}ch:shaded_triangles}
 
 In the previous chapter, we developed an algorithm to draw a triangle filled with a solid color. Our goal for this chapter is to draw a *shaded* triangle---that is, a triangle filled with a color gradient.
 
@@ -10,7 +11,7 @@ We want to fill the triangle with different *shades* of a single color. It will 
 
 We need a more formal definition of what we're trying to draw. To do this, we'll assign a real value $h$ to each vertex, denoting the intensity of the color at the vertex. $h$ is in the $[0.0, 1.0]$ range, where $0.0$ represents the darkest possible shade (that is, black) and $1.0$ represents the brightest possible shade (that is, the original color---not white!).
 
-![Figure&nbsp;8-1: A shaded triangle](/computer-graphics-from-scratch/images/raster-04.png){#fig:shaded_triangle}
+![Figure&nbsp;8-1: A shaded triangle](/computer-graphics-from-scratch/images/raster-04.png){{'{#'}}fig:shaded_triangle}
 
 To compute the exact color shade of a pixel given the base color of the triangle $C$ and the intensity at that pixel $h$, we'll multiply channel-wise: $C_h = (R_C \cdot h, G_C \cdot h, B_C \cdot h)$. Therefore $h = 0.0$ yields pure black, $h = 1.0$ yields the original color $C$, and $h = 0.5$ yields a color half as bright as the original one.
 
@@ -24,7 +25,7 @@ Let's start with the edges of the triangle. Consider the edge $AB$. We know $h_A
 
 More formally, we have a function $h = f(P)$ that gives each point $P$ an intensity value $h$; we know its values at $A$ and $B$, $h(A) = h_A$ and $h(B) = h_B$, respectively. We want this function to be smooth. Since we know nothing else about $h = f(P)$, we can choose any function that is compatible with what we *do* know, such as a linear function (Figure&nbsp;8-2).
 
-![Figure&nbsp;8-2: A linear function *h*(*P*), compatible with what we know about *h*(*A*) and *h*(*B*)](/computer-graphics-from-scratch/images/r11-linear-function.png){#fig:linear_function}
+![Figure&nbsp;8-2: A linear function *h*(*P*), compatible with what we know about *h*(*A*) and *h*(*B*)](/computer-graphics-from-scratch/images/r11-linear-function.png){{'{#'}}fig:linear_function}
 
 This is suspiciously similar to the situation in the previous chapter: we had a linear function $x = f(y)$, we knew the values of this function at the vertices of the triangle, and we wanted to compute values of $x$ along its sides. We can compute values of $h$ along the sides of the triangle in a very similar way, using `Interpolate` with y as the independent variable (the values we know) and h as the dependent variable (the values we want):
 

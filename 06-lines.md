@@ -1,6 +1,7 @@
-!!html_class cgfs
-!!html_title Lines - Computer Graphics from Scratch
-# Lines {#ch:lines}
+{% block header %}{% endblock %}
+{% set html_class="cgfs" %}
+{% set html_title="Lines - Computer Graphics from Scratch" %}
+# Lines {{'{#'}}ch:lines}
 
 In Part I of this book, we studied raytracing extensively and developed a raytracer that could render our test scene with accurate lighting, material properties, shadows, and reflection using relatively simple algorithms and math. This simplicity comes at a cost: performance. While non-real-time performance is fine for certain applications, such as architectural visualization or visual effects for movies, it's not enough for other applications, such as video games.
 
@@ -32,19 +33,19 @@ $$x = x_0 + t\cdot(x_1 - x_0)$$
 
 $$x - x_0 = t\cdot(x_1 - x_0)$$
 
-$${{x - x_0} \over {x_1 - x_0}} = t$$
+$${{'{{'}}x - x_0} \over {x_1 - x_0}} = t$$
 
 We can now plug this expression for $t$ into the second equation:
 
 $$y = y_0 + t\cdot(y_1 - y_0)$$
 
-$$y = y_0 + {{x - x_0} \over {x_1 - x_0}} \cdot (y_1 - y_0)$$
+$$y = y_0 + {{'{{'}}x - x_0} \over {x_1 - x_0}} \cdot (y_1 - y_0)$$
 
 Rearranging it a bit:
 
-$$y = y_0 + (x - x_0) \cdot {{y_1 - y_0} \over {x_1 - x_0}}$$
+$$y = y_0 + (x - x_0) \cdot {{'{{'}}y_1 - y_0} \over {x_1 - x_0}}$$
 
-Notice that ${{y_1 - y_0} \over {x_1 - x_0}}$ is a constant that depends only on the endpoints of the segment; let's call it $a$. So we can rewrite the equation above as
+Notice that ${{'{{'}}y_1 - y_0} \over {x_1 - x_0}}$ is a constant that depends only on the endpoints of the segment; let's call it $a$. So we can rewrite the equation above as
 
 $$y = y_0 + a\cdot(x - x_0)$$
 
@@ -139,17 +140,17 @@ So far we've been assuming that $x_0 < x_1$. There's an easy workaround to suppo
 
 Let's use our function to draw a couple of lines. Figure&nbsp;6-1 shows the line segment $(-200, -100)-(240, 120)$, and Figure&nbsp;6-2 shows a close-up of the line.
 
-![Figure&nbsp;6-1: A straight line](/computer-graphics-from-scratch/images/raster-01.png){#fig:raster_line}
+![Figure&nbsp;6-1: A straight line](/computer-graphics-from-scratch/images/raster-01.png){{'{#'}}fig:raster_line}
 
-![Figure&nbsp;6-2: Zooming in on the straight line](/computer-graphics-from-scratch/images/raster-01b.png){#fig:raster_line_closeup}
+![Figure&nbsp;6-2: Zooming in on the straight line](/computer-graphics-from-scratch/images/raster-01b.png){{'{#'}}fig:raster_line_closeup}
 
 The line appears jagged because we can only draw pixels on integer coordinates, and mathematical lines actually have zero width; what we're drawing is a quantized approximation of the ideal line from $(-200, -100)-(240, 120)$. There are ways to draw prettier approximations of lines (you may want to look into MSAA, FXAA, SSAA, and TAA as possible entry points to an interesting set of rabbit holes). We won't go there for two reasons: (1) it's slower, and (2) our goal is not to draw pretty lines but to develop some basic algorithms to render 3D scenes.
 
 Let's try another line, $(-50, -200)-(60, 240)$. Figure&nbsp;6-3 shows the result and Figure&nbsp;6-4 shows the corresponding close-up.
 
-![Figure&nbsp;6-3: Another straight line with a higher slope](/computer-graphics-from-scratch/images/raster-01c.png){#fig:another_line}
+![Figure&nbsp;6-3: Another straight line with a higher slope](/computer-graphics-from-scratch/images/raster-01c.png){{'{#'}}fig:another_line}
 
-![Figure&nbsp;6-4: Zooming in on the second straight line](/computer-graphics-from-scratch/images/raster-01d.png){#fig:another_line_closeup}
+![Figure&nbsp;6-4: Zooming in on the second straight line](/computer-graphics-from-scratch/images/raster-01d.png){{'{#'}}fig:another_line_closeup}
 
 Oops. What happened?
 
@@ -220,7 +221,7 @@ This certainly works, but it isn't pretty. There's a lot of code duplication, an
 
 We have two linear functions $y = f(x)$ and $x = f(y)$. To abstract away the fact that we're dealing with pixels, let's write it in a more generic way as $d = f(i)$, where $i$ is the *independent variable*, the one we choose the values for, and $d$ is the *dependent variable*, the one whose value depends on the other and which we want to compute. In the horizontal-ish case, $x$ is the independent variable and $y$ is the dependent variable; in the vertical-ish case, it's the other way around.
 
-Of course, *any* function can be written as $d = f(i)$. We know two more things that completely define *our* function: the fact that it's linear and two of its values---that is, $d_0 = f(i_0)$ and $d_1 = f(i_1)$. We can write a simple function that takes these values and returns a list of all the intermediate values of $d$, assuming as before that $i_0 < i_1$:
+Of course, *any* function can be written as $d = f(i)$. We know two more things that completely define *our* function: the fact that it's linear, and two of its values---that is, $d_0 = f(i_0)$ and $d_1 = f(i_1)$. We can write a simple function that takes these values and returns a list of all the intermediate values of $d$, assuming as before that $i_0 < i_1$:
 
 ~~~
     Interpolate (i0, d0, i1, d1) {
@@ -289,7 +290,7 @@ Now we can write `DrawLine` using `Interpolate`.
 
 This `DrawLine` can handle all cases correctly (Figure&nbsp;6-5).
 
-![Figure&nbsp;6-5: The refactored algorithm handles all cases correctly.](/computer-graphics-from-scratch/images/raster-02.png){#fig:line-drawing-all-cases}
+![Figure&nbsp;6-5: The refactored algorithm handles all cases correctly.](/computer-graphics-from-scratch/images/raster-02.png){{'{#'}}fig:line-drawing-all-cases}
 
 <a class="cgfs_demo" href="https://gabrielgambetta.com/cgfs/lines-demo">Source code and live demo &gt;&gt;</a>
 

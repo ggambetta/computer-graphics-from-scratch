@@ -1,6 +1,7 @@
-!!html_class cgfs
-!!html_title Light - Computer Graphics from Scratch
-# Light {#ch:light}
+{% block header %}{% endblock %}
+{% set html_class="cgfs" %}
+{% set html_title="Light - Computer Graphics from Scratch" %}
+# Light {{'{#'}}ch:light}
 
 We'll start adding "realism" to our rendering of the scene by introducing light. Light is a vast and complex topic, so we'll present a simplified model that is good enough for our purposes. This model is, for the most part, inspired by how light works in the real world, but it also takes some liberties with the aim of making the rendered scenes look good.
 
@@ -24,7 +25,7 @@ A light bulb is a good real-life approximation of a point light. While a real-li
 
 Let's define the vector $\vec{L}$ as the direction from a point in the scene, $P$, to the light, $Q$. We can calculate this vector, called the *light vector*, as $Q - P$. Note that since $Q$ is fixed but $P$ can be any point in the scene, $\vec{L}$ is different for every point in the scene, as you can see in Figure&nbsp;3-1.
 
-![Figure&nbsp;3-1: A point light at *Q*. The $\vec{\mathsf{L}}$ vector is different for every point *P*.](/computer-graphics-from-scratch/images/05-point-light.png){#fig:point_light}
+![Figure&nbsp;3-1: A point light at *Q*. The $\vec{\mathsf{L}}$ vector is different for every point *P*.](/computer-graphics-from-scratch/images/05-point-light.png){{'{#'}}fig:point_light}
 
 ### Directional Lights
 
@@ -38,7 +39,7 @@ To better handle these situations, we define *directional lights*. Like point li
 
 While in the case of point lights we need to compute a different light vector $\vec{L}$ for every point $P$ in the scene, in this case $\vec{L}$ is given. In the Sun-to-Earth scene example, $\vec{L}$ would be *(center of Sun) -- (center of Earth)*. Figure&nbsp;3-2 shows what this looks like.
 
-![Figure&nbsp;3-2: A directional light. The $\vec{\mathsf{L}}$ vector is the same for every point *P*.](/computer-graphics-from-scratch/images/05-directional-light.png){#fig:directional_light}
+![Figure&nbsp;3-2: A directional light. The $\vec{\mathsf{L}}$ vector is the same for every point *P*.](/computer-graphics-from-scratch/images/05-directional-light.png){{'{#'}}fig:directional_light}
 
 As we can see here, the light vector of a directional light is the same for every point in the scene. Compare this with Figure&nbsp;3-1, where the light vector of a point light is different for every point in the scene.
 
@@ -76,7 +77,7 @@ To verify this, look at some matte object around you, such as a wall. If you mov
 
 On the other hand, the amount of light reflected does depend on the *angle* between the ray of light and the surface. Intuitively, this happens because the energy carried by the ray has to spread over a smaller or bigger area depending on the angle, so the energy reflected to the scene per unit of area is higher or lower, respectively, as shown in Figure 3-3.
 
-![Figure&nbsp;3-3: The energy of a ray of light spreads over areas of different size, depending on its angle to the surface.](/computer-graphics-from-scratch/images/06-light-spread.png){#fig:light_spread}
+![Figure&nbsp;3-3: The energy of a ray of light spreads over areas of different size, depending on its angle to the surface.](/computer-graphics-from-scratch/images/06-light-spread.png){{'{#'}}fig:light_spread}
 
 In Figure&nbsp;3-3, we can see two rays of light of the same intensity (represented by having the same width) hitting a surface head-on and at an angle. The energy carried by the rays of light spreads uniformly across the areas they hit. The energy of the ray on the right spreads across a bigger area than that of the ray on the left, and therefore each point in its area receives less energy than in the left-hand case.
 
@@ -90,7 +91,7 @@ As a geometric analogy, let's represent the intensity of the light as the "width
 
 The situation is depicted in Figure&nbsp;3-4. We know $\vec{N}$, $\vec{L}$, and $P$ ; I have added the angles $\alpha$ and $\beta$, and the points $Q$, $R$, and $S$ to make writing about the diagram easier.
 
-![Figure&nbsp;3-4: The vectors and angles involved in the diffuse reflection calculations](/computer-graphics-from-scratch/images/06-diffuse-diagram.png){#fig:diffuse-diagram}
+![Figure&nbsp;3-4: The vectors and angles involved in the diffuse reflection calculations](/computer-graphics-from-scratch/images/06-diffuse-diagram.png){{'{#'}}fig:diffuse-diagram}
 
 Since a ray of light technically has no width, we can assume that everything happens in a flat, infinitesimally small patch of the surface. Even if it's the surface of a sphere, the area we're considering is so infinitesimally small that it's almost flat in comparison with the size of the sphere, just like Earth looks flat at small scales.
 
@@ -102,7 +103,7 @@ One of the angles of $PQR$ is $90^\circ$, and another is $\beta$. The remaining 
 
 Let's focus on the triangle $PQR$ (Figure&nbsp;3-5). Its angles are $\alpha$, $\beta$, and $90^\circ$. The side $QR$ measures $I \over 2$, and the side $PR$ measures $A \over 2$.
 
-![Figure&nbsp;3-5: The *PQR* triangle in a trigonometry context](/computer-graphics-from-scratch/images/06-qrp.png){#fig:qrp}
+![Figure&nbsp;3-5: The *PQR* triangle in a trigonometry context](/computer-graphics-from-scratch/images/06-qrp.png){{'{#'}}fig:qrp}
 
 And now, trigonometry to the rescue! By definition, $cos(\alpha) = {QR \over PR}$; substituting $QR$ with $I \over 2$ and $PR$ with $A \over 2$, we get
 
@@ -114,11 +115,11 @@ $$cos(\alpha) = {I \over A}$$
 
 We're almost there. $\alpha$ is the angle between $\vec{N}$ and $\vec{L}$. We can use the properties of the dot product (feel free to consult the Linear Algebra appendix) to express $cos(\alpha)$ as
 
-$$cos(\alpha) = {{\langle \vec{N}, \vec{L} \rangle} \over {|\vec{N}||\vec{L}|}}$$
+$$cos(\alpha) = {{'{{'}}\langle \vec{N}, \vec{L} \rangle} \over {|\vec{N}||\vec{L}|}}$$
 
 And finally
 
-$${I \over A} = {{\langle \vec{N}, \vec{L} \rangle} \over {|\vec{N}||\vec{L}|}}$$
+$${I \over A} = {{'{{'}}\langle \vec{N}, \vec{L} \rangle} \over {|\vec{N}||\vec{L}|}}$$
 
 We have arrived at a simple equation that gives us the fraction of light that is reflected as a function of the angle between the surface normal and the direction of the light.
 
@@ -128,7 +129,7 @@ Note that the value of $cos(\alpha)$ becomes negative for angles over $90^\circ$
 
 We can now formulate an equation to compute the full amount of light received by a point $P$ with normal $\vec{N}$ in a scene with an ambient light of intensity $I_A$ and $n$ point or directional lights with intensity $I_n$ and light vectors $\vec{L_n}$ either known (for directional lights) or computed for $P$ (for point lights):
 
-$$I_P = I_A + \sum_{i = 1}^{n} I_i {{\langle \vec{N}, \vec{L_i} \rangle} \over {|\vec{N}||\vec{L_i}|}}$$
+$$I_P = I_A + \sum_{i = 1}^{n} I_i {{'{{'}}\langle \vec{N}, \vec{L_i} \rangle} \over {|\vec{N}||\vec{L_i}|}}$$
 
 It's worth repeating that the terms where $\langle \vec{N}, \vec{L_i} \rangle < 0$ shouldn't be added to the point's illumination.
 
@@ -136,11 +137,11 @@ It's worth repeating that the terms where $\langle \vec{N}, \vec{L_i} \rangle < 
 
 There's only a small detail missing: where do the normals come from? The answer to this general question is far more complex than it might seem, as we'll see in the second part of this book. Fortunately, at this point we're only dealing with spheres, and there's a very simple answer for them: the normal vector of any point of a sphere lies on a line that goes through the center of the sphere. As you can see in Figure&nbsp;3-6, if the sphere center is $C$, the direction of the normal at point $P$ is $P - C$.
 
-![Figure&nbsp;3-6: The normal of a sphere at *P* has the same direction as *CP*.](/computer-graphics-from-scratch/images/06-sphere-normal.png){#fig:sphere_normal}
+![Figure&nbsp;3-6: The normal of a sphere at *P* has the same direction as *CP*.](/computer-graphics-from-scratch/images/06-sphere-normal.png){{'{#'}}fig:sphere_normal}
 
 Why "the direction of the normal" and not "the normal"? A normal vector needs to be perpendicular to the surface, but it also needs to have length $1$. To *normalize* this vector and turn it into a true normal, we need to divide it by its own length, thus guaranteeing the result has length $1$:
 
-$$\vec{N} = {{P - C} \over {|P - C|}}$$
+$$\vec{N} = {{'{{'}}P - C} \over {|P - C|}}$$
 
 ### Rendering with Diffuse Reflection
 
@@ -219,7 +220,7 @@ Just for fun, let's add a big yellow sphere:
 
 We run the renderer and, lo and behold, the spheres now start to look like spheres (Figure&nbsp;3-7)!
 
-![Figure&nbsp;3-7: Diffuse reflection adds a sense of depth and volume to the scene.](/computer-graphics-from-scratch/images/raytracer-02.png){#fig:diffuse-reflection}
+![Figure&nbsp;3-7: Diffuse reflection adds a sense of depth and volume to the scene.](/computer-graphics-from-scratch/images/raytracer-02.png){{'{#'}}fig:diffuse-reflection}
 
 <a class="cgfs_demo" href="https://gabrielgambetta.com/cgfs/diffuse-demo">Source code and live demo &gt;&gt;</a>
 
@@ -236,21 +237,21 @@ Note that a red billiard ball stays red if you walk around it, but the bright wh
 
 To understand why this happens, let's take a closer look at how surfaces reflect light. As we saw in the previous section, when a ray of light hits the surface of a matte object, it's scattered back to the scene equally in every direction. This happens because the surface of the object is irregular, so at the microscopic level it behaves like a set of tiny surfaces pointing in random directions (Figure&nbsp;3-8):
 
-![Figure&nbsp;3-8: What the rough surface of a matte object might look like through a microscope. The incident rays of light are reflected in random directions.](/computer-graphics-from-scratch/images/06-rough-surface.png){#fig:rough_surface}
+![Figure&nbsp;3-8: What the rough surface of a matte object might look like through a microscope. The incident rays of light are reflected in random directions.](/computer-graphics-from-scratch/images/06-rough-surface.png){{'{#'}}fig:rough_surface}
 
 But what if the surface isn't that irregular? Let's go to the other extreme: a perfectly polished mirror. When a ray of light hits a mirror, it's reflected in a single direction. If we call the direction of the reflected light $\vec{R}$, and we keep the convention that $\vec{L}$ points toward the light source, Figure&nbsp;3-9 illustrates the situation.
 
-![Figure&nbsp;3-9: Rays of light reflected by a mirror](/computer-graphics-from-scratch/images/06-mirror.png){#fig:mirror}
+![Figure&nbsp;3-9: Rays of light reflected by a mirror](/computer-graphics-from-scratch/images/06-mirror.png){{'{#'}}fig:mirror}
 
 Depending on how "polished" the surface is, it behaves more or less like a mirror; this is why it's called *specular* reflection, from *speculum*, the Latin word for *mirror*.
 
 For a perfectly polished mirror, the incident ray of light $\vec{L}$ is reflected in a single direction, $\vec{R}$. This is why you see reflected objects very clearly: for every incident ray of light $\vec{L}$, there's a single reflected ray $\vec{R}$. But not every object is perfectly polished; while *most* of the light is reflected in the direction of $\vec{R}$, *some* of it is reflected in directions close to $\vec{R}$. The closer to $\vec{R}$, the more light is reflected in that direction, as you can see in Figure&nbsp;3-10. The "shininess" of the object is what determines how rapidly the reflected light decreases as you move away from $\vec{R}$.
 
-![Figure&nbsp;3-10: For surfaces that aren't perfectly polished, the closer a direction is to $\vec{\mathsf{R}}$, the more rays of light are reflected in that direction.](/computer-graphics-from-scratch/images/07-specular-decay.png){#fig:specular_decay}
+![Figure&nbsp;3-10: For surfaces that aren't perfectly polished, the closer a direction is to $\vec{\mathsf{R}}$, the more rays of light are reflected in that direction.](/computer-graphics-from-scratch/images/07-specular-decay.png){{'{#'}}fig:specular_decay}
 
 We want to figure out how much light from $\vec{L}$ is reflected back in the direction of our point of view. If $\vec{V}$ is the "view vector" pointing from $P$ to the camera, and $\alpha$ is the angle between $\vec{R}$ and $\vec{V}$, we get Figure&nbsp;3-11.
 
-![Figure&nbsp;3-11: The vectors and angles involved in the specular reflection calculation](/computer-graphics-from-scratch/images/07-specular-diagram.png){#fig:specular_diagram}
+![Figure&nbsp;3-11: The vectors and angles involved in the specular reflection calculation](/computer-graphics-from-scratch/images/07-specular-diagram.png){{'{#'}}fig:specular_diagram}
 
 For $\alpha = 0^\circ$, all the light is reflected in the direction of $\vec{V}$. For $\alpha = 90^\circ$, no light is reflected. As with diffuse reflection, we need a mathematical expression to determine what happens for intermediate values of $\alpha$.
 
@@ -260,7 +261,7 @@ At the beginning of this chapter, I mentioned that some models aren't based on p
 
 Consider $cos(\alpha)$. It has the nice properties that $cos(0) = 1$ and $cos(\pm 90) = 0$, just like we need; and the values become gradually smaller from $0$ to $90$ in a very pleasant curve (Figure&nbsp;3-12).
 
-![Figure&nbsp;3-12: The graph of *cos($\boldsymbol{\alpha}$)*.](/computer-graphics-from-scratch/images/07-cos-alpha.png){#fig:cos_alpha}
+![Figure&nbsp;3-12: The graph of *cos($\boldsymbol{\alpha}$)*.](/computer-graphics-from-scratch/images/07-cos-alpha.png){{'{#'}}fig:cos_alpha}
 
 This means $cos(\alpha)$ matches all of our requirements for the specular reflection function, so why not use it?
 
@@ -268,7 +269,7 @@ There's one more detail. If we used this formula straight away, every object wou
 
 Remember that shininess is a measure of how quickly the reflection function decreases as $\alpha$ increases. A simple way to obtain different shininess curves is to compute the power of $cos(\alpha)$ to some positive exponent $s$. Since $0 \le cos(\alpha) \le 1$, we are guaranteed that $0 \le cos(\alpha)^s \le 1$; so $cos(\alpha)^s$ is just like $cos(\alpha)$, only "narrower." Figure&nbsp;3-13 shows the graph for $cos(\alpha)^s$ for different values of $s$.
 
-![Figure&nbsp;3-13: The graph of cos($\boldsymbol{\alpha}$)^s^](/computer-graphics-from-scratch/images/07-specular-exponent.png){#fig:specular_exponent}
+![Figure&nbsp;3-13: The graph of cos($\boldsymbol{\alpha}$)^s^](/computer-graphics-from-scratch/images/07-specular-exponent.png){{'{#'}}fig:specular_exponent}
 
 The bigger the value of $s$, the "narrower" the function becomes around $0$ and the shinier the object looks. $s$ is called the *specular exponent* and it's a property of the surface. Since the model is not based on physical reality, the values of $s$ can only be determined by trial and error---essentially, tweaking the values until they look "right." For a physically based model, you can look into bi-directional reflectance functions (BDRFs).
 
@@ -278,7 +279,7 @@ According to our model, this value is $cos(\alpha)^s$, where $\alpha$ is the ang
 
 We can decompose $\vec{L}$ into two vectors, $\vec{L_P}$ and $\vec{L_N}$, such that $\vec{L} = \vec{L_N} + \vec{L_P}$, where $\vec{L_N}$ is parallel to $\vec{N}$ and $\vec{L_P}$ is perpendicular to $\vec{N}$ (Figure&nbsp;3-14).
 
-![Figure&nbsp;3-14: Decomposing $\vec{\mathsf{L}}$ into its components $\vec{\mathsf{L_P}}$ and $\vec{\mathsf{L_N}}$](/computer-graphics-from-scratch/images/08-nl.png){#fig:nl}
+![Figure&nbsp;3-14: Decomposing $\vec{\mathsf{L}}$ into its components $\vec{\mathsf{L_P}}$ and $\vec{\mathsf{L_N}}$](/computer-graphics-from-scratch/images/08-nl.png){{'{#'}}fig:nl}
 
 $\vec{L_N}$ is the projection of $\vec{L}$ over $\vec{N}$; by the properties of the dot product and the fact that $|\vec{N}| = 1$, the length of this projection is $\langle \vec{N}, \vec{L} \rangle$. We defined $\vec{L_N}$ to be parallel to $\vec{N}$, so $\vec{L_N} = \vec{N} \langle \vec{N}, \vec{L} \rangle$.
 
@@ -286,7 +287,7 @@ Since $\vec{L} = \vec{L_P} + \vec{L_N}$, we can immediately get $\vec{L_P} = \ve
 
 Now let's look at $\vec{R}$. Since it's symmetrical to $\vec{L}$ with respect to $\vec{N}$, its component parallel to $\vec{N}$ is the same as $\vec{L}$'s, and its perpendicular component is the opposite of $\vec{L}$'s; that is, $\vec{R} = \vec{L_N} - \vec{L_P}$. You can see this in Figure&nbsp;3-15.
 
-![Figure&nbsp;3-15: Computing $\vec{\mathsf{L_R}}$](/computer-graphics-from-scratch/images/08-vec-r.png){#fig:vec-r}
+![Figure&nbsp;3-15: Computing $\vec{\mathsf{L_R}}$](/computer-graphics-from-scratch/images/08-vec-r.png){{'{#'}}fig:vec-r}
 
 Substituting with the expressions we found above, we get
 
@@ -302,7 +303,7 @@ We're now ready to write an equation for the specular reflection:
 
 $$\vec{R} = 2\vec{N} \langle \vec{N}, \vec{L} \rangle - \vec{L}$$
 
-$$I_S = I_L \left( {{\langle \vec{R}, \vec{V} \rangle} \over {|\vec{R}||\vec{V}|}} \right)^s$$
+$$I_S = I_L \left( {{'{{'}}\langle \vec{R}, \vec{V} \rangle} \over {|\vec{R}||\vec{V}|}} \right)^s$$
 
 As with diffuse lighting, it's possible that $cos(\alpha)$ is negative, and we should ignore it for the same reason as before. Also, not every object has to be shiny; for matte objects, the specular term shouldn't be computed at all. We'll note this in the scene by setting their specular exponent to $-1$ and handling them accordingly.
 
@@ -310,7 +311,7 @@ As with diffuse lighting, it's possible that $cos(\alpha)$ is negative, and we s
 
 We can add the specular reflection term to the illumination equation we've been developing and get a single expression that describes illumination at a point:
 
-$$I_P = I_A + \sum_{i = 1}^{n} I_i \cdot \left[ {{{\langle \vec{N}, \vec{L_i} \rangle} \over {|\vec{N}||\vec{L_i}|}} + \left( {{\langle \vec{R_i}, \vec{V} \rangle} \over {|\vec{R_i}||\vec{V}|}} \right)^s} \right]$$
+$$I_P = I_A + \sum_{i = 1}^{n} I_i \cdot \left[ {{'{{'}}{\langle \vec{N}, \vec{L_i} \rangle} \over {|\vec{N}||\vec{L_i}|}} + \left( {{'{{'}}\langle \vec{R_i}, \vec{V} \rangle} \over {|\vec{R_i}||\vec{V}|}} \right)^s} \right]$$
 
 where $I_P$ is the total illumination at point $P$, $I_A$ is the intensity of the ambient light, $N$ is the normal of the surface at $P$, $V$ is the vector from $P$ to the camera, $s$ is the specular exponent of the surface, $I_i$ is the intensity of light $i$, $L_i$ is the vector from P to light $i$, and $R_i$ is the reflection vector at $P$ for light $i$.
 
@@ -420,7 +421,7 @@ The color calculation ❶ is slightly more involved than it looks. Remember that
 
 You can see the reward for all this vector juggling in Figure&nbsp;3-16.
 
-![Figure&nbsp;3-16: The scene rendered with ambient, diffuse, and specular reflection. Not only do we get a sense of depth and volume, but each surface also has a slightly different appearance.](/computer-graphics-from-scratch/images/raytracer-03.png){#fig:raytracer-03.png}
+![Figure&nbsp;3-16: The scene rendered with ambient, diffuse, and specular reflection. Not only do we get a sense of depth and volume, but each surface also has a slightly different appearance.](/computer-graphics-from-scratch/images/raytracer-03.png){{'{#'}}fig:raytracer-03.png}
 
 <a class="cgfs_demo" href="https://gabrielgambetta.com/cgfs/specular-demo">Source code and live demo &gt;&gt;</a>
 
